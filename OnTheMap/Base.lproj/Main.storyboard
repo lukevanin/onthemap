@@ -58,7 +58,7 @@
                                 <rect key="frame" x="16" y="28" width="288" height="524"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="evK-XU-hcn">
-                                        <rect key="frame" x="0.0" y="0.0" width="288" height="331.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="333.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="pIJ-jb-AHA">
                                                 <rect key="frame" x="0.0" y="0.0" width="288" height="120"/>
@@ -72,35 +72,35 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Bg-af-6G6">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1Bg-af-6G6">
                                                 <rect key="frame" x="0.0" y="159.5" width="288" height="40"/>
-                                                <color key="backgroundColor" red="0.98114663362503052" green="0.84467780590057373" blue="0.80227756500244141" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.99613183736801147" green="0.82361805438995361" blue="0.65456968545913696" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done"/>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BSB-Fe-0GH">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BSB-Fe-0GH">
                                                 <rect key="frame" x="0.0" y="207.5" width="288" height="40"/>
-                                                <color key="backgroundColor" red="0.98114663362503052" green="0.84467780590057373" blue="0.80227756500244141" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.99613183736801147" green="0.82361805438995361" blue="0.65456968545913696" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RL8-oT-mpr">
                                                 <rect key="frame" x="0.0" y="255.5" width="288" height="40"/>
-                                                <color key="backgroundColor" red="0.99042290449142456" green="0.50671333074569702" blue="0.32023262977600098" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.9880681037902832" green="0.31601673364639282" blue="0.03039591945707798" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="etW-Ib-3iS"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                 <state key="normal" title="Login"/>
                                                 <connections>
                                                     <action selector="onUdacityLoginAction:" destination="OnS-ny-J5m" eventType="touchUpInside" id="8ZD-g5-haY"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eK-8p-87s">
-                                                <rect key="frame" x="0.0" y="303.5" width="288" height="28"/>
-                                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
+                                                <rect key="frame" x="0.0" y="303.5" width="288" height="30"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                 <state key="normal" title="Don't have an account? Sign up"/>
                                                 <connections>
                                                     <action selector="onSignUpAction:" destination="OnS-ny-J5m" eventType="touchUpInside" id="cme-Uh-njH"/>
@@ -126,7 +126,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.98758721350000001" green="0.26671049000000002" blue="0.029613846910000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Iaw-V4-MCI" firstAttribute="leading" secondItem="dJy-bx-Odm" secondAttribute="leadingMargin" id="DE7-AY-a2n"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Iaw-V4-MCI" secondAttribute="trailing" id="H0C-RQ-RW6"/>
@@ -152,7 +152,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.98758721350000001" green="0.26671049000000002" blue="0.029613846910000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="selectedImageTintColor" red="0.98922836780548096" green="0.4153139591217041" blue="0.031820401549339294" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
@@ -223,7 +223,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rte-4a-qcm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.98758721350000001" green="0.26671049000000002" blue="0.029613846910000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
@@ -247,7 +247,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UPA-9e-BZb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.98758721350000001" green="0.26671049000000002" blue="0.029613846910000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
