@@ -8,11 +8,46 @@
 
 import Foundation
 
-class Authentication {
+enum AuthenticationError: Error {
+    case credentials
+    case network
+}
+
+enum AuthenticationResponse {
+    case error(AuthenticationError)
+    case authenticated
+}
+
+typealias AuthenticationCompletion = (AuthenticationResponse) -> Void
+
+protocol Authentication {
     
-    let shared = Authentication()
-    
+    //
+    //  Current authentication state (logged in or logged out).
+    //
     var isAuthenticated: Bool {
-        return false
+        get
     }
+    
+    //
+    //  Invalidate the current authenticated session.
+    //
+    func logout()
+    
+    //
+    //  Log in with username and password.
+    //  Call the Udacity API passing the provided username and password. 
+    //  If the response indicates a valid login then set the state to authenticated, otherwise set the state to 
+    //  unauthenticated and show an error.
+    //
+    func login(username: String, password: String, completion: AuthenticationCompletion)
+    
+    //
+    //  Log in using facebook token. The user must have been authenticated with facebook (ie via a webview or device
+    //  credentials).
+    //  Call the Udacity API passing the provided facebook token.
+    //  If the response indicates a valid login then set the state to authenticated, otherwise set the state to
+    //  unauthenticated and show an error.
+    //
+    func loginWithFacebook(token: Data, completion: AuthenticationCompletion)
 }

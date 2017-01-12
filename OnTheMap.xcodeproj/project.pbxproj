@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC1C35441E27DEDF00191CA7 /* UdacityAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C35431E27DEDF00191CA7 /* UdacityAuthentication.swift */; };
+		FC1C35461E27DF4200191CA7 /* MockAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C35451E27DF4200191CA7 /* MockAuthentication.swift */; };
 		FCA7E9D81E274270009ED523 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */; };
 		FCA7E9D91E274270009ED523 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA7E9D61E274270009ED523 /* Roboto-Regular.ttf */; };
 		FCA7E9DA1E274270009ED523 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA7E9D71E274270009ED523 /* Roboto-Thin.ttf */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FC1C35431E27DEDF00191CA7 /* UdacityAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityAuthentication.swift; sourceTree = "<group>"; };
+		FC1C35451E27DF4200191CA7 /* MockAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAuthentication.swift; sourceTree = "<group>"; };
 		FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		FCA7E9D61E274270009ED523 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		FCA7E9D71E274270009ED523 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				FCA7E9E81E274B60009ED523 /* Authentication.swift */,
+				FC1C35431E27DEDF00191CA7 /* UdacityAuthentication.swift */,
+				FC1C35451E27DF4200191CA7 /* MockAuthentication.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -208,8 +214,10 @@
 				FCCD32C01E27399A00DFC250 /* TabViewController.swift in Sources */,
 				FCA7E9E91E274B60009ED523 /* Authentication.swift in Sources */,
 				FCA7E9DF1E274585009ED523 /* MapViewController.swift in Sources */,
+				FC1C35461E27DF4200191CA7 /* MockAuthentication.swift in Sources */,
 				FCA7E9E11E27459D009ED523 /* ListViewController.swift in Sources */,
 				FCA7E9E71E274A00009ED523 /* LoginViewController.swift in Sources */,
+				FC1C35441E27DEDF00191CA7 /* UdacityAuthentication.swift in Sources */,
 				FCCD32BE1E27399A00DFC250 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
