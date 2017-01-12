@@ -6,9 +6,21 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+        <array key="Roboto-Thin.ttf">
+            <string>Roboto-Thin</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--On the Map-->
         <scene sceneID="z1B-eS-P81">
@@ -29,6 +41,108 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nK-03-oFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1592.8" y="-226.23688155922042"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="BQ7-RC-TbH">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="OnS-ny-J5m" customClass="LoginViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gtl-O4-m1Y"/>
+                        <viewControllerLayoutGuide type="bottom" id="waD-Mc-mev"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dJy-bx-Odm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Iaw-V4-MCI">
+                                <rect key="frame" x="16" y="28" width="288" height="524"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="evK-XU-hcn">
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="331.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="pIJ-jb-AHA">
+                                                <rect key="frame" x="0.0" y="0.0" width="288" height="120"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="hcG-dT-Kdh"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waL-Jo-JHf">
+                                                <rect key="frame" x="0.0" y="128" width="288" height="23.5"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Bg-af-6G6">
+                                                <rect key="frame" x="0.0" y="159.5" width="288" height="40"/>
+                                                <color key="backgroundColor" red="0.98114663362503052" green="0.84467780590057373" blue="0.80227756500244141" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BSB-Fe-0GH">
+                                                <rect key="frame" x="0.0" y="207.5" width="288" height="40"/>
+                                                <color key="backgroundColor" red="0.98114663362503052" green="0.84467780590057373" blue="0.80227756500244141" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RL8-oT-mpr">
+                                                <rect key="frame" x="0.0" y="255.5" width="288" height="40"/>
+                                                <color key="backgroundColor" red="0.99042290449142456" green="0.50671333074569702" blue="0.32023262977600098" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="etW-Ib-3iS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                                <state key="normal" title="Login"/>
+                                                <connections>
+                                                    <action selector="onUdacityLoginAction:" destination="OnS-ny-J5m" eventType="touchUpInside" id="8ZD-g5-haY"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eK-8p-87s">
+                                                <rect key="frame" x="0.0" y="303.5" width="288" height="28"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
+                                                <state key="normal" title="Don't have an account? Sign up"/>
+                                                <connections>
+                                                    <action selector="onSignUpAction:" destination="OnS-ny-J5m" eventType="touchUpInside" id="cme-Uh-njH"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="RL8-oT-mpr" firstAttribute="height" secondItem="1Bg-af-6G6" secondAttribute="height" id="CA4-BY-pMG"/>
+                                            <constraint firstItem="BSB-Fe-0GH" firstAttribute="height" secondItem="1Bg-af-6G6" secondAttribute="height" id="QtZ-2o-EAR"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6q-OI-uVQ">
+                                        <rect key="frame" x="0.0" y="484" width="288" height="40"/>
+                                        <color key="backgroundColor" red="0.17365863919258118" green="0.24193555116653442" blue="0.58442771434783936" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Sign in with Facebook"/>
+                                        <connections>
+                                            <action selector="onFacebookLoginAction:" destination="OnS-ny-J5m" eventType="touchUpInside" id="0vn-ND-kbW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="T6q-OI-uVQ" firstAttribute="height" secondItem="RL8-oT-mpr" secondAttribute="height" id="6te-de-SkR"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98758721350000001" green="0.26671049000000002" blue="0.029613846910000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Iaw-V4-MCI" firstAttribute="leading" secondItem="dJy-bx-Odm" secondAttribute="leadingMargin" id="DE7-AY-a2n"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Iaw-V4-MCI" secondAttribute="trailing" id="H0C-RQ-RW6"/>
+                            <constraint firstItem="waD-Mc-mev" firstAttribute="top" secondItem="Iaw-V4-MCI" secondAttribute="bottom" constant="16" id="Mg3-uZ-9M9"/>
+                            <constraint firstItem="Iaw-V4-MCI" firstAttribute="top" secondItem="gtl-O4-m1Y" secondAttribute="bottom" constant="8" symbolic="YES" id="x2e-Uc-JgB"/>
+                        </constraints>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="passwordtextField" destination="BSB-Fe-0GH" id="wtK-wb-dqh"/>
+                        <outlet property="usernameTextField" destination="1Bg-af-6G6" id="PwX-3J-xIo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d1d-nG-prS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1583" y="100"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="sHL-1W-2Hq">
@@ -152,6 +266,7 @@
         <image name="list" width="32" height="32"/>
         <image name="map" width="32" height="32"/>
         <image name="pin" width="32" height="32"/>
+        <image name="udacity" width="256" height="256"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -12,4 +12,7 @@ class ListViewController: UITableViewController {
     
     private let cellIdentifier = "UserCell"
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }

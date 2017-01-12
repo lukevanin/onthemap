@@ -13,6 +13,8 @@
 		FCA7E9DD1E274498009ED523 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA7E9DC1E274498009ED523 /* MapKit.framework */; };
 		FCA7E9DF1E274585009ED523 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7E9DE1E274585009ED523 /* MapViewController.swift */; };
 		FCA7E9E11E27459D009ED523 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7E9E01E27459D009ED523 /* ListViewController.swift */; };
+		FCA7E9E71E274A00009ED523 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7E9E61E274A00009ED523 /* LoginViewController.swift */; };
+		FCA7E9E91E274B60009ED523 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7E9E81E274B60009ED523 /* Authentication.swift */; };
 		FCCD32BE1E27399A00DFC250 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */; };
 		FCCD32C01E27399A00DFC250 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD32BF1E27399A00DFC250 /* TabViewController.swift */; };
 		FCCD32C31E27399A00DFC250 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCD32C11E27399A00DFC250 /* Main.storyboard */; };
@@ -27,6 +29,8 @@
 		FCA7E9DC1E274498009ED523 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FCA7E9DE1E274585009ED523 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FCA7E9E01E27459D009ED523 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		FCA7E9E61E274A00009ED523 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FCA7E9E81E274B60009ED523 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		FCCD32BA1E27399A00DFC250 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCCD32BF1E27399A00DFC250 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +60,46 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FCA7E9E21E2746A6009ED523 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FCCD32BF1E27399A00DFC250 /* TabViewController.swift */,
+				FCA7E9DE1E274585009ED523 /* MapViewController.swift */,
+				FCA7E9E01E27459D009ED523 /* ListViewController.swift */,
+				FCA7E9E61E274A00009ED523 /* LoginViewController.swift */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		FCA7E9E31E2746B1009ED523 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				FCCD32C11E27399A00DFC250 /* Main.storyboard */,
+				FCCD32C61E27399A00DFC250 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		FCA7E9E41E2746B9009ED523 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FCCD32C91E27399A00DFC250 /* Info.plist */,
+				FCCD32C41E27399A00DFC250 /* Assets.xcassets */,
+				FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */,
+				FCA7E9D61E274270009ED523 /* Roboto-Regular.ttf */,
+				FCA7E9D71E274270009ED523 /* Roboto-Thin.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		FCA7E9E51E2746C5009ED523 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FCA7E9E81E274B60009ED523 /* Authentication.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		FCCD32B11E27399A00DFC250 = {
 			isa = PBXGroup;
 			children = (
@@ -77,16 +121,10 @@
 			isa = PBXGroup;
 			children = (
 				FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */,
-				FCCD32BF1E27399A00DFC250 /* TabViewController.swift */,
-				FCA7E9DE1E274585009ED523 /* MapViewController.swift */,
-				FCA7E9E01E27459D009ED523 /* ListViewController.swift */,
-				FCCD32C11E27399A00DFC250 /* Main.storyboard */,
-				FCCD32C41E27399A00DFC250 /* Assets.xcassets */,
-				FCCD32C61E27399A00DFC250 /* LaunchScreen.storyboard */,
-				FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */,
-				FCA7E9D61E274270009ED523 /* Roboto-Regular.ttf */,
-				FCA7E9D71E274270009ED523 /* Roboto-Thin.ttf */,
-				FCCD32C91E27399A00DFC250 /* Info.plist */,
+				FCA7E9E51E2746C5009ED523 /* Model */,
+				FCA7E9E21E2746A6009ED523 /* View Controller */,
+				FCA7E9E31E2746B1009ED523 /* Storyboard */,
+				FCA7E9E41E2746B9009ED523 /* Resources */,
 			);
 			path = OnTheMap;
 			sourceTree = "<group>";
@@ -168,8 +206,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCCD32C01E27399A00DFC250 /* TabViewController.swift in Sources */,
+				FCA7E9E91E274B60009ED523 /* Authentication.swift in Sources */,
 				FCA7E9DF1E274585009ED523 /* MapViewController.swift in Sources */,
 				FCA7E9E11E27459D009ED523 /* ListViewController.swift in Sources */,
+				FCA7E9E71E274A00009ED523 /* LoginViewController.swift in Sources */,
 				FCCD32BE1E27399A00DFC250 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
