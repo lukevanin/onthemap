@@ -7,17 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FCA7E9D81E274270009ED523 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */; };
+		FCA7E9D91E274270009ED523 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA7E9D61E274270009ED523 /* Roboto-Regular.ttf */; };
+		FCA7E9DA1E274270009ED523 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA7E9D71E274270009ED523 /* Roboto-Thin.ttf */; };
+		FCA7E9DD1E274498009ED523 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA7E9DC1E274498009ED523 /* MapKit.framework */; };
+		FCA7E9DF1E274585009ED523 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7E9DE1E274585009ED523 /* MapViewController.swift */; };
+		FCA7E9E11E27459D009ED523 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7E9E01E27459D009ED523 /* ListViewController.swift */; };
 		FCCD32BE1E27399A00DFC250 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */; };
-		FCCD32C01E27399A00DFC250 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD32BF1E27399A00DFC250 /* ViewController.swift */; };
+		FCCD32C01E27399A00DFC250 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD32BF1E27399A00DFC250 /* TabViewController.swift */; };
 		FCCD32C31E27399A00DFC250 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCD32C11E27399A00DFC250 /* Main.storyboard */; };
 		FCCD32C51E27399A00DFC250 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCCD32C41E27399A00DFC250 /* Assets.xcassets */; };
 		FCCD32C81E27399A00DFC250 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCD32C61E27399A00DFC250 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		FCA7E9D61E274270009ED523 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		FCA7E9D71E274270009ED523 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		FCA7E9DC1E274498009ED523 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		FCA7E9DE1E274585009ED523 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		FCA7E9E01E27459D009ED523 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		FCCD32BA1E27399A00DFC250 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FCCD32BF1E27399A00DFC250 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FCCD32BF1E27399A00DFC250 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		FCCD32C21E27399A00DFC250 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FCCD32C41E27399A00DFC250 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCCD32C71E27399A00DFC250 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -29,17 +41,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCA7E9DD1E274498009ED523 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FCA7E9DB1E274498009ED523 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCA7E9DC1E274498009ED523 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FCCD32B11E27399A00DFC250 = {
 			isa = PBXGroup;
 			children = (
 				FCCD32BC1E27399A00DFC250 /* OnTheMap */,
 				FCCD32BB1E27399A00DFC250 /* Products */,
+				FCA7E9DB1E274498009ED523 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,10 +77,15 @@
 			isa = PBXGroup;
 			children = (
 				FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */,
-				FCCD32BF1E27399A00DFC250 /* ViewController.swift */,
+				FCCD32BF1E27399A00DFC250 /* TabViewController.swift */,
+				FCA7E9DE1E274585009ED523 /* MapViewController.swift */,
+				FCA7E9E01E27459D009ED523 /* ListViewController.swift */,
 				FCCD32C11E27399A00DFC250 /* Main.storyboard */,
 				FCCD32C41E27399A00DFC250 /* Assets.xcassets */,
 				FCCD32C61E27399A00DFC250 /* LaunchScreen.storyboard */,
+				FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */,
+				FCA7E9D61E274270009ED523 /* Roboto-Regular.ttf */,
+				FCA7E9D71E274270009ED523 /* Roboto-Thin.ttf */,
 				FCCD32C91E27399A00DFC250 /* Info.plist */,
 			);
 			path = OnTheMap;
@@ -124,7 +151,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCA7E9D81E274270009ED523 /* Roboto-Medium.ttf in Resources */,
 				FCCD32C81E27399A00DFC250 /* LaunchScreen.storyboard in Resources */,
+				FCA7E9DA1E274270009ED523 /* Roboto-Thin.ttf in Resources */,
+				FCA7E9D91E274270009ED523 /* Roboto-Regular.ttf in Resources */,
 				FCCD32C51E27399A00DFC250 /* Assets.xcassets in Resources */,
 				FCCD32C31E27399A00DFC250 /* Main.storyboard in Resources */,
 			);
@@ -137,7 +167,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCCD32C01E27399A00DFC250 /* ViewController.swift in Sources */,
+				FCCD32C01E27399A00DFC250 /* TabViewController.swift in Sources */,
+				FCA7E9DF1E274585009ED523 /* MapViewController.swift in Sources */,
+				FCA7E9E11E27459D009ED523 /* ListViewController.swift in Sources */,
 				FCCD32BE1E27399A00DFC250 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,6 +334,7 @@
 				FCCD32CE1E27399A00DFC250 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

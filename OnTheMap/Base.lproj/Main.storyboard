@@ -1,76 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Npf-oH-ldp">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map-->
+        <!--On the Map-->
         <scene sceneID="z1B-eS-P81">
             <objects>
-                <viewController id="lVC-tw-JzM" sceneMemberID="viewController">
+                <viewController id="lVC-tw-JzM" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="QfX-84-CAC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </mapView>
-                    <tabBarItem key="tabBarItem" title="Map" id="40J-Jv-wav"/>
+                    <navigationItem key="navigationItem" title="On the Map" id="kFD-N5-iKW">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Ngk-bz-b54"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="pMM-1Q-t7T"/>
+                            <barButtonItem image="pin" id="rjL-ly-jJs"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nK-03-oFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="654" y="-226"/>
+            <point key="canvasLocation" x="1592.8" y="-226.23688155922042"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab View Controller-->
         <scene sceneID="sHL-1W-2Hq">
             <objects>
-                <tabBarController id="Npf-oH-ldp" sceneMemberID="viewController">
+                <tabBarController id="Npf-oH-ldp" customClass="TabViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="lWV-cS-0dF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.98758721350000001" green="0.26671049000000002" blue="0.029613846910000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.98922836780548096" green="0.4153139591217041" blue="0.031820401549339294" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="lVC-tw-JzM" kind="relationship" relationship="viewControllers" id="HWX-La-2vM"/>
-                        <segue destination="3gi-fv-f8t" kind="relationship" relationship="viewControllers" id="vV0-ga-uYJ"/>
+                        <segue destination="czr-BV-jAf" kind="relationship" relationship="viewControllers" id="HWX-La-2vM"/>
+                        <segue destination="0Yy-vi-OaQ" kind="relationship" relationship="viewControllers" id="vV0-ga-uYJ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YCe-a8-YzE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-300" y="101"/>
         </scene>
-        <!--List-->
+        <!--On the Map-->
         <scene sceneID="p0j-8b-RVi">
             <objects>
-                <tableViewController id="3gi-fv-f8t" sceneMemberID="viewController">
+                <tableViewController id="3gi-fv-f8t" customClass="ListViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="28" sectionFooterHeight="28" id="n18-7c-1Wr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="uOL-6c-e0s" detailTextLabel="rMz-vE-ztY" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="hKt-qP-jdj">
-                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UserCell" textLabel="uOL-6c-e0s" imageView="ZgV-sA-TCF" rowHeight="60" style="IBUITableViewCellStyleDefault" id="hKt-qP-jdj">
+                                <rect key="frame" x="0.0" y="28" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hKt-qP-jdj" id="6DT-XB-MmO">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="59"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uOL-6c-e0s">
-                                            <rect key="frame" x="15" y="12" width="34" height="21"/>
+                                            <rect key="frame" x="62" y="0.0" width="223" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rMz-vE-ztY">
-                                            <rect key="frame" x="15" y="33" width="44" height="15"/>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pin" id="ZgV-sA-TCF">
+                                            <rect key="frame" x="15" y="13" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                            <color key="tintColor" red="0.98758721350000001" green="0.26671049000000002" blue="0.029613846910000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -80,11 +87,71 @@
                             <outlet property="delegate" destination="3gi-fv-f8t" id="sJj-cy-7Wt"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="List" id="9FI-ie-U19"/>
+                    <navigationItem key="navigationItem" title="On the Map" id="sXa-R4-wBS">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="3gK-Jm-KVz"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="2bC-Lq-WE3"/>
+                            <barButtonItem image="pin" id="rsh-8e-UJe"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vqn-Us-tmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1592.8" y="512.29385307346331"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="9hN-Cp-Dph">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="czr-BV-jAf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="40J-Jv-wav"/>
+                    <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rte-4a-qcm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.98758721350000001" green="0.26671049000000002" blue="0.029613846910000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lVC-tw-JzM" kind="relationship" relationship="rootViewController" id="gBb-5E-Rf7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9UU-IO-w9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="653.60000000000002" y="-226.23688155922042"/>
+        </scene>
+        <!--List-->
+        <scene sceneID="L7I-of-3s8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0Yy-vi-OaQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="List" image="list" id="9FI-ie-U19"/>
+                    <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UPA-9e-BZb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.98758721350000001" green="0.26671049000000002" blue="0.029613846910000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3gi-fv-f8t" kind="relationship" relationship="rootViewController" id="rP2-cq-r7h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kFK-mO-339" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="653.60000000000002" y="512.29385307346331"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="list" width="32" height="32"/>
+        <image name="map" width="32" height="32"/>
+        <image name="pin" width="32" height="32"/>
+    </resources>
+    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
