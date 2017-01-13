@@ -23,13 +23,6 @@ typealias AuthenticationCompletion = (AuthenticationResponse) -> Void
 protocol Authentication {
     
     //
-    //  Current authentication state (logged in or logged out).
-    //
-    var isAuthenticated: Bool {
-        get
-    }
-    
-    //
     //  Invalidate the current authenticated session.
     //
     func logout()

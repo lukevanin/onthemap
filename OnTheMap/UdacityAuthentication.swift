@@ -10,13 +10,10 @@ import Foundation
 
 class UdacityAuthentication: Authentication {
 
-    var isAuthenticated: Bool = false
-    
     //
     //  Invalidate the current authenticated session.
     //
     func logout() {
-        isAuthenticated = false
         // FIXME: Invalidate facebook login
     }
     

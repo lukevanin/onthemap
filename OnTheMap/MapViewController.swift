@@ -9,11 +9,32 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, StudentsController {
+    
+    var model: [StudentInformation]?
+    var delegate: StudentsControllerDelegate?
+    var viewController: UIViewController {
+        return self
+    }
+    
+    // MARK: Outlets
 
     @IBOutlet weak var mapView: MKMapView!
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    
+    // MARK: Actions
+    
+    @IBAction func onLogoutAction(_ sender: Any) {
+        delegate?.studentsController(controller: self, action: .logout, sender: sender)
     }
+    
+    @IBAction func onPinAction(_ sender: Any) {
+        delegate?.studentsController(controller: self, action: .addLocation, sender: sender)
+    }
+    
+    @IBAction func onRefreshAction(_ sender: Any) {
+        delegate?.studentsController(controller: self, action: .refresh, sender: sender)
+    }
+
+    // MARK: View controller life cycle
+    
 }

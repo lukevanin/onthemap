@@ -14,7 +14,6 @@ import Foundation
 class MockAuthentication: Authentication {
 
     var expectedResponse: AuthenticationResponse
-    var isAuthenticated: Bool = false
     
     convenience init() {
         self.init(response: .authenticated)
@@ -25,7 +24,6 @@ class MockAuthentication: Authentication {
     }
     
     func logout() {
-        isAuthenticated = false
     }
 
     func login(username: String, password: String, completion: AuthenticationCompletion) {
@@ -37,12 +35,6 @@ class MockAuthentication: Authentication {
     }
     
     func complete(_ completion: AuthenticationCompletion) {
-        switch expectedResponse {
-        case .authenticated:
-            isAuthenticated = true
-        case .error(_):
-            break
-        }
         completion(expectedResponse)
     }
 }

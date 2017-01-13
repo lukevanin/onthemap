@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		FC1C35441E27DEDF00191CA7 /* UdacityAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C35431E27DEDF00191CA7 /* UdacityAuthentication.swift */; };
 		FC1C35461E27DF4200191CA7 /* MockAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C35451E27DF4200191CA7 /* MockAuthentication.swift */; };
+		FCA1B7E31E288C1600A10E85 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1B7E21E288C1600A10E85 /* AuthenticationManager.swift */; };
+		FCA1B7E71E28911000A10E85 /* StudentsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1B7E61E28911000A10E85 /* StudentsManager.swift */; };
+		FCA1B7E91E2891EC00A10E85 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1B7E81E2891EC00A10E85 /* StudentInformation.swift */; };
+		FCA1B7EB1E28944300A10E85 /* StudentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1B7EA1E28944300A10E85 /* StudentsController.swift */; };
+		FCA393A41E28A5BB000F17FB /* LocationLookupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA393A31E28A5BB000F17FB /* LocationLookupViewController.swift */; };
+		FCA393A61E28A6D6000F17FB /* StudentInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA393A51E28A6D6000F17FB /* StudentInfoViewController.swift */; };
 		FCA7E9D81E274270009ED523 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */; };
 		FCA7E9D91E274270009ED523 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA7E9D61E274270009ED523 /* Roboto-Regular.ttf */; };
 		FCA7E9DA1E274270009ED523 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA7E9D71E274270009ED523 /* Roboto-Thin.ttf */; };
@@ -27,6 +33,12 @@
 /* Begin PBXFileReference section */
 		FC1C35431E27DEDF00191CA7 /* UdacityAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityAuthentication.swift; sourceTree = "<group>"; };
 		FC1C35451E27DF4200191CA7 /* MockAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAuthentication.swift; sourceTree = "<group>"; };
+		FCA1B7E21E288C1600A10E85 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		FCA1B7E61E28911000A10E85 /* StudentsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsManager.swift; sourceTree = "<group>"; };
+		FCA1B7E81E2891EC00A10E85 /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
+		FCA1B7EA1E28944300A10E85 /* StudentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsController.swift; sourceTree = "<group>"; };
+		FCA393A31E28A5BB000F17FB /* LocationLookupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationLookupViewController.swift; sourceTree = "<group>"; };
+		FCA393A51E28A6D6000F17FB /* StudentInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfoViewController.swift; sourceTree = "<group>"; };
 		FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		FCA7E9D61E274270009ED523 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		FCA7E9D71E274270009ED523 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
@@ -67,10 +79,13 @@
 		FCA7E9E21E2746A6009ED523 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FCA1B7EA1E28944300A10E85 /* StudentsController.swift */,
 				FCCD32BF1E27399A00DFC250 /* TabViewController.swift */,
 				FCA7E9DE1E274585009ED523 /* MapViewController.swift */,
 				FCA7E9E01E27459D009ED523 /* ListViewController.swift */,
 				FCA7E9E61E274A00009ED523 /* LoginViewController.swift */,
+				FCA393A31E28A5BB000F17FB /* LocationLookupViewController.swift */,
+				FCA393A51E28A6D6000F17FB /* StudentInfoViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -87,7 +102,6 @@
 		FCA7E9E41E2746B9009ED523 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FCCD32C91E27399A00DFC250 /* Info.plist */,
 				FCCD32C41E27399A00DFC250 /* Assets.xcassets */,
 				FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */,
 				FCA7E9D61E274270009ED523 /* Roboto-Regular.ttf */,
@@ -102,6 +116,9 @@
 				FCA7E9E81E274B60009ED523 /* Authentication.swift */,
 				FC1C35431E27DEDF00191CA7 /* UdacityAuthentication.swift */,
 				FC1C35451E27DF4200191CA7 /* MockAuthentication.swift */,
+				FCA1B7E21E288C1600A10E85 /* AuthenticationManager.swift */,
+				FCA1B7E61E28911000A10E85 /* StudentsManager.swift */,
+				FCA1B7E81E2891EC00A10E85 /* StudentInformation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -127,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */,
+				FCCD32C91E27399A00DFC250 /* Info.plist */,
 				FCA7E9E51E2746C5009ED523 /* Model */,
 				FCA7E9E21E2746A6009ED523 /* View Controller */,
 				FCA7E9E31E2746B1009ED523 /* Storyboard */,
@@ -214,11 +232,17 @@
 				FCCD32C01E27399A00DFC250 /* TabViewController.swift in Sources */,
 				FCA7E9E91E274B60009ED523 /* Authentication.swift in Sources */,
 				FCA7E9DF1E274585009ED523 /* MapViewController.swift in Sources */,
+				FCA1B7E91E2891EC00A10E85 /* StudentInformation.swift in Sources */,
+				FCA1B7E71E28911000A10E85 /* StudentsManager.swift in Sources */,
+				FCA1B7E31E288C1600A10E85 /* AuthenticationManager.swift in Sources */,
 				FC1C35461E27DF4200191CA7 /* MockAuthentication.swift in Sources */,
 				FCA7E9E11E27459D009ED523 /* ListViewController.swift in Sources */,
+				FCA1B7EB1E28944300A10E85 /* StudentsController.swift in Sources */,
 				FCA7E9E71E274A00009ED523 /* LoginViewController.swift in Sources */,
 				FC1C35441E27DEDF00191CA7 /* UdacityAuthentication.swift in Sources */,
 				FCCD32BE1E27399A00DFC250 /* AppDelegate.swift in Sources */,
+				FCA393A61E28A6D6000F17FB /* StudentInfoViewController.swift in Sources */,
+				FCA393A41E28A5BB000F17FB /* LocationLookupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

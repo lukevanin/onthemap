@@ -9,15 +9,13 @@
 import UIKit
 import SafariServices
 
-typealias AlertCompletion = () -> Void
-
 protocol LoginViewControllerDelegate: class {
     func loginController(_ controller: LoginViewController, didAuthenticate: Bool)
 }
 
 class LoginViewController: UIViewController {
     
-    var authentication: Authentication!
+    var authentication: AuthenticationManager!
     weak var delegate: LoginViewControllerDelegate?
     
     // MARK: Outlets
@@ -72,17 +70,24 @@ class LoginViewController: UIViewController {
     
     // MARK: Authentication
 
+    //
+    //  Process authentication response. Notify delegate
+    //
     private func handleLoginResponse(_ response: AuthenticationResponse) {
         switch response {
         case .authenticated:
             delegate?.loginController(self, didAuthenticate: true)
         case .error(let error):
-            delegate?.loginController(self, didAuthenticate: false)
-            handleError(error)
+            handleError(error) { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                self.delegate?.loginController(self, didAuthenticate: false)
+            }
         }
     }
     
-    private func handleError(_ error: AuthenticationError) {
+    private func handleError(_ error: AuthenticationError, completion: @escaping () -> Void) {
         let message: String
         switch (error) {
         case .credentials:
@@ -91,14 +96,14 @@ class LoginViewController: UIViewController {
             message = "Please check your internet connection and try again."
         }
         DispatchQueue.main.async {
-            self.showAlert(error: message)
+            self.showAlert(error: message, completion: completion)
         }
     }
     
-    private func showAlert(error message: String, completion: AlertCompletion? = nil) {
+    private func showAlert(error message: String, completion: @escaping () -> Void) {
         let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Dismiss", style: .cancel) { (action) in
-            completion?()
+            completion()
         }
         controller.addAction(action)
         present(controller, animated: true, completion: nil)
