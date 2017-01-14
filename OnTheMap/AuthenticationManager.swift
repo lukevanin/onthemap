@@ -9,55 +9,87 @@
 import Foundation
 
 class AuthenticationManager {
+    
+    typealias Completion = (Result<Bool>) -> Void
+    typealias SessionCompletion = (Result<Session>) -> Void
 
     //
     //  Current authentication state (logged in or logged out).
     //
-    var isAuthenticated: Bool = false
-
-    private let service: Authentication
-    
-    init(service: Authentication) {
-        self.service = service
+    var isAuthenticated: Bool {
+        return (credentials.session != nil)
     }
     
+    private let service: UdacityService
+    private let credentials: Credentials
+    
+    init(service: UdacityService, credentials: Credentials) {
+        self.service = service
+        self.credentials = credentials
+    }
+    
+    //
+    //  Retrieve the current authenticated session. Returns an error if the user has not logged in.
+    //
+    func fetchSession(completion: @escaping SessionCompletion) {
+        if let session = credentials.session {
+            completion(.success(session))
+        }
+        else {
+            completion(.failure(ServiceError.authentication))
+        }
+    }
+    
+    //
+    //
+    //
+    func fetchUser(accountId: String, completion: @escaping UserCompletion) {
+        service.fetchUser(accountId: accountId, completion: completion)
+    }
+
     //
     //  Log out of all services. Set state to unauthenticated.
     //
     func logout() {
-        self.service.logout()
-        isAuthenticated = false
+        service.logout()
+        credentials.session = nil
     }
     
     //
     //  Log in to service with username and password.
     //
-    func login(username: String, password: String, completion: @escaping AuthenticationCompletion) {
-        service.login(username: username, password: password) { [weak self] response in
-            self?.handleResponse(response)
-            completion(response)
+    func login(username: String, password: String, completion: @escaping Completion) {
+        service.login(username: username, password: password) { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+            self.handleSession(result)
+            completion(.success(self.isAuthenticated))
         }
     }
     
     //
     //  Log in to service with facebook authentication token.
     //
-    func loginWithFacebook(token: Data, completion: @escaping AuthenticationCompletion) {
-        service.loginWithFacebook(token: token) { [weak self] response in
-            self?.handleResponse(response)
-            completion(response)
+    func loginWithFacebook(token: Data, completion: @escaping Completion) {
+        service.loginWithFacebook(token: token) { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+            self.handleSession(result)
+            completion(.success(self.isAuthenticated))
         }
     }
-    
+
     //
     //  Process response from authentication service. Update internal state according to success of response.
     //
-    private func handleResponse(_ response: AuthenticationResponse) {
-        switch response {
-        case .authenticated:
-            isAuthenticated = true
-        default:
-            isAuthenticated = false
+    private func handleSession(_ result: Result<Session>) {
+        switch result {
+        case .success(let session):
+            credentials.session = session
+        case .failure(_):
+            credentials.session = nil
         }
     }
 

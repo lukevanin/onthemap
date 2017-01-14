@@ -42,7 +42,7 @@ class LoginViewController: UIViewController {
         // Get username text input.
         guard let username = usernameTextField.text, !username.isEmpty else {
             let message = "Please enter a username."
-            showAlert(error: message) { [weak self] in
+            showAlert(forErrorMessage: message) { [weak self] in
                 self?.usernameTextField.becomeFirstResponder()
             }
             return
@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
         // Get password text input.
         guard let password = passwordTextField.text, !password.isEmpty else {
             let message = "Please enter a password."
-            showAlert(error: message) { [weak self] in
+            showAlert(forErrorMessage: message) { [weak self] in
                 self?.passwordTextField.becomeFirstResponder()
             }
             return
@@ -73,40 +73,23 @@ class LoginViewController: UIViewController {
     //
     //  Process authentication response. Notify delegate
     //
-    private func handleLoginResponse(_ response: AuthenticationResponse) {
-        switch response {
-        case .authenticated:
-            delegate?.loginController(self, didAuthenticate: true)
-        case .error(let error):
-            handleError(error) { [weak self] in
+    private func handleLoginResponse(_ result: Result<Bool>) {
+        
+        switch result {
+            
+        case .success(let isAuthenticated):
+            delegate?.loginController(self, didAuthenticate: isAuthenticated)
+            
+        case .failure(let error):
+            DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else {
                     return
                 }
-                self.delegate?.loginController(self, didAuthenticate: false)
+                self.showAlert(forError: error) {
+                    self.delegate?.loginController(self, didAuthenticate: false)
+                }
             }
         }
-    }
-    
-    private func handleError(_ error: AuthenticationError, completion: @escaping () -> Void) {
-        let message: String
-        switch (error) {
-        case .credentials:
-            message = "Your username or password is incorrect. Please check your entry and try again."
-        case .network:
-            message = "Please check your internet connection and try again."
-        }
-        DispatchQueue.main.async {
-            self.showAlert(error: message, completion: completion)
-        }
-    }
-    
-    private func showAlert(error message: String, completion: @escaping () -> Void) {
-        let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Dismiss", style: .cancel) { (action) in
-            completion()
-        }
-        controller.addAction(action)
-        present(controller, animated: true, completion: nil)
     }
     
     // MARK: View life cycle
@@ -124,10 +107,16 @@ class LoginViewController: UIViewController {
     }
 }
 
+//
+//
+//
 extension LoginViewController: UITextFieldDelegate {
     
+    //
+    //
+    //
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // FIXME: Go to next text field, otherwise submit.
+        textField.resignFirstResponder()
         return true
     }
 }

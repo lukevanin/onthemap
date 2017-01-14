@@ -8,19 +8,10 @@
 
 import Foundation
 
-enum AuthenticationError: Error {
-    case credentials
-    case network
-}
+typealias AuthenticationCompletion = (Result<Session>) -> Void
+typealias UserCompletion = (Result<User>) -> Void
 
-enum AuthenticationResponse {
-    case error(AuthenticationError)
-    case authenticated
-}
-
-typealias AuthenticationCompletion = (AuthenticationResponse) -> Void
-
-protocol Authentication {
+protocol UdacityService {
     
     //
     //  Invalidate the current authenticated session.
@@ -33,7 +24,7 @@ protocol Authentication {
     //  If the response indicates a valid login then set the state to authenticated, otherwise set the state to 
     //  unauthenticated and show an error.
     //
-    func login(username: String, password: String, completion: AuthenticationCompletion)
+    func login(username: String, password: String, completion: @escaping AuthenticationCompletion)
     
     //
     //  Log in using facebook token. The user must have been authenticated with facebook (ie via a webview or device
@@ -42,5 +33,10 @@ protocol Authentication {
     //  If the response indicates a valid login then set the state to authenticated, otherwise set the state to
     //  unauthenticated and show an error.
     //
-    func loginWithFacebook(token: Data, completion: AuthenticationCompletion)
+    func loginWithFacebook(token: Data, completion: @escaping AuthenticationCompletion)
+    
+    //
+    //
+    //
+    func fetchUser(accountId: String, completion: @escaping UserCompletion)
 }

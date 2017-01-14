@@ -90,7 +90,7 @@
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="OnS-ny-J5m" id="1zI-Dq-B2D"/>
                                                 </connections>
@@ -279,7 +279,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="UFq-7i-PmB">
-                                <rect key="frame" x="16" y="104" width="288" height="424"/>
+                                <rect key="frame" x="16" y="80" width="288" height="472"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UAI-jx-PiA">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="70.5"/>
@@ -305,40 +305,54 @@
                                         </subviews>
                                     </stackView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Where are you located?" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3MC-P1-8S5">
-                                        <rect key="frame" x="0.0" y="135.5" width="288" height="44"/>
+                                        <rect key="frame" x="0.0" y="220.5" width="288" height="44"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                    </textField>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="2A4-qw-jqM">
-                                        <rect key="frame" x="0.0" y="261.5" width="288" height="37"/>
-                                        <color key="color" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </activityIndicatorView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mR-Rd-H1B">
-                                        <rect key="frame" x="0.0" y="380" width="288" height="44"/>
-                                        <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="ThH-8K-MTA"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                        <state key="normal" title="Find on the map"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
-                                            <action selector="onFindButtonAction:" destination="9V2-cv-WWe" eventType="touchUpInside" id="Etn-VB-uwf"/>
+                                            <outlet property="delegate" destination="9V2-cv-WWe" id="J4n-NI-4Ye"/>
                                         </connections>
-                                    </button>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQG-4F-A4U">
+                                        <rect key="frame" x="0.0" y="428" width="288" height="44"/>
+                                        <subviews>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BdO-kh-pHx">
+                                                <rect key="frame" x="125.5" y="3.5" width="37" height="37"/>
+                                                <color key="color" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </activityIndicatorView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mR-Rd-H1B">
+                                                <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                                <state key="normal" title="Find on the map"/>
+                                                <connections>
+                                                    <action selector="onFindButtonAction:" destination="9V2-cv-WWe" eventType="touchUpInside" id="Etn-VB-uwf"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="BdO-kh-pHx" firstAttribute="centerY" secondItem="IQG-4F-A4U" secondAttribute="centerY" id="1Nj-7B-Fys"/>
+                                            <constraint firstAttribute="height" constant="44" id="5EQ-jc-MFW"/>
+                                            <constraint firstAttribute="trailing" secondItem="6mR-Rd-H1B" secondAttribute="trailing" id="Ces-iJ-jKL"/>
+                                            <constraint firstItem="BdO-kh-pHx" firstAttribute="centerX" secondItem="IQG-4F-A4U" secondAttribute="centerX" id="Hhu-bm-5FO"/>
+                                            <constraint firstItem="6mR-Rd-H1B" firstAttribute="top" secondItem="IQG-4F-A4U" secondAttribute="top" id="OxT-NU-nij"/>
+                                            <constraint firstItem="6mR-Rd-H1B" firstAttribute="leading" secondItem="IQG-4F-A4U" secondAttribute="leading" id="ZGo-j0-BEP"/>
+                                            <constraint firstAttribute="bottom" secondItem="6mR-Rd-H1B" secondAttribute="bottom" id="eJt-yD-Kdf"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="6mR-Rd-H1B" firstAttribute="height" secondItem="3MC-P1-8S5" secondAttribute="height" id="1vM-sh-zqw"/>
+                                    <constraint firstItem="IQG-4F-A4U" firstAttribute="height" secondItem="3MC-P1-8S5" secondAttribute="height" id="1c1-Mg-Qxn"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="UFq-7i-PmB" firstAttribute="top" secondItem="cMY-Ga-gnE" secondAttribute="bottom" constant="40" id="HLr-L4-gDf"/>
+                            <constraint firstItem="UFq-7i-PmB" firstAttribute="top" secondItem="cMY-Ga-gnE" secondAttribute="bottom" constant="16" id="HLr-L4-gDf"/>
                             <constraint firstItem="UFq-7i-PmB" firstAttribute="leading" secondItem="h5S-ca-NxA" secondAttribute="leadingMargin" id="Xae-Qj-OcI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UFq-7i-PmB" secondAttribute="trailing" id="Z8x-mW-jB5"/>
-                            <constraint firstItem="RzB-XS-T83" firstAttribute="top" secondItem="UFq-7i-PmB" secondAttribute="bottom" constant="40" id="mkm-Oo-cli"/>
+                            <constraint firstItem="RzB-XS-T83" firstAttribute="top" secondItem="UFq-7i-PmB" secondAttribute="bottom" constant="16" id="mkm-Oo-cli"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9Bm-HG-Tam">
@@ -349,7 +363,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="2A4-qw-jqM" id="sKx-3g-SVY"/>
+                        <outlet property="activityIndicator" destination="BdO-kh-pHx" id="kRC-mI-oGa"/>
                         <outlet property="findButton" destination="6mR-Rd-H1B" id="Gfb-SS-Bnc"/>
                         <outlet property="locationTextField" destination="3MC-P1-8S5" id="IgL-rs-suf"/>
                         <segue destination="ohn-kd-Om6" kind="show" identifier="info" id="Wll-up-jRA"/>
@@ -422,49 +436,64 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="XKe-RE-QgA">
-                                <rect key="frame" x="16" y="104" width="288" height="424"/>
+                                <rect key="frame" x="16" y="80" width="288" height="472"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your web site URL" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Z7Z-X3-TFD">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="5iG-72-EBH"/>
+                                        </constraints>
                                         <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="ohn-kd-Om6" id="R1z-kp-NCH"/>
+                                        </connections>
                                     </textField>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="al3-zM-nmK">
-                                        <rect key="frame" x="0.0" y="68" width="288" height="288"/>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsCompass="NO" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="al3-zM-nmK">
+                                        <rect key="frame" x="0.0" y="92" width="288" height="288"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="al3-zM-nmK" secondAttribute="height" id="Xih-Or-OH0"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="22"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </mapView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCb-0J-tp6">
-                                        <rect key="frame" x="0.0" y="380" width="288" height="44"/>
-                                        <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6w-Xa-34b">
+                                        <rect key="frame" x="0.0" y="428" width="288" height="44"/>
+                                        <subviews>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="2Wy-69-Fcb">
+                                                <rect key="frame" x="125" y="3" width="37" height="37"/>
+                                                <color key="color" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </activityIndicatorView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCb-0J-tp6">
+                                                <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                                <state key="normal" title="Submit"/>
+                                                <connections>
+                                                    <action selector="onSubmitButtonAction:" destination="ohn-kd-Om6" eventType="touchUpInside" id="ffK-0o-Gpd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="Dpw-GI-dZN"/>
+                                            <constraint firstItem="wCb-0J-tp6" firstAttribute="leading" secondItem="x6w-Xa-34b" secondAttribute="leading" id="QYn-2C-PEA"/>
+                                            <constraint firstItem="2Wy-69-Fcb" firstAttribute="centerX" secondItem="x6w-Xa-34b" secondAttribute="centerX" id="Tfh-iG-j4R"/>
+                                            <constraint firstItem="wCb-0J-tp6" firstAttribute="top" secondItem="x6w-Xa-34b" secondAttribute="top" id="VfP-CE-uIa"/>
+                                            <constraint firstAttribute="bottom" secondItem="wCb-0J-tp6" secondAttribute="bottom" id="bnB-oF-Vtg"/>
+                                            <constraint firstAttribute="trailing" secondItem="wCb-0J-tp6" secondAttribute="trailing" id="j2e-sJ-Gd6"/>
+                                            <constraint firstItem="2Wy-69-Fcb" firstAttribute="centerY" secondItem="x6w-Xa-34b" secondAttribute="centerY" id="nbD-JO-Ift"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                        <state key="normal" title="Submit"/>
-                                        <connections>
-                                            <action selector="onSubmitButtonAction:" destination="ohn-kd-Om6" eventType="touchUpInside" id="ffK-0o-Gpd"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="wCb-0J-tp6" firstAttribute="height" secondItem="Z7Z-X3-TFD" secondAttribute="height" id="b8j-FP-Rzi"/>
+                                    <constraint firstItem="x6w-Xa-34b" firstAttribute="height" secondItem="Z7Z-X3-TFD" secondAttribute="height" id="XYd-Ee-Bsu"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="XKe-RE-QgA" firstAttribute="leading" secondItem="4fe-OL-nOo" secondAttribute="leadingMargin" id="0Fv-lQ-GW6"/>
-                            <constraint firstItem="XKe-RE-QgA" firstAttribute="top" secondItem="C5F-dN-tYS" secondAttribute="bottom" constant="40" id="VmT-XL-2Iz"/>
-                            <constraint firstItem="uX7-yg-PwQ" firstAttribute="top" secondItem="XKe-RE-QgA" secondAttribute="bottom" constant="40" id="aRm-GG-wmJ"/>
+                            <constraint firstItem="XKe-RE-QgA" firstAttribute="top" secondItem="C5F-dN-tYS" secondAttribute="bottom" constant="16" id="VmT-XL-2Iz"/>
+                            <constraint firstItem="uX7-yg-PwQ" firstAttribute="top" secondItem="XKe-RE-QgA" secondAttribute="bottom" constant="16" id="aRm-GG-wmJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XKe-RE-QgA" secondAttribute="trailing" id="iOa-4e-A86"/>
                         </constraints>
                     </view>
@@ -477,6 +506,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="2Wy-69-Fcb" id="fiv-vc-aRQ"/>
                         <outlet property="mapView" destination="al3-zM-nmK" id="7pX-4n-6qu"/>
                         <outlet property="submitButton" destination="wCb-0J-tp6" id="Tu3-jW-KCM"/>
                         <outlet property="websiteTextField" destination="Z7Z-X3-TFD" id="7fX-1y-Ia9"/>

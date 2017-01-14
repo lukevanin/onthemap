@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UdacityAuthentication: Authentication {
+class ConcreteUdacityService: UdacityService {
 
     //
     //  Invalidate the current authenticated session.
@@ -23,7 +23,7 @@ class UdacityAuthentication: Authentication {
     //  If the response indicates a valid login then set the state to authenticated, otherwise set the state to
     //  unauthenticated and show an error.
     //
-    func login(username: String, password: String, completion: (AuthenticationResponse) -> Void) {
+    func login(username: String, password: String, completion: @escaping AuthenticationCompletion) {
     
     }
     
@@ -34,7 +34,14 @@ class UdacityAuthentication: Authentication {
     //  If the response indicates a valid login then set the state to authenticated, otherwise set the state to
     //  unauthenticated and show an error.
     //
-    func loginWithFacebook(token: Data, completion: (AuthenticationResponse) -> Void) {
+    func loginWithFacebook(token: Data, completion: @escaping AuthenticationCompletion) {
     
+    }
+    
+    //
+    //
+    //
+    func fetchUser(accountId: String, completion: @escaping UserCompletion) {
+        
     }
 }

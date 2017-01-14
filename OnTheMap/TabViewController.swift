@@ -15,8 +15,11 @@ class TabViewController: UITabBarController {
     private let loginSegue = "login"
     private let locationSegue = "location"
     
-    private let authentication = AuthenticationManager(service: MockAuthentication()) // Mock authenticator for testing
-//    private let authentication = UdacityAuthentication()
+    private let authentication: AuthenticationManager = {
+        let service = MockUdacityService()
+        let credentials = Credentials.shared
+        return AuthenticationManager(service: service, credentials: credentials)
+    }()
     
     private var students: [StudentInformation]?
 
