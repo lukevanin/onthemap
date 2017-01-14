@@ -172,7 +172,95 @@ class TabViewController: UITabBarController {
     //
     //
     fileprivate func addStudentLocation(sender: Any?) {
-        performSegue(withIdentifier: locationSegue, sender: sender)
+        
+        // Check if any location information exists for the user.
+        checkIfUserHasLocation() { result in
+            DispatchQueue.main.async {
+                switch result {
+                    
+                // Fetched entry status. Prompt to overwrite if user already has an entry.
+                case .success(let hasLocation):
+                    if hasLocation {
+                        // Location information is present for the user. Prompt to overwrite it.
+                        self.promptToOverwriteLocation() { overwrite in
+                            if overwrite {
+                                self.performSegue(withIdentifier: self.locationSegue, sender: sender)
+                            }
+                        }
+                    }
+                    else {
+                        // No existing location info. Show location popup.
+                        self.performSegue(withIdentifier: self.locationSegue, sender: sender)
+                    }
+                    
+                // Error occurred checking if user has location.
+                case .failure(let error):
+                    self.showAlert(forError: error)
+                }
+            }
+        }
+    }
+    
+    //
+    //
+    //
+    private func checkIfUserHasLocation(completion: @escaping (Result<Bool>) -> Void) {
+        
+        // Fetch current auth session.
+        authentication.fetchSession { [weak self] (result) in
+            switch result {
+                
+            // Error fetching session.
+            case .failure(let error):
+                completion(Result.failure(error))
+
+            // Fetched sesion. Fetch locations for user.
+            case .success(let session):
+                self?.studentService.fetchInformationForStudent(accountId: session.accountId) { (result) in
+                    switch result {
+                        
+                    // Error fetching entries for student.
+                    case .failure(let error):
+                        completion(Result.failure(error))
+                        
+                    // Fetched entries. Check if student has any entries.
+                    case .success(let entries):
+                        let hasLocation = (entries.count > 0)
+                        completion(Result.success(hasLocation))
+                    }
+                }
+            }
+        }
+    }
+    
+    //
+    //
+    //
+    private func promptToOverwriteLocation(completion: @escaping (Bool) -> Void) {
+        let message = "Do you want to overwrite your existing location?"
+        let controller = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        // Overwrite action
+        controller.addAction(
+            UIAlertAction(
+                title: "Overwrite",
+                style: .destructive,
+                handler: { (action) in
+                    completion(true)
+            })
+        )
+        
+        // Dismiss action
+        controller.addAction(
+            UIAlertAction(
+                title: "Cancel",
+                style: .cancel,
+                handler: { (action) in
+                    completion(false)
+            })
+        )
+        
+        present(controller, animated: true, completion: nil)
     }
     
     //
