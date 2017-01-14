@@ -34,7 +34,7 @@ class ConcreteUdacityService: UdacityService {
     //  If the response indicates a valid login then set the state to authenticated, otherwise set the state to
     //  unauthenticated and show an error.
     //
-    func loginWithFacebook(token: Data, completion: @escaping AuthenticationCompletion) {
+    func login(facebookToken: String, completion: @escaping AuthenticationCompletion) {
     
     }
     

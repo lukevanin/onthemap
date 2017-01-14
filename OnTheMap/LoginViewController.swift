@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import FBSDKLoginKit
 
 protocol LoginViewControllerDelegate: class {
     func loginController(_ controller: LoginViewController, didAuthenticate: Bool)
@@ -65,7 +66,27 @@ class LoginViewController: UIViewController {
     //  Facebook login button tapped. Authenticate the user with Facebook, then authorize the token with Udacity API.
     //
     @IBAction func onFacebookLoginAction(_ sender: Any) {
-//        authentication.loginWithFacebook(token: token), completion: handleLogin)
+        let login = FBSDKLoginManager()
+        let permissions = ["public_profile"]
+        login.logIn(withReadPermissions: permissions, from: self) { [weak self] (result, error) in
+            DispatchQueue.main.async {
+                guard let `self` = self else {
+                    return
+                }
+                
+                // Show an error alert if an error occurred...
+                if let error = error {
+                    self.showAlert(forError: error)
+                    return
+                }
+                
+                // ... otherwise login with the facebook token.
+                if let result = result, !result.isCancelled, let token = result.token.tokenString {
+                    // Login to udacity with facebook token.
+                    self.authentication.login(facebookToken: token, completion: self.handleLoginResponse)
+                }
+            }
+        }
     }
     
     // MARK: Authentication

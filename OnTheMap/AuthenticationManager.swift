@@ -71,8 +71,8 @@ class AuthenticationManager {
     //
     //  Log in to service with facebook authentication token.
     //
-    func loginWithFacebook(token: Data, completion: @escaping Completion) {
-        service.loginWithFacebook(token: token) { [weak self] result in
+    func login(facebookToken token: String, completion: @escaping Completion) {
+        service.login(facebookToken: token) { [weak self] result in
             guard let `self` = self else {
                 return
             }

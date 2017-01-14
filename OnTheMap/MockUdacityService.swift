@@ -40,7 +40,7 @@ class MockUdacityService: UdacityService {
         completeLogin(completion)
     }
 
-    func loginWithFacebook(token: Data, completion: @escaping AuthenticationCompletion) {
+    func login(facebookToken: String, completion: @escaping AuthenticationCompletion) {
         completeLogin(completion)
     }
     
