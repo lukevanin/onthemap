@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class TabViewController: UITabBarController {
     
@@ -14,22 +15,24 @@ class TabViewController: UITabBarController {
     
     private let loginSegue = "login"
     private let locationSegue = "location"
+    private let numberOfStudents = 100
     
-    private let authentication: AuthenticationManager = {
-        let service = MockUdacityService()
-        let credentials = Credentials.shared
-        return AuthenticationManager(service: service, credentials: credentials)
-    }()
+    private let authentication = AuthenticationManager(service: MockUdacityService(), credentials: Credentials.shared)
+    private let studentService = MockStudentService()
     
-    private var students: [StudentInformation]?
 
     // MARK: View controller life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.tintColor = .white
-        delegate = self
+        tabBar.unselectedItemTintColor = UIColor(hue: 30.0 / 360.0, saturation: 0.8, brightness: 0.8, alpha: 1.0)
         setupTabViewControllers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadStudents()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -94,17 +97,13 @@ class TabViewController: UITabBarController {
         case let viewController as LoginViewController:
             prepare(loginViewController: viewController)
 
-        // Segue to location lookup view controller.
-        case let viewController as LocationLookupViewController:
-            prepare(locationLookupViewController: viewController)
-            
         // Segue to a navigation controller - recurse into top-most view controller.
         case let navigationController as UINavigationController:
             if let viewController = navigationController.topViewController {
                 prepare(viewController: viewController, sender: sender)
             }
             
-        // Segue to unexpected view controller
+        // No customisation needed.
         default:
             break
         }
@@ -117,13 +116,6 @@ class TabViewController: UITabBarController {
         viewController.delegate = self
         viewController.authentication = authentication
     }
-    
-    //
-    //
-    //
-    private func prepare(locationLookupViewController viewController: LocationLookupViewController) {
-        // TODO: Implement
-    }
 
     // MARK: Authentication
     
@@ -135,7 +127,6 @@ class TabViewController: UITabBarController {
     fileprivate func updateAuthenticationState() {
         if authentication.isAuthenticated {
             hideLoginViewController()
-            updateSelectedViewController()
             reloadStudents()
         }
         else {
@@ -188,14 +179,54 @@ class TabViewController: UITabBarController {
     //
     //
     fileprivate func showStudentInformation(_ student: StudentInformation, sender: Any?) {
+        guard let url = makeURLForStudent(student.location.mediaURL) else {
+            let message = "Item does not contain a valid media URL."
+            showAlert(forErrorMessage: message)
+            return
+        }
+        let controller = SFSafariViewController(url: url)
+        present(controller, animated: true, completion: nil)
+    }
+    
+    //
+    //
+    //
+    fileprivate func makeURLForStudent(_ input: String) -> URL? {
+
+        guard var components = URLComponents(string: input) else {
+            return nil
+        }
         
+        if components.scheme == nil {
+            // Address is a valid URL, but is missing the scheme part, which will cause Safari view controller to crash. 
+            // Try fix it by using HTTP scheme
+            components.scheme = "http"
+        }
+        
+        return components.url
     }
     
     //
     //
     //
     fileprivate func reloadStudents() {
-        
+        studentService.fetchLatestStudentInformation(count: numberOfStudents) { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+            DispatchQueue.main.async {
+                switch result {
+                
+                // Loaded students.
+                case .success(let students):
+                    self.updateViewControllers(students: students)
+                    
+                // Error loading students.
+                case .failure(let error):
+                    self.showAlert(forError: error)
+                }
+            }
+        }
     }
 
     // MARK: App state
@@ -203,35 +234,31 @@ class TabViewController: UITabBarController {
     //
     //
     //
-    fileprivate func updateSelectedViewController() {
-        if let viewController = selectedViewController {
-            updateViewController(viewController)
-        }
-    }
-    
-    //
-    //
-    //
-    fileprivate func updateViewController(_ viewController: UIViewController) {
-        guard let controller = viewController as? StudentsController else {
+    fileprivate func updateViewControllers(students: [StudentInformation]?) {
+        guard let viewControllers = viewControllers else {
             return
         }
-        controller.model = students
+        for viewController in viewControllers {
+            updateViewController(viewController, students: students)
+        }
     }
-}
-
-//
-//
-//
-extension TabViewController: UITabBarControllerDelegate {
     
     //
-    //  Called when user taps on a tab bar item to switch to a different tab. Synchronize the new view controller with 
-    //  the current app state.
     //
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        updateViewController(viewController)
-        return true
+    //
+    fileprivate func updateViewController(_ viewController: UIViewController, students: [StudentInformation]?) {
+        switch viewController {
+        case let controller as StudentsController:
+            controller.model = students
+            
+        case let navigationController as UINavigationController:
+            if let viewController = navigationController.topViewController {
+                updateViewController(viewController, students: students)
+            }
+            
+        default:
+            break
+        }
     }
 }
 

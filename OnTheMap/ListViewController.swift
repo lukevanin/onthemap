@@ -10,13 +10,21 @@ import UIKit
 
 class ListViewController: UITableViewController, StudentsController {
     
-    var model: [StudentInformation]?
+    var model: [StudentInformation]? {
+        didSet {
+            if self.isViewLoaded {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     var delegate: StudentsControllerDelegate?
     var viewController: UIViewController {
         return self
     }
-
+    
     private let cellIdentifier = "UserCell"
+//    private let pinImage = UIImage(named: "pin").templ
     
     // MARK: Actions
     
@@ -33,5 +41,31 @@ class ListViewController: UITableViewController, StudentsController {
     }
 
     // MARK: View controller life cycle
+
+    // MARK: Table view
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        
+        if let info = model?[indexPath.row] {
+            cell.textLabel?.text = info.user.firstName + " " + info.user.lastName
+            cell.detailTextLabel?.text = info.location.mapString
+        }
+        
+        return cell
+    }
+    
+    //
+    //
+    //
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let info = model?[indexPath.row] else {
+            return
+        }
+        delegate?.studentsController(controller: self, action: .showInformation(info), sender: nil)
+    }
 }

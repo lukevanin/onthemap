@@ -13,7 +13,7 @@ extension UIViewController {
     //
     //
     //
-    func showAlert(forErrorMessage message: String, completion: @escaping ErrorAlertCompletion) {
+    func showAlert(forErrorMessage message: String, completion: ErrorAlertCompletion? = nil) {
         let controller = UIAlertController.alert(forErrorMessage: message, completion: completion)
         present(controller, animated: true, completion: nil)
     }
@@ -21,7 +21,7 @@ extension UIViewController {
     //
     //
     //
-    func showAlert(forError error: Error, completion: @escaping ErrorAlertCompletion) {
+    func showAlert(forError error: Error, completion: ErrorAlertCompletion? = nil) {
         let controller = UIAlertController.alert(forError: error, completion: completion)
         present(controller, animated: true, completion: nil)
     }
