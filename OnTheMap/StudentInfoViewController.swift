@@ -33,7 +33,8 @@ class StudentInfoViewController: UIViewController {
     // MARK: Outlets
     
     @IBOutlet weak var websiteTextField: UITextField!
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var portraitMapView: MKMapView!
+    @IBOutlet weak var landscapeMapView: MKMapView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var submitButton: UIButton!
     
@@ -62,11 +63,25 @@ class StudentInfoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateMapOrientation(forTraits: traitCollection)
         updateMapWithLocation()
         updateState()
     }
     
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        updateMapOrientation(forTraits: newCollection)
+    }
+    
     // MARK: Map
+    
+    //
+    //
+    //
+    private func updateMapOrientation(forTraits traits: UITraitCollection) {
+        let isLandscape = (traits.verticalSizeClass == .compact)
+        portraitMapView.superview?.isHidden = isLandscape
+        landscapeMapView.superview?.isHidden = !isLandscape
+    }
     
     //
     //
@@ -77,9 +92,17 @@ class StudentInfoViewController: UIViewController {
         }
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        mapView.addAnnotation(annotation)
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
         let region = MKCoordinateRegion(center: coordinate, span: span)
+        updateMap(mapView: portraitMapView, annotation: annotation, region: region)
+        updateMap(mapView: landscapeMapView, annotation: annotation, region: region)
+    }
+    
+    //
+    //
+    //
+    private func updateMap(mapView: MKMapView, annotation: MKPointAnnotation, region: MKCoordinateRegion) {
+        mapView.addAnnotation(annotation)
         mapView.setRegion(region, animated: false)
     }
     

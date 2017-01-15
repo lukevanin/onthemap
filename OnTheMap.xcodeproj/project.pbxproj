@@ -40,6 +40,7 @@
 		FCA7E9E11E27459D009ED523 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7E9E01E27459D009ED523 /* ListViewController.swift */; };
 		FCA7E9E71E274A00009ED523 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7E9E61E274A00009ED523 /* LoginViewController.swift */; };
 		FCA7E9E91E274B60009ED523 /* UdacityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7E9E81E274B60009ED523 /* UdacityService.swift */; };
+		FCC44DDA1E2BF500002E8D75 /* CircleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC44DD91E2BF500002E8D75 /* CircleMapView.swift */; };
 		FCCD32BE1E27399A00DFC250 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */; };
 		FCCD32C01E27399A00DFC250 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD32BF1E27399A00DFC250 /* TabViewController.swift */; };
 		FCCD32C31E27399A00DFC250 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCD32C11E27399A00DFC250 /* Main.storyboard */; };
@@ -81,6 +82,7 @@
 		FCA7E9E01E27459D009ED523 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		FCA7E9E61E274A00009ED523 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FCA7E9E81E274B60009ED523 /* UdacityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityService.swift; sourceTree = "<group>"; };
+		FCC44DD91E2BF500002E8D75 /* CircleMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMapView.swift; sourceTree = "<group>"; };
 		FCCD32BA1E27399A00DFC250 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCCD32BF1E27399A00DFC250 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +178,6 @@
 				FCA393A51E28A6D6000F17FB /* StudentInfoViewController.swift */,
 				FC5975A11E2924A4006C3733 /* UIAlertController+Error.swift */,
 				FC5975BF1E2A2747006C3733 /* UIViewController+Error.swift */,
-				FC5975C51E2A7929006C3733 /* PaddedTextField.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -216,6 +217,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		FCC44DDB1E2BF642002E8D75 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FC5975C51E2A7929006C3733 /* PaddedTextField.swift */,
+				FCC44DD91E2BF500002E8D75 /* CircleMapView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		FCCD32B11E27399A00DFC250 = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +252,7 @@
 				FC5975B81E29A812006C3733 /* Manager */,
 				FCA7E9E51E2746C5009ED523 /* Model */,
 				FCA7E9E21E2746A6009ED523 /* View Controller */,
+				FCC44DDB1E2BF642002E8D75 /* View */,
 				FCA7E9E31E2746B1009ED523 /* Storyboard */,
 				FCA7E9E41E2746B9009ED523 /* Resources */,
 			);
@@ -349,6 +360,7 @@
 				FC5975A91E2928B9006C3733 /* LocationService.swift in Sources */,
 				FCA393A41E28A5BB000F17FB /* LocationLookupViewController.swift in Sources */,
 				FC5975C01E2A2747006C3733 /* UIViewController+Error.swift in Sources */,
+				FCC44DDA1E2BF500002E8D75 /* CircleMapView.swift in Sources */,
 				FC5975BA1E29FCCD006C3733 /* StudentLocation.swift in Sources */,
 				FC5975B31E299ABB006C3733 /* User.swift in Sources */,
 			);
