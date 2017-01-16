@@ -11,7 +11,7 @@
 
 import Foundation
 
-class MockUdacityService: UdacityService {
+class MockUserService: UserService {
 
     var session: Result<Session>
     var user: Result<User>

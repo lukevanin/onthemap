@@ -19,4 +19,19 @@ enum Result<T> {
     init(error: Error) {
         self = .failure(error)
     }
+    
+    func map<U>(_ f: (T) throws -> U) -> Result<U> {
+        switch self {
+        case .success(let t):
+            do {
+                let u = try f(t)
+                return Result<U>.success(u)
+            }
+            catch {
+                return Result<U>.failure(error)
+            }
+        case .failure(let error):
+            return Result<U>.failure(error)
+        }
+    }
 }

@@ -20,10 +20,10 @@ class AuthenticationManager {
         return (credentials.session != nil)
     }
     
-    private let service: UdacityService
+    private let service: UdacityUserService
     private let credentials: Credentials
     
-    init(service: UdacityService, credentials: Credentials) {
+    init(service: UdacityUserService, credentials: Credentials) {
         self.service = service
         self.credentials = credentials
     }

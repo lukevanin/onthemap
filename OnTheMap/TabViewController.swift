@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import FBSDKLoginKit
 
 class TabViewController: UITabBarController {
     
@@ -17,8 +18,9 @@ class TabViewController: UITabBarController {
     private let locationSegue = "location"
     private let numberOfStudents = 100
     
-    private let authentication = AuthenticationManager(service: MockUdacityService(), credentials: Credentials.shared)
-    private let studentService = MockStudentService()
+//    private let authentication = AuthenticationManager(service: MockUdacityService(), credentials: Credentials.shared)
+    private let authentication = AuthenticationManager(service: UdacityUserService(), credentials: Credentials.shared)
+    private let studentService = UdacityStudentService()
     
 
     // MARK: View controller life cycle
@@ -32,7 +34,11 @@ class TabViewController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadStudents()
+        
+        // Load data if user is authenticated.
+        if authentication.isAuthenticated {
+            reloadStudents()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -164,6 +170,7 @@ class TabViewController: UITabBarController {
     //
     //
     fileprivate func logout() {
+        FBSDKLoginManager().logOut()
         authentication.logout()
         updateAuthenticationState()
     }
@@ -267,7 +274,7 @@ class TabViewController: UITabBarController {
     //
     //
     fileprivate func showStudentInformation(_ student: StudentInformation, sender: Any?) {
-        guard let url = makeURLForStudent(student.location.mediaURL) else {
+        guard let mediaURL = student.location.mediaURL, let url = makeURLForStudent(mediaURL) else {
             let message = "Item does not contain a valid media URL."
             showAlert(forErrorMessage: message)
             return

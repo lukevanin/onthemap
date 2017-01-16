@@ -11,7 +11,7 @@ import Foundation
 typealias AuthenticationCompletion = (Result<Session>) -> Void
 typealias UserCompletion = (Result<User>) -> Void
 
-protocol UdacityService {
+protocol UserService {
     
     //
     //  Invalidate the current authenticated session.

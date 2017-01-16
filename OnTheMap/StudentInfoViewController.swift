@@ -18,8 +18,10 @@ class StudentInfoViewController: UIViewController {
     
     private let dismissSegue = "dismiss"
     
-    private let authenticationManager = AuthenticationManager(service: MockUdacityService(), credentials: Credentials.shared)
-    private let studentService = MockStudentService()
+//    private let authenticationManager = AuthenticationManager(service: MockUserService(), credentials: Credentials.shared)
+    private let authenticationManager = AuthenticationManager(service: UdacityUserService(), credentials: Credentials.shared)
+//    private let studentService = MockStudentService()
+    private let studentService = UdacityStudentService()
     
     var address: String?
     var coordinate: CLLocationCoordinate2D?

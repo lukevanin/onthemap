@@ -18,4 +18,10 @@ enum ServiceError: Error {
     
     // Network connection error.
     case network
+    
+    // Invalid or unsupported content.
+    case content
+    
+    // Invalid request.
+    case request
 }

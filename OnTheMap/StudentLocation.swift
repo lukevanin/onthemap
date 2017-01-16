@@ -9,8 +9,8 @@
 import Foundation
 
 struct StudentLocation {
-    let mapString: String
-    let mediaURL: String
+    let mapString: String?
+    let mediaURL: String?
     let longitude: Double
     let latitude: Double
 }

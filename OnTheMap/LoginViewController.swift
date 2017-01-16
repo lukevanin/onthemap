@@ -16,13 +16,28 @@ protocol LoginViewControllerDelegate: class {
 
 class LoginViewController: UIViewController {
     
+    enum State {
+        case pending
+        case busy
+    }
+    
     var authentication: AuthenticationManager!
     weak var delegate: LoginViewControllerDelegate?
+    
+    private var state: State = .pending {
+        didSet {
+            updateState()
+        }
+    }
     
     // MARK: Outlets
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var udacityLoginButton: UIButton!
+    @IBOutlet weak var facebookLoginButton: UIButton!
+    @IBOutlet weak var signupButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     // MARK: Actions
     
@@ -30,6 +45,7 @@ class LoginViewController: UIViewController {
     // Sign up button tapped. Show web view to allow user to create an account.
     //
     @IBAction func onSignUpAction(_ sender: Any) {
+        resignResponders()
         let url = URL(string: "https://www.udacity.com/account/auth#!/signup")
         let viewController = SFSafariViewController(url: url!)
         present(viewController, animated: true, completion: nil)
@@ -39,6 +55,7 @@ class LoginViewController: UIViewController {
     //  Udacity login button tapped. Try to authenticate the user with the entered username and password.
     //
     @IBAction func onUdacityLoginAction(_ sender: Any) {
+        resignResponders()
         
         // Get username text input.
         guard let username = usernameTextField.text, !username.isEmpty else {
@@ -59,13 +76,25 @@ class LoginViewController: UIViewController {
         }
         
         // Attempt authentication with username and password.
-        authentication.login(username: username, password: password, completion: handleLoginResponse)
+        state = .busy
+        authentication.login(username: username, password: password) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let `self` = self else {
+                    return
+                }
+                self.state = .pending
+                self.handleLoginResponse(result)
+            }
+        }
     }
     
     //
     //  Facebook login button tapped. Authenticate the user with Facebook, then authorize the token with Udacity API.
     //
     @IBAction func onFacebookLoginAction(_ sender: Any) {
+        resignResponders()
+        state = .busy
+
         let login = FBSDKLoginManager()
         let permissions = ["public_profile"]
         login.logIn(withReadPermissions: permissions, from: self) { [weak self] (result, error) in
@@ -73,7 +102,9 @@ class LoginViewController: UIViewController {
                 guard let `self` = self else {
                     return
                 }
-                
+
+                self.state = .pending
+
                 // Show an error alert if an error occurred...
                 if let error = error {
                     self.showAlert(forError: error)
@@ -89,6 +120,14 @@ class LoginViewController: UIViewController {
         }
     }
     
+    //
+    //
+    //
+    private func resignResponders() {
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
     // MARK: Authentication
 
     //
@@ -99,16 +138,19 @@ class LoginViewController: UIViewController {
         switch result {
             
         case .success(let isAuthenticated):
-            delegate?.loginController(self, didAuthenticate: isAuthenticated)
+            if isAuthenticated {
+                delegate?.loginController(self, didAuthenticate: isAuthenticated)
+            }
+            else {
+                DispatchQueue.main.async { [weak self] in
+                    let message = "Cannot sign in. Please check your username and password, then try again."
+                    self?.showAlert(forErrorMessage: message)
+                }
+            }
             
         case .failure(let error):
             DispatchQueue.main.async { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
-                self.showAlert(forError: error) {
-                    self.delegate?.loginController(self, didAuthenticate: false)
-                }
+                self?.showAlert(forError: error)
             }
         }
     }
@@ -121,10 +163,40 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateState()
+    }
+
+    // MARK: State
+    
+    //
+    //
+    //
+    private func updateState() {
+        switch state {
+        case .pending:
+            configureUI(inputEnabled: true, activityVisible: false)
+            
+        case .busy:
+            configureUI(inputEnabled: false, activityVisible: true)
+        }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    //
+    //
+    //
+    private func configureUI(inputEnabled: Bool, activityVisible: Bool) {
+        usernameTextField.isEnabled = inputEnabled
+        passwordTextField.isEnabled = inputEnabled
+        udacityLoginButton.isEnabled = inputEnabled
+        facebookLoginButton.isEnabled = inputEnabled
+        signupButton.isEnabled = inputEnabled
+        
+        if activityVisible {
+            activityIndicator.startAnimating()
+        }
+        else {
+            activityIndicator.stopAnimating()
+        }
     }
 }
 

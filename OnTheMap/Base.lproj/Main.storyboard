@@ -93,6 +93,16 @@
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="3av-xW-he6"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="3av-xW-he6"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="3av-xW-he6"/>
+                                            </mask>
+                                        </variation>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DfO-lB-S0N">
                                         <rect key="frame" x="0.0" y="212.66666666666669" width="374" height="479.33333333333331"/>
@@ -151,6 +161,15 @@
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DGR-5v-owB" userLabel="Spacer View">
                                                 <rect key="frame" x="0.0" y="184.00000000000003" width="374" height="255.33333333333334"/>
+                                                <subviews>
+                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="mSI-Ww-jvm">
+                                                        <rect key="frame" x="168.66666666666666" y="108.33333333333331" width="37" height="37"/>
+                                                    </activityIndicatorView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="mSI-Ww-jvm" firstAttribute="centerX" secondItem="DGR-5v-owB" secondAttribute="centerX" id="OdI-4h-uIJ"/>
+                                                    <constraint firstItem="mSI-Ww-jvm" firstAttribute="centerY" secondItem="DGR-5v-owB" secondAttribute="centerY" id="d1t-ze-ulJ"/>
+                                                </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6q-OI-uVQ">
                                                 <rect key="frame" x="0.0" y="439.33333333333337" width="374" height="40"/>
@@ -186,7 +205,11 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="mSI-Ww-jvm" id="ews-xl-hAc"/>
+                        <outlet property="facebookLoginButton" destination="T6q-OI-uVQ" id="QmE-2g-Up8"/>
                         <outlet property="passwordTextField" destination="BSB-Fe-0GH" id="0sR-bc-OgA"/>
+                        <outlet property="signupButton" destination="8eK-8p-87s" id="fND-Ab-YoT"/>
+                        <outlet property="udacityLoginButton" destination="RL8-oT-mpr" id="UhY-mv-A9b"/>
                         <outlet property="usernameTextField" destination="1Bg-af-6G6" id="PwX-3J-xIo"/>
                     </connections>
                 </viewController>
