@@ -76,6 +76,7 @@ struct HTTPService {
                         error = ServiceError.server
                     }
                     completion?(Result.failure(error))
+                    return
                 }
                 
                 // Parse the response data.

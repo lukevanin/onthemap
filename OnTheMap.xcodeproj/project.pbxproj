@@ -134,7 +134,6 @@
 				FCA7E9E81E274B60009ED523 /* UserService.swift */,
 				FC5975A81E2928B9006C3733 /* LocationService.swift */,
 				FC5975AA1E299250006C3733 /* StudentService.swift */,
-				FCC44DDE1E2C8363002E8D75 /* JSONEntity.swift */,
 			);
 			name = Abstract;
 			sourceTree = "<group>";
@@ -224,9 +223,10 @@
 				FC5975B91E29FCCD006C3733 /* StudentLocation.swift */,
 				FC5975B21E299ABB006C3733 /* User.swift */,
 				FC5975B61E299C3F006C3733 /* Session.swift */,
-				FC5975B01E299A57006C3733 /* ServiceError.swift */,
-				FCC44DDC1E2C0108002E8D75 /* JSONError.swift */,
 				FC5975BB1E2A0097006C3733 /* Credentials.swift */,
+				FC5975B01E299A57006C3733 /* ServiceError.swift */,
+				FCC44DDE1E2C8363002E8D75 /* JSONEntity.swift */,
+				FCC44DDC1E2C0108002E8D75 /* JSONError.swift */,
 				FC5975C11E2A344B006C3733 /* Result.swift */,
 			);
 			name = Model;

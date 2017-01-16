@@ -10,8 +10,8 @@ import Foundation
 
 struct UdacityUserService: UserService {
     
-    let sessionURL = URL(string: "https://www.udacity.com/api/session")!
     let usersURL = URL(string: "https://www.udacity.com/api/users")!
+    let sessionURL = URL(string: "https://www.udacity.com/api/session")!
 
     //
     //  Invalidate the current authenticated session.
@@ -38,21 +38,13 @@ struct UdacityUserService: UserService {
     //  unauthenticated and show an error.
     //
     func login(username: String, password: String, completion: @escaping AuthenticationCompletion) {
-        let json = [
+        let parameters = [
             "udacity": [
                 "username": username,
                 "password": password
             ]
         ]
-        HTTPService.performRequest(
-            url: sessionURL,
-            method: "POST",
-            parameters: json,
-            completion: { result in
-                let output = self.parseSession(result: result)
-                completion(output)
-            }
-        )
+        login(parameters: parameters, completion: completion)
     }
     
     //
@@ -63,19 +55,26 @@ struct UdacityUserService: UserService {
     //  unauthenticated and show an error.
     //
     func login(facebookToken token: String, completion: @escaping AuthenticationCompletion) {
-        let json = [
+        let parameters = [
             "facebook_mobile": [
                 "access_token": token
             ]
         ]
+        login(parameters: parameters, completion: completion)
+    }
+    
+    //
+    //
+    //
+    private func login(parameters: [String: Any], completion: @escaping AuthenticationCompletion) {
         HTTPService.performRequest(
             url: sessionURL,
             method: "POST",
-            parameters: json,
+            parameters: parameters,
             completion: { result in
-                let output = self.parseSession(result: result)
+                let output = result.map(self.trimData).map(Session.parseData)
                 completion(output)
-            }
+        }
         )
     }
     
@@ -88,26 +87,12 @@ struct UdacityUserService: UserService {
             url: url,
             method: "GET",
             completion: { result in
-                let output = self.parseUser(result: result)
+                let output = result.map(self.trimData).map(User.parseData)
                 completion(output)
         })
     }
     
     // MARK: Parseing
-    
-    //
-    //
-    //
-    private func parseSession(result: Result<Data>) -> Result<Session> {
-        return result.map(self.trimData).map(Session.parseData)
-    }
-    
-    //
-    //
-    //
-    private func parseUser(result: Result<Data>) -> Result<User> {
-        return result.map(self.trimData).map(User.parseData)
-    }
     
     //
     //

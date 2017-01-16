@@ -16,7 +16,7 @@ extension UIAlertController {
     
     class func alert(forError error: Error, completion: ErrorAlertCompletion? = nil) -> UIAlertController {
         let message = error.localizedDescription
-        return alert(forErrorMessage: message)
+        return alert(forErrorMessage: message, completion: completion)
     }
     
     class func alert(forErrorMessage message: String, completion: ErrorAlertCompletion? = nil) -> UIAlertController {

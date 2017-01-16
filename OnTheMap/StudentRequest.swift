@@ -13,3 +13,24 @@ struct StudentRequest {
     let user: User
     let location: StudentLocation
 }
+
+extension StudentRequest {
+    func toJSON() -> [String: Any] {
+        var output = [String: Any]()
+        output["uniqueKey"] = uniqueKey
+        output["firstName"] = user.firstName
+        output["lastName"] = user.lastName
+        output["latitude"] = location.latitude
+        output["longitude"] = location.longitude
+        
+        if let mapString = location.mapString {
+            output["mapString"] = mapString
+        }
+        
+        if let mediaURL = location.mediaURL {
+            output["mediaURL"] = mediaURL;
+        }
+        
+        return output
+    }
+}

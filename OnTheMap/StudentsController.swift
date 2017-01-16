@@ -5,7 +5,8 @@
 //  Created by Luke Van In on 2017/01/13.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
-//  Defines an abstract interface for a controller which displays students.
+//  Defines an abstract interface for displaying students.
+//  Implemented by MapViewController and ListViewController.
 //
 
 import UIKit

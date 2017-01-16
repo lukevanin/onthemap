@@ -17,7 +17,7 @@ struct NativeLocationService: LocationService {
         case busy
     }
     
-    let geocoder = CLGeocoder()
+    private let geocoder = CLGeocoder()
     
     //
     //

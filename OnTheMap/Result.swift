@@ -34,4 +34,10 @@ enum Result<T> {
             return Result<U>.failure(error)
         }
     }
+    
+    func mapToVoid() -> Result<Void> {
+        return map() { _ in
+            return
+        }
+    }
 }

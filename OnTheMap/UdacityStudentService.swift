@@ -15,7 +15,7 @@ struct UdacityStudentService: StudentService {
         "X-Parse-Application-Id": "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr",
         "X-Parse-REST-API-Key": "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
     ]
-    
+
     //
     //
     //
@@ -23,14 +23,7 @@ struct UdacityStudentService: StudentService {
         let query = [
             "where": "{\"uniqueKey\": \"\(accountId)\"}"
         ]
-        HTTPService.performRequest(
-            url: baseURL,
-            method: "GET",
-            headers: headers,
-            query: query,
-            completion: { result in
-                completion(self.parseStudents(result: result))
-        })
+        fetchStudents(query: query, completion: completion)
     }
     
     //
@@ -41,13 +34,21 @@ struct UdacityStudentService: StudentService {
             "limit": "100",
             "order": "-updatedAt"
         ]
+        fetchStudents(query: query, completion: completion)
+    }
+    
+    //
+    //
+    //
+    private func fetchStudents(query: [String: String], completion: @escaping FetchStudentsCompletion) {
         HTTPService.performRequest(
             url: baseURL,
             method: "GET",
             headers: headers,
             query: query,
             completion: { result in
-                completion(self.parseStudents(result: result))
+                let output = result.map(self.parseStudents)
+                completion(output)
         })
     }
     
@@ -55,25 +56,43 @@ struct UdacityStudentService: StudentService {
     //
     //
     func addStudentInformation(student: StudentRequest, completion: @escaping UpdateStudentCompletion) {
-        
+        submitStudent(
+            url: baseURL,
+            method: "POST",
+            student: student,
+            completion: completion
+        )
     }
     
     //
     //
     //
     func updateStudentInformation(objectId: String, student: StudentRequest, completion: @escaping UpdateStudentCompletion) {
-        
+        submitStudent(
+            url: baseURL.appendingPathComponent(objectId),
+            method: "PUT",
+            student: student,
+            completion: completion
+        )
     }
     
-    // MARK: Parseing
+    //
+    //
+    //
+    private func submitStudent(url: URL, method: String, student: StudentRequest, completion: @escaping UpdateStudentCompletion) {
+        let json = student.toJSON()
+        HTTPService.performRequest(
+            url: url,
+            method: method,
+            headers: headers,
+            parameters: json,
+            completion: { result in
+                completion(result.mapToVoid())
+        })
+    }
+    
+    // MARK: Parsing
 
-    //
-    //
-    //
-    private func parseStudents(result: Result<Data>) -> Result<[StudentInformation]> {
-        return result.map(parseStudents)
-    }
-    
     //
     //
     //
