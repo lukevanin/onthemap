@@ -14,3 +14,34 @@ struct StudentLocation {
     let longitude: Double
     let latitude: Double
 }
+
+//
+//
+//
+extension StudentLocation {
+    
+    //
+    //
+    //
+    var hasValidURL: Bool {
+        return (validURL != nil)
+    }
+    
+    //
+    //
+    //
+    var validURL: URL? {
+        
+        guard let mediaURL = mediaURL, var components = URLComponents(string: mediaURL) else {
+            return nil
+        }
+        
+        if components.scheme == nil {
+            // Address is a valid URL, but is missing the scheme part, which will cause Safari view controller to crash.
+            // Try fix it by using HTTP scheme
+            components.scheme = "http"
+        }
+        
+        return components.url
+    }
+}

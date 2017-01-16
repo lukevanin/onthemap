@@ -10,7 +10,7 @@ import Foundation
 
 class AuthenticationManager {
     
-    typealias Completion = (Result<Bool>) -> Void
+    typealias AuthenticationCompletion = (Result<Bool>) -> Void
     typealias SessionCompletion = (Result<Session>) -> Void
 
     //
@@ -20,10 +20,10 @@ class AuthenticationManager {
         return (credentials.session != nil)
     }
     
-    private let service: UdacityUserService
+    private let service: UserService
     private let credentials: Credentials
     
-    init(service: UdacityUserService, credentials: Credentials) {
+    init(service: UserService, credentials: Credentials) {
         self.service = service
         self.credentials = credentials
     }
@@ -43,22 +43,25 @@ class AuthenticationManager {
     //
     //
     //
-    func fetchUser(accountId: String, completion: @escaping UserCompletion) {
+    func fetchUser(accountId: String, completion: @escaping UserService.UserCompletion) {
         service.fetchUser(accountId: accountId, completion: completion)
     }
 
     //
     //  Log out of all services. Set state to unauthenticated.
     //
-    func logout() {
-        service.logout()
+    func logout(completion: @escaping AuthenticationCompletion) {
         credentials.session = nil
+        service.logout() { result in
+            let output = result.map { _ in false }
+            completion(output)
+        }
     }
     
     //
     //  Log in to service with username and password.
     //
-    func login(username: String, password: String, completion: @escaping Completion) {
+    func login(username: String, password: String, completion: @escaping AuthenticationCompletion) {
         service.login(username: username, password: password) { [weak self] result in
             guard let `self` = self else {
                 return
@@ -71,7 +74,7 @@ class AuthenticationManager {
     //
     //  Log in to service with facebook authentication token.
     //
-    func login(facebookToken token: String, completion: @escaping Completion) {
+    func login(facebookToken token: String, completion: @escaping AuthenticationCompletion) {
         service.login(facebookToken: token) { [weak self] result in
             guard let `self` = self else {
                 return

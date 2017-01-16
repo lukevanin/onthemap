@@ -8,15 +8,16 @@
 
 import Foundation
 
-typealias AuthenticationCompletion = (Result<Session>) -> Void
-typealias UserCompletion = (Result<User>) -> Void
-
 protocol UserService {
-    
+
+    typealias AuthenticationCompletion = (Result<Session>) -> Void
+    typealias UserCompletion = (Result<User>) -> Void
+    typealias LogoutCompletion = (Result<Void>) -> Void
+
     //
     //  Invalidate the current authenticated session.
     //
-    func logout()
+    func logout(completion: @escaping LogoutCompletion)
     
     //
     //  Log in with username and password.

@@ -16,7 +16,7 @@ struct UdacityUserService: UserService {
     //
     //  Invalidate the current authenticated session.
     //
-    func logout() {
+    func logout(completion: @escaping UserService.LogoutCompletion) {
         var headers = [String: String]()
         let sharedCookieStorage = HTTPCookieStorage.shared
         for cookie in sharedCookieStorage.cookies! {
@@ -27,8 +27,11 @@ struct UdacityUserService: UserService {
         HTTPService.performRequest(
             url: sessionURL,
             method: "DELETE",
-            headers: headers
-        )
+            headers: headers,
+            completion: { result in
+                let output = result.mapToVoid()
+                completion(output)
+        })
     }
     
     //
@@ -37,7 +40,7 @@ struct UdacityUserService: UserService {
     //  If the response indicates a valid login then set the state to authenticated, otherwise set the state to
     //  unauthenticated and show an error.
     //
-    func login(username: String, password: String, completion: @escaping AuthenticationCompletion) {
+    func login(username: String, password: String, completion: @escaping UserService.AuthenticationCompletion) {
         let parameters = [
             "udacity": [
                 "username": username,
@@ -54,7 +57,7 @@ struct UdacityUserService: UserService {
     //  If the response indicates a valid login then set the state to authenticated, otherwise set the state to
     //  unauthenticated and show an error.
     //
-    func login(facebookToken token: String, completion: @escaping AuthenticationCompletion) {
+    func login(facebookToken token: String, completion: @escaping UserService.AuthenticationCompletion) {
         let parameters = [
             "facebook_mobile": [
                 "access_token": token
@@ -66,7 +69,7 @@ struct UdacityUserService: UserService {
     //
     //
     //
-    private func login(parameters: [String: Any], completion: @escaping AuthenticationCompletion) {
+    private func login(parameters: [String: Any], completion: @escaping UserService.AuthenticationCompletion) {
         HTTPService.performRequest(
             url: sessionURL,
             method: "POST",
@@ -81,7 +84,7 @@ struct UdacityUserService: UserService {
     //
     //
     //
-    func fetchUser(accountId: String, completion: @escaping UserCompletion) {
+    func fetchUser(accountId: String, completion: @escaping UserService.UserCompletion) {
         let url = usersURL.appendingPathComponent(accountId)
         HTTPService.performRequest(
             url: url,

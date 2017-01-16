@@ -9,7 +9,15 @@
 import UIKit
 
 class ListViewController: UITableViewController, StudentsController {
-    
+
+    var state = AppState() {
+        didSet {
+            if self.isViewLoaded {
+                self.updateState()
+            }
+        }
+    }
+
     var model: [StudentInformation]? {
         didSet {
             if self.isViewLoaded {
@@ -19,28 +27,35 @@ class ListViewController: UITableViewController, StudentsController {
     }
     
     var delegate: StudentsControllerDelegate?
-    var viewController: UIViewController {
-        return self
-    }
     
     private let cellIdentifier = "UserCell"
-//    private let pinImage = UIImage(named: "pin").templ
     
     // MARK: Actions
     
     @IBAction func onLogoutAction(_ sender: Any) {
-        delegate?.studentsController(controller: self, action: .logout, sender: sender)
+        delegate?.logout()
     }
     
     @IBAction func onPinAction(_ sender: Any) {
-        delegate?.studentsController(controller: self, action: .addLocation, sender: sender)
+        delegate?.addLocation()
     }
     
     @IBAction func onRefreshAction(_ sender: Any) {
-        delegate?.studentsController(controller: self, action: .refresh, sender: sender)
+        delegate?.loadStudents()
     }
 
     // MARK: View controller life cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateState()
+    }
+    
+    private func updateState() {
+        if let appNavItem = navigationItem as? AppNavItem {
+            appNavItem.state = state
+        }
+    }
 
     // MARK: Table view
     
@@ -53,7 +68,8 @@ class ListViewController: UITableViewController, StudentsController {
         
         if let info = model?[indexPath.row] {
             cell.textLabel?.text = info.user.firstName + " " + info.user.lastName
-            cell.detailTextLabel?.text = info.location.mapString
+            cell.detailTextLabel?.text = info.location.hasValidURL ? info.location.mapString : nil
+            cell.accessoryType = info.location.hasValidURL ? .disclosureIndicator : .none
         }
         
         return cell
@@ -66,6 +82,6 @@ class ListViewController: UITableViewController, StudentsController {
         guard let info = model?[indexPath.row] else {
             return
         }
-        delegate?.studentsController(controller: self, action: .showInformation(info), sender: nil)
+        delegate?.showInformationForStudent(info)
     }
 }

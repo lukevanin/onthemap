@@ -11,18 +11,19 @@
 
 import UIKit
 
-enum StudentsControllerAction {
-    case logout
-    case addLocation
-    case showInformation(StudentInformation)
-    case refresh
-}
-
 protocol StudentsControllerDelegate: class {
-    func studentsController(controller: StudentsController, action: StudentsControllerAction, sender: Any?)
+    func logout()
+    func addLocation()
+    func showInformationForStudent(_ student: StudentInformation)
+    func loadStudents()
 }
 
 protocol StudentsController: class {
+    
+    var state: AppState {
+        get
+        set
+    }
     
     var model: [StudentInformation]? {
         get
@@ -32,9 +33,5 @@ protocol StudentsController: class {
     weak var delegate: StudentsControllerDelegate? {
         get
         set
-    }
-    
-    var viewController: UIViewController {
-        get
     }
 }

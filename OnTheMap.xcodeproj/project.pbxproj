@@ -46,6 +46,8 @@
 		FCC44DE11E2C94C6002E8D75 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC44DE01E2C94C6002E8D75 /* HTTPService.swift */; };
 		FCC44DE31E2C9AA6002E8D75 /* NativeLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC44DE21E2C9AA6002E8D75 /* NativeLocationService.swift */; };
 		FCC44DE51E2C9D4A002E8D75 /* UdacityStudentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC44DE41E2C9D4A002E8D75 /* UdacityStudentService.swift */; };
+		FCC44DF11E2D40F5002E8D75 /* StudentsAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC44DF01E2D40F5002E8D75 /* StudentsAppController.swift */; };
+		FCC44DF51E2D616A002E8D75 /* AppNavItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC44DF41E2D616A002E8D75 /* AppNavItem.swift */; };
 		FCCD32BE1E27399A00DFC250 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */; };
 		FCCD32C01E27399A00DFC250 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD32BF1E27399A00DFC250 /* TabViewController.swift */; };
 		FCCD32C31E27399A00DFC250 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCD32C11E27399A00DFC250 /* Main.storyboard */; };
@@ -93,6 +95,8 @@
 		FCC44DE01E2C94C6002E8D75 /* HTTPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		FCC44DE21E2C9AA6002E8D75 /* NativeLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeLocationService.swift; sourceTree = "<group>"; };
 		FCC44DE41E2C9D4A002E8D75 /* UdacityStudentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityStudentService.swift; sourceTree = "<group>"; };
+		FCC44DF01E2D40F5002E8D75 /* StudentsAppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsAppController.swift; sourceTree = "<group>"; };
+		FCC44DF41E2D616A002E8D75 /* AppNavItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavItem.swift; sourceTree = "<group>"; };
 		FCCD32BA1E27399A00DFC250 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCCD32BF1E27399A00DFC250 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 		FCA7E9E21E2746A6009ED523 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FCC44DF01E2D40F5002E8D75 /* StudentsAppController.swift */,
 				FCA1B7EA1E28944300A10E85 /* StudentsController.swift */,
 				FCCD32BF1E27399A00DFC250 /* TabViewController.swift */,
 				FCA7E9DE1E274585009ED523 /* MapViewController.swift */,
@@ -237,6 +242,7 @@
 			children = (
 				FC5975C51E2A7929006C3733 /* PaddedTextField.swift */,
 				FCC44DD91E2BF500002E8D75 /* CircleMapView.swift */,
+				FCC44DF41E2D616A002E8D75 /* AppNavItem.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -350,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC44DF11E2D40F5002E8D75 /* StudentsAppController.swift in Sources */,
 				FCC44DE11E2C94C6002E8D75 /* HTTPService.swift in Sources */,
 				FC5975C21E2A344B006C3733 /* Result.swift in Sources */,
 				FC5975B11E299A57006C3733 /* ServiceError.swift in Sources */,
@@ -380,6 +387,7 @@
 				FC5975A91E2928B9006C3733 /* LocationService.swift in Sources */,
 				FCA393A41E28A5BB000F17FB /* LocationLookupViewController.swift in Sources */,
 				FC5975C01E2A2747006C3733 /* UIViewController+Error.swift in Sources */,
+				FCC44DF51E2D616A002E8D75 /* AppNavItem.swift in Sources */,
 				FCC44DDA1E2BF500002E8D75 /* CircleMapView.swift in Sources */,
 				FC5975BA1E29FCCD006C3733 /* StudentLocation.swift in Sources */,
 				FC5975B31E299ABB006C3733 /* User.swift in Sources */,

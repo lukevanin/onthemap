@@ -15,17 +15,9 @@ struct StudentInformation {
     let location: StudentLocation
 }
 
-//"createdAt":"2015-02-24T22:35:30.639Z",
-//"firstName":"John",
-//"lastName":"Doe",
-//"latitude":37.322998,
-//"longitude":-122.032182,
-//"mapString":"Cupertino, CA",
-//"mediaURL":"https://udacity.com",
-//"objectId":"8ZEuHF5uX8",
-//"uniqueKey":"1234",
-//"updatedAt":"2015-03-11T02:42:59.217Z"
-
+//
+//
+//
 extension StudentInformation: JSONEntity {
     init(json: Any) throws {
         guard let entity = json as? [String: Any] else {

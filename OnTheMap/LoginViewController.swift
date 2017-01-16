@@ -10,8 +10,10 @@ import UIKit
 import SafariServices
 import FBSDKLoginKit
 
-protocol LoginViewControllerDelegate: class {
-    func loginController(_ controller: LoginViewController, didAuthenticate: Bool)
+protocol LoginControllerDelegate: class {
+    typealias AuthenticationCompletion = (Result<Bool>) -> Void
+    func login(username: String, password: String, completion: @escaping AuthenticationCompletion)
+    func login(facebookToken: String, completion: @escaping AuthenticationCompletion)
 }
 
 class LoginViewController: UIViewController {
@@ -21,8 +23,9 @@ class LoginViewController: UIViewController {
         case busy
     }
     
-    var authentication: AuthenticationManager!
-    weak var delegate: LoginViewControllerDelegate?
+    private let exitSegue = "dismiss"
+    
+    weak var delegate: LoginControllerDelegate?
     
     private var state: State = .pending {
         didSet {
@@ -77,15 +80,7 @@ class LoginViewController: UIViewController {
         
         // Attempt authentication with username and password.
         state = .busy
-        authentication.login(username: username, password: password) { [weak self] result in
-            DispatchQueue.main.async {
-                guard let `self` = self else {
-                    return
-                }
-                self.state = .pending
-                self.handleLoginResponse(result)
-            }
-        }
+        delegate?.login(username: username, password: password, completion: self.handleLoginResponse)
     }
     
     //
@@ -103,8 +98,6 @@ class LoginViewController: UIViewController {
                     return
                 }
 
-                self.state = .pending
-
                 // Show an error alert if an error occurred...
                 if let error = error {
                     self.showAlert(forError: error)
@@ -114,7 +107,7 @@ class LoginViewController: UIViewController {
                 // ... otherwise login with the facebook token.
                 if let result = result, !result.isCancelled, let token = result.token.tokenString {
                     // Login to udacity with facebook token.
-                    self.authentication.login(facebookToken: token, completion: self.handleLoginResponse)
+                    self.delegate?.login(facebookToken: token, completion: self.handleLoginResponse)
                 }
             }
         }
@@ -134,23 +127,26 @@ class LoginViewController: UIViewController {
     //  Process authentication response. Notify delegate
     //
     private func handleLoginResponse(_ result: Result<Bool>) {
-        
-        switch result {
-            
-        case .success(let isAuthenticated):
-            if isAuthenticated {
-                delegate?.loginController(self, didAuthenticate: isAuthenticated)
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                return
             }
-            else {
-                DispatchQueue.main.async { [weak self] in
-                    let message = "Cannot sign in. Please check your username and password, then try again."
-                    self?.showAlert(forErrorMessage: message)
+            
+            self.state = .pending
+
+            switch result {
+                
+            case .success(let isAuthenticated):
+                if isAuthenticated {
+                    self.performSegue(withIdentifier: self.exitSegue, sender: nil)
                 }
-            }
-            
-        case .failure(let error):
-            DispatchQueue.main.async { [weak self] in
-                self?.showAlert(forError: error)
+                else {
+                    let message = "Cannot sign in. Please check your username and password, then try again."
+                    self.showAlert(forErrorMessage: message)
+                }
+                
+            case .failure(let error):
+                self.showAlert(forError: error)
             }
         }
     }

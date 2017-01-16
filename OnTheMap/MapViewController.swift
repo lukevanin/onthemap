@@ -15,6 +15,14 @@ class MapViewController: UIViewController, StudentsController {
         var student: StudentInformation?
     }
     
+    var state = AppState() {
+        didSet {
+            if self.isViewLoaded {
+                self.updateState()
+            }
+        }
+    }
+    
     var model: [StudentInformation]? {
         didSet {
             if self.isViewLoaded {
@@ -23,9 +31,6 @@ class MapViewController: UIViewController, StudentsController {
         }
     }
     var delegate: StudentsControllerDelegate?
-    var viewController: UIViewController {
-        return self
-    }
     
     // MARK: Outlets
 
@@ -34,22 +39,29 @@ class MapViewController: UIViewController, StudentsController {
     // MARK: Actions
     
     @IBAction func onLogoutAction(_ sender: Any) {
-        delegate?.studentsController(controller: self, action: .logout, sender: sender)
+        delegate?.logout()
     }
     
     @IBAction func onPinAction(_ sender: Any) {
-        delegate?.studentsController(controller: self, action: .addLocation, sender: sender)
+        delegate?.addLocation()
     }
     
     @IBAction func onRefreshAction(_ sender: Any) {
-        delegate?.studentsController(controller: self, action: .refresh, sender: sender)
+        delegate?.loadStudents()
     }
 
     // MARK: View controller life cycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateState()
         updateMap()
+    }
+    
+    private func updateState() {
+        if let appNavItem = navigationItem as? AppNavItem {
+            appNavItem.state = state
+        }
     }
     
     // MARK: Pins
@@ -79,7 +91,7 @@ class MapViewController: UIViewController, StudentsController {
         output.student = info
         output.coordinate = CLLocationCoordinate2D(latitude: info.location.latitude, longitude: info.location.longitude)
         output.title = info.user.firstName + " " + info.user.lastName
-        output.subtitle = info.location.mediaURL
+        output.subtitle = info.location.validURL?.absoluteString ?? nil
         return output
     }
 }
@@ -115,6 +127,6 @@ extension MapViewController: MKMapViewDelegate {
         guard let annotation = view.annotation as? StudentAnnotation, let info = annotation.student else {
             return
         }
-        delegate?.studentsController(controller: self, action: .showInformation(info), sender: control)
+        delegate?.showInformationForStudent(info)
     }
 }

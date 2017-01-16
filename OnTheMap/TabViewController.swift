@@ -12,15 +12,23 @@ import FBSDKLoginKit
 
 class TabViewController: UITabBarController {
     
+    typealias StudentsControllerHandler = (StudentsController) -> Void
+    
     // MARK: Properties
     
-    private let loginSegue = "login"
-    private let locationSegue = "location"
-    private let numberOfStudents = 100
+    fileprivate let loginSegue = "login"
+    fileprivate let locationSegue = "location"
+//    private let numberOfStudents = 100
     
 //    private let authentication = AuthenticationManager(service: MockUdacityService(), credentials: Credentials.shared)
-    private let authentication = AuthenticationManager(service: UdacityUserService(), credentials: Credentials.shared)
-    private let studentService = UdacityStudentService()
+//    private let authentication = AuthenticationManager(service: UdacityUserService(), credentials: Credentials.shared)
+//    private let studentService = UdacityStudentService()
+    
+    private lazy var appController: StudentsAppController = {
+        let instance = StudentsAppController()
+        instance.delegate = self
+        return instance
+    }()
     
 
     // MARK: View controller life cycle
@@ -32,15 +40,6 @@ class TabViewController: UITabBarController {
         setupTabViewControllers()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Load data if user is authenticated.
-        if authentication.isAuthenticated {
-            reloadStudents()
-        }
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateAuthenticationState()
@@ -62,7 +61,8 @@ class TabViewController: UITabBarController {
             
         // Setup students information controller (map and list).
         case let controller as StudentsController:
-            controller.delegate = self
+            controller.delegate = appController
+            controller.state = appController.state
             
         // Navigation controller - recurse to configure top-most view controller.
         case let navigationController as UINavigationController:
@@ -119,8 +119,8 @@ class TabViewController: UITabBarController {
     //
     //
     private func prepare(loginViewController viewController: LoginViewController) {
-        viewController.delegate = self
-        viewController.authentication = authentication
+//        viewController.delegate = self
+        viewController.delegate = self.appController
     }
 
     // MARK: Authentication
@@ -131,224 +131,223 @@ class TabViewController: UITabBarController {
     //  if the user is not logged in then hide the login controller.
     //
     fileprivate func updateAuthenticationState() {
-        if authentication.isAuthenticated {
-            hideLoginViewController()
-            reloadStudents()
+        if appController.isAuthenticated {
+            appController.loadStudents()
         }
         else {
-            showLoginViewController()
+            showLoginScreen()
         }
     }
     
     //
     //  Show a modal login screen. If the login screen is already visible then this does nothing.
     //
-    private func showLoginViewController() {
-        guard presentedViewController == nil else {
-            // Login view controller is already visible.
-            return
-        }
-        
-        // Instantiate and display the login controller.
-        performSegue(withIdentifier: loginSegue, sender: nil)
-    }
+//    private func showLoginViewController() {
+//        guard presentedViewController == nil else {
+//            // Login view controller is already visible.
+//            return
+//        }
+//        
+//        // Instantiate and display the login controller.
+//        performSegue(withIdentifier: loginSegue, sender: nil)
+//    }
 
     //
     //  Dismiss and deallocate the login view controller. If the login controller is not visible then this does nothing.
     //
-    fileprivate func hideLoginViewController() {
-        guard let viewController = presentedViewController as? LoginViewController else {
-            // Login view controller not showing.
-            return
-        }
-        viewController.dismiss(animated: true, completion: nil)
-    }
+//    fileprivate func hideLoginViewController() {
+//        guard let viewController = presentedViewController as? LoginViewController else {
+//            // Login view controller not showing.
+//            return
+//        }
+//        viewController.dismiss(animated: true, completion: nil)
+//    }
     
     // MARK: App features
     
     //
     //
     //
-    fileprivate func logout() {
-        FBSDKLoginManager().logOut()
-        authentication.logout()
-        updateAuthenticationState()
-    }
+//    fileprivate func logout() {
+//        FBSDKLoginManager().logOut()
+//        authentication.logout()
+//        updateAuthenticationState()
+//    }
     
     //
     //
     //
-    fileprivate func addStudentLocation(sender: Any?) {
-        
-        // Check if any location information exists for the user.
-        checkIfUserHasLocation() { result in
-            DispatchQueue.main.async {
-                switch result {
-                    
-                // Fetched entry status. Prompt to overwrite if user already has an entry.
-                case .success(let hasLocation):
-                    if hasLocation {
-                        // Location information is present for the user. Prompt to overwrite it.
-                        self.promptToOverwriteLocation() { overwrite in
-                            if overwrite {
-                                self.performSegue(withIdentifier: self.locationSegue, sender: sender)
-                            }
-                        }
-                    }
-                    else {
-                        // No existing location info. Show location popup.
-                        self.performSegue(withIdentifier: self.locationSegue, sender: sender)
-                    }
-                    
-                // Error occurred checking if user has location.
-                case .failure(let error):
-                    self.showAlert(forError: error)
-                }
-            }
-        }
-    }
+//    fileprivate func addStudentLocation(sender: Any?) {
+//        
+//        // Check if any location information exists for the user.
+//        checkIfUserHasLocation() { result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                    
+//                // Fetched entry status. Prompt to overwrite if user already has an entry.
+//                case .success(let hasLocation):
+//                    if hasLocation {
+//                        // Location information is present for the user. Prompt to overwrite it.
+//                        self.promptToOverwriteLocation() { overwrite in
+//                            if overwrite {
+//                                self.performSegue(withIdentifier: self.locationSegue, sender: sender)
+//                            }
+//                        }
+//                    }
+//                    else {
+//                        // No existing location info. Show location popup.
+//                        self.performSegue(withIdentifier: self.locationSegue, sender: sender)
+//                    }
+//                    
+//                // Error occurred checking if user has location.
+//                case .failure(let error):
+//                    self.showAlert(forError: error)
+//                }
+//            }
+//        }
+//    }
     
     //
     //
     //
-    private func checkIfUserHasLocation(completion: @escaping (Result<Bool>) -> Void) {
-        
-        // Fetch current auth session.
-        authentication.fetchSession { [weak self] (result) in
-            switch result {
-                
-            // Error fetching session.
-            case .failure(let error):
-                completion(Result.failure(error))
-
-            // Fetched sesion. Fetch locations for user.
-            case .success(let session):
-                self?.studentService.fetchInformationForStudent(accountId: session.accountId) { (result) in
-                    switch result {
-                        
-                    // Error fetching entries for student.
-                    case .failure(let error):
-                        completion(Result.failure(error))
-                        
-                    // Fetched entries. Check if student has any entries.
-                    case .success(let entries):
-                        let hasLocation = (entries.count > 0)
-                        completion(Result.success(hasLocation))
-                    }
-                }
-            }
-        }
-    }
+//    private func checkIfUserHasLocation(completion: @escaping (Result<Bool>) -> Void) {
+//        
+//        // Fetch current auth session.
+//        authentication.fetchSession { [weak self] (result) in
+//            switch result {
+//                
+//            // Error fetching session.
+//            case .failure(let error):
+//                completion(Result.failure(error))
+//
+//            // Fetched sesion. Fetch locations for user.
+//            case .success(let session):
+//                self?.studentService.fetchInformationForStudent(accountId: session.accountId) { (result) in
+//                    switch result {
+//                        
+//                    // Error fetching entries for student.
+//                    case .failure(let error):
+//                        completion(Result.failure(error))
+//                        
+//                    // Fetched entries. Check if student has any entries.
+//                    case .success(let entries):
+//                        let hasLocation = (entries.count > 0)
+//                        completion(Result.success(hasLocation))
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     //
     //
     //
-    private func promptToOverwriteLocation(completion: @escaping (Bool) -> Void) {
-        let message = "Do you want to overwrite your existing location?"
-        let controller = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        
-        // Overwrite action
-        controller.addAction(
-            UIAlertAction(
-                title: "Overwrite",
-                style: .destructive,
-                handler: { (action) in
-                    completion(true)
-            })
-        )
-        
-        // Dismiss action
-        controller.addAction(
-            UIAlertAction(
-                title: "Cancel",
-                style: .cancel,
-                handler: { (action) in
-                    completion(false)
-            })
-        )
-        
-        present(controller, animated: true, completion: nil)
-    }
+//    private func promptToOverwriteLocation(completion: @escaping (Bool) -> Void) {
+//        let message = "Do you want to overwrite your existing location?"
+//        let controller = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+//        
+//        // Overwrite action
+//        controller.addAction(
+//            UIAlertAction(
+//                title: "Overwrite",
+//                style: .destructive,
+//                handler: { (action) in
+//                    completion(true)
+//            })
+//        )
+//        
+//        // Dismiss action
+//        controller.addAction(
+//            UIAlertAction(
+//                title: "Cancel",
+//                style: .cancel,
+//                handler: { (action) in
+//                    completion(false)
+//            })
+//        )
+//        
+//        present(controller, animated: true, completion: nil)
+//    }
     
     //
     //
     //
-    fileprivate func showStudentInformation(_ student: StudentInformation, sender: Any?) {
-        guard let mediaURL = student.location.mediaURL, let url = makeURLForStudent(mediaURL) else {
-            let message = "Item does not contain a valid media URL."
-            showAlert(forErrorMessage: message)
-            return
-        }
-        let controller = SFSafariViewController(url: url)
-        present(controller, animated: true, completion: nil)
-    }
+//    fileprivate func showStudentInformation(_ student: StudentInformation, sender: Any?) {
+//        guard let mediaURL = student.location.mediaURL, let url = makeURLForStudent(mediaURL) else {
+//            let message = "Item does not contain a valid media URL."
+//            showAlert(forErrorMessage: message)
+//            return
+//        }
+//        let controller = SFSafariViewController(url: url)
+//        present(controller, animated: true, completion: nil)
+//    }
     
     //
     //
     //
-    fileprivate func makeURLForStudent(_ input: String) -> URL? {
-
-        guard var components = URLComponents(string: input) else {
-            return nil
-        }
-        
-        if components.scheme == nil {
-            // Address is a valid URL, but is missing the scheme part, which will cause Safari view controller to crash. 
-            // Try fix it by using HTTP scheme
-            components.scheme = "http"
-        }
-        
-        return components.url
-    }
+//    fileprivate func makeURLForStudent(_ input: String) -> URL? {
+//
+//        guard var components = URLComponents(string: input) else {
+//            return nil
+//        }
+//        
+//        if components.scheme == nil {
+//            // Address is a valid URL, but is missing the scheme part, which will cause Safari view controller to crash. 
+//            // Try fix it by using HTTP scheme
+//            components.scheme = "http"
+//        }
+//        
+//        return components.url
+//    }
     
     //
     //
     //
-    fileprivate func reloadStudents() {
-        studentService.fetchLatestStudentInformation(count: numberOfStudents) { [weak self] result in
-            guard let `self` = self else {
-                return
-            }
-            DispatchQueue.main.async {
-                switch result {
-                
-                // Loaded students.
-                case .success(let students):
-                    self.updateViewControllers(students: students)
-                    
-                // Error loading students.
-                case .failure(let error):
-                    self.showAlert(forError: error)
-                }
-            }
-        }
-    }
+//    fileprivate func reloadStudents() {
+//        studentService.fetchLatestStudentInformation(count: numberOfStudents) { [weak self] result in
+//            guard let `self` = self else {
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                switch result {
+//                
+//                // Loaded students.
+//                case .success(let students):
+//                    self.updateViewControllers(students: students)
+//                    
+//                // Error loading students.
+//                case .failure(let error):
+//                    self.showAlert(forError: error)
+//                }
+//            }
+//        }
+//    }
 
     // MARK: App state
     
     //
     //
     //
-    fileprivate func updateViewControllers(students: [StudentInformation]?) {
+    fileprivate func updateViewControllers(iterator: StudentsControllerHandler) {
         guard let viewControllers = viewControllers else {
             return
         }
         for viewController in viewControllers {
-            updateViewController(viewController, students: students)
+            updateViewController(viewController, iterator: iterator)
         }
     }
-    
+
     //
     //
     //
-    fileprivate func updateViewController(_ viewController: UIViewController, students: [StudentInformation]?) {
+    fileprivate func updateViewController(_ viewController: UIViewController, iterator: StudentsControllerHandler) {
         switch viewController {
         case let controller as StudentsController:
-            controller.model = students
+            iterator(controller)
             
         case let navigationController as UINavigationController:
             if let viewController = navigationController.topViewController {
-                updateViewController(viewController, students: students)
+                updateViewController(viewController, iterator: iterator)
             }
             
         default:
@@ -360,17 +359,25 @@ class TabViewController: UITabBarController {
 //
 //
 //
-extension TabViewController: LoginViewControllerDelegate {
+extension TabViewController: StudentsAppDelegate {
     
-    //
-    //  Called when login controller state changes, such as when the user logs in. Synchronize the app state with the 
-    //  authentication state.
-    //
-    func loginController(_ controller: LoginViewController, didAuthenticate: Bool) {
-        if didAuthenticate {
-            DispatchQueue.main.async {
-                self.updateAuthenticationState()
-            }
+    func showLoginScreen() {
+        performSegue(withIdentifier: loginSegue, sender: nil)
+    }
+    
+    func showLocationEditScreen() {
+        performSegue(withIdentifier: locationSegue, sender: nil)
+    }
+    
+    func updateStudents(_ students: [StudentInformation]?) {
+        updateViewControllers() { controller in
+            controller.model = students
+        }
+    }
+    
+    func updateState(_ state: AppState) {
+        updateViewControllers() { controller in
+            controller.state = state
         }
     }
 }
@@ -378,23 +385,41 @@ extension TabViewController: LoginViewControllerDelegate {
 //
 //
 //
-extension TabViewController: StudentsControllerDelegate {
-    
-    //
-    //  Called by students controllers.
-    //
-    func studentsController(controller: StudentsController, action: StudentsControllerAction, sender: Any?) {
-        DispatchQueue.main.async {
-            switch action {
-            case .logout:
-                self.logout()
-            case .addLocation:
-                self.addStudentLocation(sender: sender)
-            case .showInformation(let student):
-                self.showStudentInformation(student, sender: sender)
-            case .refresh:
-                self.reloadStudents()
-            }
-        }
-    }
-}
+//extension TabViewController: LoginViewControllerDelegate {
+//    
+//    //
+//    //  Called when login controller state changes, such as when the user logs in. Synchronize the app state with the 
+//    //  authentication state.
+//    //
+//    func loginController(_ controller: LoginViewController, didAuthenticate: Bool) {
+//        if didAuthenticate {
+//            DispatchQueue.main.async {
+//                self.updateAuthenticationState()
+//            }
+//        }
+//    }
+//}
+
+//
+//
+//
+//extension TabViewController: StudentsControllerDelegate {
+//    
+//    //
+//    //  Called by students controllers.
+//    //
+//    func studentsController(controller: StudentsController, action: StudentsControllerAction, sender: Any?) {
+//        DispatchQueue.main.async {
+//            switch action {
+//            case .logout:
+//                self.logout()
+//            case .addLocation:
+//                self.addStudentLocation(sender: sender)
+//            case .showInformation(let student):
+//                self.showStudentInformation(student, sender: sender)
+//            case .refresh:
+//                self.reloadStudents()
+//            }
+//        }
+//    }
+//}

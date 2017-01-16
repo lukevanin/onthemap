@@ -8,7 +8,12 @@
 
 import UIKit
 
-extension UIViewController {
+protocol ErrorAlertPresenter {
+    func showAlert(forErrorMessage message: String, completion: ErrorAlertCompletion?)
+    func showAlert(forError error: Error, completion: ErrorAlertCompletion?)
+}
+
+extension UIViewController: ErrorAlertPresenter {
     
     //
     //

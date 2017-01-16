@@ -33,18 +33,19 @@ class MockUserService: UserService {
         self.user = user
     }
     
-    func logout() {
+    func logout(completion: @escaping UserService.LogoutCompletion) {
+        completion(Result.success())
     }
 
-    func login(username: String, password: String, completion: @escaping AuthenticationCompletion) {
+    func login(username: String, password: String, completion: @escaping UserService.AuthenticationCompletion) {
         completeLogin(completion)
     }
 
-    func login(facebookToken: String, completion: @escaping AuthenticationCompletion) {
+    func login(facebookToken: String, completion: @escaping UserService.AuthenticationCompletion) {
         completeLogin(completion)
     }
     
-    func completeLogin(_ completion: @escaping AuthenticationCompletion) {
+    func completeLogin(_ completion: @escaping UserService.AuthenticationCompletion) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) { [weak self] in
             guard let `self` = self else {
                 return
@@ -53,7 +54,7 @@ class MockUserService: UserService {
         }
     }
     
-    func fetchUser(accountId: String, completion: @escaping UserCompletion) {
+    func fetchUser(accountId: String, completion: @escaping UserService.UserCompletion) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) { [weak self] in
             guard let `self` = self else {
                 return

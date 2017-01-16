@@ -35,7 +35,7 @@
                             <outlet property="delegate" destination="lVC-tw-JzM" id="xCb-EQ-Cjb"/>
                         </connections>
                     </mapView>
-                    <navigationItem key="navigationItem" title="On the Map" id="kFD-N5-iKW">
+                    <navigationItem key="navigationItem" title="On the Map" id="kFD-N5-iKW" customClass="AppNavItem" customModule="OnTheMap" customModuleProvider="target">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="Ngk-bz-b54">
                             <connections>
                                 <action selector="onLogoutAction:" destination="lVC-tw-JzM" id="0yu-kb-2YM"/>
@@ -53,12 +53,21 @@
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
+                        <connections>
+                            <outlet property="logoutButtonItem" destination="Ngk-bz-b54" id="55G-5X-tDy"/>
+                            <outlet property="pinButtonItem" destination="rjL-ly-jJs" id="zD2-OA-BVS"/>
+                            <outlet property="refreshButtonItem" destination="pMM-1Q-t7T" id="cFc-vr-fZ9"/>
+                        </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="QfX-84-CAC" id="7KW-0P-bM4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nK-03-oFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" id="CEw-c3-eN6">
+                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
             </objects>
             <point key="canvasLocation" x="1592.8" y="-226.23688155922042"/>
         </scene>
@@ -78,13 +87,13 @@
                                 <rect key="frame" x="20" y="28" width="374" height="692"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tPi-yn-siD">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="196.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="196.33333333333334"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="pIJ-jb-AHA">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="173"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waL-Jo-JHf">
-                                                <rect key="frame" x="0.0" y="173" width="374" height="23.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="173" width="374" height="23.333333333333343"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -105,13 +114,13 @@
                                         </variation>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DfO-lB-S0N">
-                                        <rect key="frame" x="0.0" y="212.66666666666669" width="374" height="479.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="212.33333333333331" width="374" height="479.66666666666669"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ai5-gC-jfb">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="184.00000000000003"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="183.99999999999997"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1Bg-af-6G6" customClass="PaddedTextField" customModule="OnTheMap" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="40.000000000000028"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="39.999999999999972"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -122,7 +131,7 @@
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BSB-Fe-0GH" customClass="PaddedTextField" customModule="OnTheMap" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="48.000000000000028" width="374" height="40"/>
+                                                        <rect key="frame" x="0.0" y="47.999999999999972" width="374" height="40"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -133,7 +142,7 @@
                                                         </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RL8-oT-mpr">
-                                                        <rect key="frame" x="0.0" y="96.000000000000028" width="374" height="40"/>
+                                                        <rect key="frame" x="0.0" y="95.999999999999972" width="374" height="40"/>
                                                         <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="etW-Ib-3iS"/>
@@ -145,7 +154,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eK-8p-87s">
-                                                        <rect key="frame" x="0.0" y="144.00000000000003" width="374" height="40"/>
+                                                        <rect key="frame" x="0.0" y="143.99999999999997" width="374" height="40"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                         <state key="normal" title="Don't have an account? Sign up"/>
                                                         <connections>
@@ -160,10 +169,10 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DGR-5v-owB" userLabel="Spacer View">
-                                                <rect key="frame" x="0.0" y="184.00000000000003" width="374" height="255.33333333333334"/>
+                                                <rect key="frame" x="0.0" y="183.99999999999997" width="374" height="255.66666666666666"/>
                                                 <subviews>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="mSI-Ww-jvm">
-                                                        <rect key="frame" x="168.66666666666666" y="108.33333333333331" width="37" height="37"/>
+                                                        <rect key="frame" x="168.66666666666666" y="108.66666666666669" width="37" height="37"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                                 <constraints>
@@ -172,7 +181,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6q-OI-uVQ">
-                                                <rect key="frame" x="0.0" y="439.33333333333337" width="374" height="40"/>
+                                                <rect key="frame" x="0.0" y="439.66666666666663" width="374" height="40"/>
                                                 <color key="backgroundColor" red="0.17365863919258118" green="0.24193555116653442" blue="0.58442771434783936" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Sign in with Facebook"/>
                                                 <connections>
@@ -211,9 +220,11 @@
                         <outlet property="signupButton" destination="8eK-8p-87s" id="fND-Ab-YoT"/>
                         <outlet property="udacityLoginButton" destination="RL8-oT-mpr" id="UhY-mv-A9b"/>
                         <outlet property="usernameTextField" destination="1Bg-af-6G6" id="PwX-3J-xIo"/>
+                        <segue destination="l02-rc-6QW" kind="unwind" identifier="dismiss" unwindAction="unwindToPresenter:" id="5DK-p4-hkZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1d-nG-prS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="l02-rc-6QW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1397" y="1311"/>
         </scene>
@@ -253,11 +264,11 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hKt-qP-jdj" id="6DT-XB-MmO">
-                                    <rect key="frame" x="0.0" y="0.0" width="381" height="59.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="381" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uOL-6c-e0s">
-                                            <rect key="frame" x="62" y="12.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
+                                            <rect key="frame" x="62" y="12" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -269,7 +280,7 @@
                                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tWB-l2-qy7">
-                                            <rect key="frame" x="62" y="33.333333333333329" width="43.666666666666664" height="14.333333333333334"/>
+                                            <rect key="frame" x="62" y="33" width="44" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
@@ -286,7 +297,7 @@
                             <outlet property="delegate" destination="3gi-fv-f8t" id="sJj-cy-7Wt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="On the Map" id="sXa-R4-wBS">
+                    <navigationItem key="navigationItem" title="On the Map" id="sXa-R4-wBS" customClass="AppNavItem" customModule="OnTheMap" customModuleProvider="target">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="3gK-Jm-KVz">
                             <connections>
                                 <action selector="onLogoutAction:" destination="3gi-fv-f8t" id="ux5-kn-B5m"/>
@@ -304,6 +315,11 @@
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
+                        <connections>
+                            <outlet property="logoutButtonItem" destination="3gK-Jm-KVz" id="8RW-WI-kTl"/>
+                            <outlet property="pinButtonItem" destination="rsh-8e-UJe" id="YFq-KK-PJU"/>
+                            <outlet property="refreshButtonItem" destination="2bC-Lq-WE3" id="jgm-Oo-Ozk"/>
+                        </connections>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vqn-Us-tmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -315,7 +331,7 @@
             <objects>
                 <navigationController storyboardIdentifier="LocationNavigationController" id="yop-ru-CW0" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="11d-j0-4XU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="11d-j0-4XU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -475,7 +491,7 @@
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="40J-Jv-wav"/>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="rte-4a-qcm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="rte-4a-qcm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -499,7 +515,7 @@
                     <tabBarItem key="tabBarItem" title="List" image="list" id="9FI-ie-U19"/>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="UPA-9e-BZb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="UPA-9e-BZb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
