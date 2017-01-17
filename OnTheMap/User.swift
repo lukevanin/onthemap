@@ -5,6 +5,8 @@
 //  Created by Luke Van In on 2017/01/14.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Information specific to the user, e.g. name and surname.
+//
 
 import Foundation
 
@@ -13,6 +15,9 @@ struct User {
     let lastName: String
 }
 
+//
+//  Extension for serializing a user to JSON compatible data.
+//
 extension User: JSONEntity {
     init(json: Any) throws {
         guard let entity = json as? [String: Any] else {

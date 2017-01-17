@@ -5,6 +5,9 @@
 //  Created by Luke Van In on 2017/01/16.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Protocol which defines the capabilities of an object which can be instantiated from JSON data. Implemented by model
+//  objects to add the capability to parse JSON into an instance.
+//
 
 import Foundation
 

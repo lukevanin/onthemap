@@ -5,14 +5,27 @@
 //  Created by Luke Van In on 2017/01/14.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  User authentication session data, namely the session ID and account ID.
+//
 
 import Foundation
 
 struct Session {
+    
+    //
+    //  Unique token for the auth session. Each login creates a new token.
+    //
     let sessionId: String
+    
+    //
+    //  Persistent ID associated with the user's account. Immutable between logins.
+    //
     let accountId: String
 }
 
+//
+//  Extension for instantiating session from JSON. Most of the available session information is ignored by the app.
+//
 extension Session: JSONEntity {
     init(json: Any) throws {
         guard let entity = json as? Dictionary<String, Any> else {

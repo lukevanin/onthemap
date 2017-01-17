@@ -5,6 +5,8 @@
 //  Created by Luke Van In on 2017/01/16.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Students srvice implementation using the Udacity web service API.
+//
 
 import Foundation
 
@@ -17,7 +19,8 @@ struct UdacityStudentService: StudentService {
     ]
 
     //
-    //
+    //  Retrieve existing location information for a student. The unique key is assumed to be the account ID used when
+    //  the entry was created.
     //
     func fetchInformationForStudent(accountId: String, completion: @escaping FetchStudentsCompletion) {
         let query = [
@@ -27,18 +30,19 @@ struct UdacityStudentService: StudentService {
     }
     
     //
-    //
+    //  Retrieve list of latest student information entries. Entries are ordered in reverse chronological order (from
+    //  most recent first, to oldest last).
     //
     func fetchLatestStudentInformation(count: Int, completion: @escaping FetchStudentsCompletion) {
         let query = [
-            "limit": "100",
+            "limit": "\(count)",
             "order": "-updatedAt"
         ]
         fetchStudents(query: query, completion: completion)
     }
     
     //
-    //
+    //  General purpose method for retrieving a list of students matching some constraints.
     //
     private func fetchStudents(query: [String: String], completion: @escaping FetchStudentsCompletion) {
         HTTPService.performRequest(
@@ -53,7 +57,7 @@ struct UdacityStudentService: StudentService {
     }
     
     //
-    //
+    //  Insert a student information object into the server database.
     //
     func addStudentInformation(student: StudentRequest, completion: @escaping UpdateStudentCompletion) {
         submitStudent(
@@ -65,7 +69,7 @@ struct UdacityStudentService: StudentService {
     }
     
     //
-    //
+    //  Update an existing student information object for a given object ID.
     //
     func updateStudentInformation(objectId: String, student: StudentRequest, completion: @escaping UpdateStudentCompletion) {
         submitStudent(
@@ -77,7 +81,7 @@ struct UdacityStudentService: StudentService {
     }
     
     //
-    //
+    //  General purpose method for sending student information to the server API.
     //
     private func submitStudent(url: URL, method: String, student: StudentRequest, completion: @escaping UpdateStudentCompletion) {
         let json = student.toJSON()
@@ -94,7 +98,9 @@ struct UdacityStudentService: StudentService {
     // MARK: Parsing
 
     //
-    //
+    //  Parse a response containing an array of student data into an array of student information objects. Any student
+    //  objects which contain invalid information (e.g. missing or improperly formatted fields), are excluded from the
+    //  resulting list.
     //
     private func parseStudents(_ data: Data) throws -> [StudentInformation] {
         let json = try JSONSerialization.jsonObject(with: data, options: [])

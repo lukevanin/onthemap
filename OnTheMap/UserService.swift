@@ -5,6 +5,8 @@
 //  Created by Luke Van In on 2017/01/12.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Abstraction of a user service, which provides features for authentication, and accessing user related information.
+//
 
 import Foundation
 
@@ -37,7 +39,7 @@ protocol UserService {
     func login(facebookToken: String, completion: @escaping AuthenticationCompletion)
     
     //
-    //
+    //  Retrieve user information for a given account ID.
     //
     func fetchUser(accountId: String, completion: @escaping UserCompletion)
 }

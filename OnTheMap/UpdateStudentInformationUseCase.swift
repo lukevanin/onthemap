@@ -5,6 +5,13 @@
 //  Created by Luke Van In on 2017/01/17.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Encapsulates logic for updating information for a student. The process is:
+//
+//      1. Fetch the credentials for the current login session to obtain the account ID.
+//      2. Fetch the locations for the student with the account ID from step 1.
+//      3a. If one or more entries already exist for the student, then use the object ID from the first location.
+//      3b. If no entries exist then insert a new entry.
+//
 
 import Foundation
 
@@ -18,11 +25,10 @@ struct UpdateStudentInformationUseCase {
     let completion: Completion
     
     //
-    //
+    //  Step 0: Fetch current authenticated session.
     //
     func execute() {
         
-        // Step 0: Fetch current authenticated session.
         authentication.fetchSession { result in
             
             switch result {
@@ -40,7 +46,9 @@ struct UpdateStudentInformationUseCase {
         
     }
     
-    // Step 1: Fetch existing location information for the student account.
+    //
+    //  Step 1: Fetch existing location information for the student account.
+    //
     private func fetchLocations(accountId: String) {
         studentService.fetchInformationForStudent(accountId: accountId) { (result) in
             switch result {
@@ -53,8 +61,10 @@ struct UpdateStudentInformationUseCase {
         }
     }
     
-    // Step 2: Fetch user information for the account. If a location already exists for the user then update it,
+    //
+    // Step 2 and 3: Fetch user information for the account. If a location already exists for the user then update it,
     // otherwise insert a new location.
+    //
     private func updateLocation(accountId: String, existingLocations: [StudentInformation]) {
         authentication.fetchUser(accountId: accountId) {  result in
             switch result {
@@ -85,7 +95,7 @@ struct UpdateStudentInformationUseCase {
         }
     }
     
-    // Step 3: Handle the response for adding or updating a location.
+    // Handle the response for adding or updating a location.
     private func handleUpdateResult(_ result: Result<Void>) {
         
         switch result {

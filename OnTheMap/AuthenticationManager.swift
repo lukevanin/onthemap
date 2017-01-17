@@ -5,6 +5,9 @@
 //  Created by Luke Van In on 2017/01/13.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Maintains login session state and provide user details for accounts. Delegates to underlying services which perform 
+//  the actual authentication.
+//
 
 import Foundation
 
@@ -41,7 +44,7 @@ class AuthenticationManager {
     }
     
     //
-    //
+    //  Retrieve the user details for a specific account.
     //
     func fetchUser(accountId: String, completion: @escaping UserService.UserCompletion) {
         service.fetchUser(accountId: accountId, completion: completion)

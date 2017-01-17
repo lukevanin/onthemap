@@ -5,6 +5,10 @@
 //  Created by Luke Van In on 2017/01/12.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Displays the content of the app, namely the login screen, location editor popup, and map and list tabs. Forwards 
+//  state from the app controller to the child controllers, and actions from the child controllers back to the app 
+//  controller.
+//
 
 import UIKit
 import SafariServices
@@ -42,6 +46,10 @@ class TabViewController: UITabBarController {
     
     // MARK: Setup
     
+    //
+    //  Initial configuration for child view controllers which represent the tabs to be displayed (map and list view 
+    //  controllers).
+    //
     private func setupTabViewControllers() {
         guard let viewControllers = self.viewControllers else {
             return
@@ -51,6 +59,13 @@ class TabViewController: UITabBarController {
         }
     }
     
+    //
+    //  Configure a controller for the a tab. Sets the initial state from the app controller, and the delegate so that 
+    //  the child controller communicates with the app controller.
+    //
+    //  Note: The content controllers themselves are each embedded in a navigation controller in order to obtain a nav 
+    //  bar. This function uses recursion to descend the view controller hierarchy to access the content controller.
+    //
     private func setupTabViewController(_ viewController: UIViewController) {
         switch viewController {
             
@@ -74,21 +89,22 @@ class TabViewController: UITabBarController {
     // MARK: Storyboard
     
     //
-    //
+    //  Callback action for unwind segues. Provides a way define how a presented view controller may to return to this 
+    //  view controller using interface builder.
     //
     @IBAction func unwindToPresenter(_ sender: UIStoryboardSegue) {
-        
     }
     
     //
-    //
+    //  Prepare a view controller before presentation.
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         prepare(viewController: segue.destination, sender: sender)
     }
     
     //
-    //
+    //  Prepare a view controller before presentation. This is a separate function to the built-in function so that 
+    //  recursion can be implemented to traverse the view controller hierarchy.
     //
     private func prepare(viewController: UIViewController, sender: Any?) {
     
@@ -96,7 +112,7 @@ class TabViewController: UITabBarController {
         
         // Segue to login view controller.
         case let viewController as LoginViewController:
-            prepare(loginViewController: viewController)
+            viewController.delegate = self.appController
 
         // Segue to a navigation controller - recurse into top-most view controller.
         case let navigationController as UINavigationController:
@@ -108,13 +124,6 @@ class TabViewController: UITabBarController {
         default:
             break
         }
-    }
-    
-    //
-    //
-    //
-    private func prepare(loginViewController viewController: LoginViewController) {
-        viewController.delegate = self.appController
     }
 
     // MARK: Authentication
@@ -136,7 +145,8 @@ class TabViewController: UITabBarController {
     // MARK: App state
     
     //
-    //
+    //  Iterates over the child view controllers. The iteractor is called for each view controller which conforms to
+    //  StudentsControllerHandler. Used to propogate changes to child controllers using a universal interface.
     //
     fileprivate func updateViewControllers(iterator: StudentsControllerHandler) {
         guard let viewControllers = viewControllers else {
@@ -148,7 +158,8 @@ class TabViewController: UITabBarController {
     }
 
     //
-    //
+    //  Provides a universal iterable interface to child view controllers conforming to StudentsController protocol. 
+    //  Traverses controllers embedded in navigation controllers.
     //
     fileprivate func updateViewController(_ viewController: UIViewController, iterator: StudentsControllerHandler) {
         switch viewController {
@@ -167,7 +178,8 @@ class TabViewController: UITabBarController {
 }
 
 //
-//
+//  Extension which implements delegate methods for the app controller. This provides a way for the app controller to 
+//  interact with the display state, without creating implementation dependencies.
 //
 extension TabViewController: StudentsAppDelegate {
     

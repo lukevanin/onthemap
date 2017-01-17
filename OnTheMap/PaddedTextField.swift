@@ -5,6 +5,9 @@
 //  Created by Luke Van In on 2017/01/14.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Text field with internal padding. Padding creates additional white-space around the input text which aids usability. 
+//  Used on all input fields.
+//
 
 import UIKit
 

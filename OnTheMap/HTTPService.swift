@@ -5,14 +5,16 @@
 //  Created by Luke Van In on 2017/01/16.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  General purpose utility class for performing HTTP requests.
+//
 
 import Foundation
 
 struct HTTPService {
     
-    
     //
-    //
+    //  Perform an HTTP/HTTPS request using the provided URL, method, headers, query, and body parameters. Only the URL
+    //  is required, other fields will be used if present.
     //
     static func performRequest(url: URL, method: String = "GET", headers: [String: String]? = nil, query: [String: String]? = nil, parameters: [String: Any?]? = nil, completion: ((Result<Data>) -> Void)? = nil) {
         do {
@@ -81,7 +83,7 @@ struct HTTPService {
                 
                 // Parse the response data.
                 guard let data = data else {
-                    let error = ServiceError.content
+                    let error = ServiceError.response
                     completion?(Result.failure(error))
                     return
                 }

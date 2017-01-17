@@ -5,11 +5,16 @@
 //  Created by Luke Van In on 2017/01/12.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  View controller for login and signup. Presented modally by the tab bar controller.
+//
 
 import UIKit
 import SafariServices
 import FBSDKLoginKit
 
+//
+//  Delegate for the login controller. Delegates login actions to an external object.
+//
 protocol LoginControllerDelegate: class {
     typealias AuthenticationCompletion = (Result<Bool>) -> Void
     func login(username: String, password: String, completion: @escaping AuthenticationCompletion)
@@ -45,7 +50,7 @@ class LoginViewController: UIViewController {
     // MARK: Actions
     
     //
-    // Sign up button tapped. Show web view to allow user to create an account.
+    //  Sign up button tapped. Show web view to allow user to create an account.
     //
     @IBAction func onSignUpAction(_ sender: Any) {
         resignResponders()
@@ -58,9 +63,11 @@ class LoginViewController: UIViewController {
     //  Udacity login button tapped. Try to authenticate the user with the entered username and password.
     //
     @IBAction func onUdacityLoginAction(_ sender: Any) {
+        
+        // Resign focus from any input fields to dismiss the keyboard.
         resignResponders()
         
-        // Get username text input.
+        // Get username text input. Show an error if the username field is blank.
         guard let username = usernameTextField.text, !username.isEmpty else {
             let message = "Please enter a username."
             showAlert(forErrorMessage: message) { [weak self] in
@@ -69,7 +76,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        // Get password text input.
+        // Get password text input. Show an error if the password field is blank.
         guard let password = passwordTextField.text, !password.isEmpty else {
             let message = "Please enter a password."
             showAlert(forErrorMessage: message) { [weak self] in
@@ -87,6 +94,8 @@ class LoginViewController: UIViewController {
     //  Facebook login button tapped. Authenticate the user with Facebook, then authorize the token with Udacity API.
     //
     @IBAction func onFacebookLoginAction(_ sender: Any) {
+        
+        // Resign focus from any input fields to dismiss the keyboard.
         resignResponders()
         state = .busy
 
@@ -114,7 +123,7 @@ class LoginViewController: UIViewController {
     }
     
     //
-    //
+    //  Resign focus from the input texfield and dismiss the keyboard.
     //
     private func resignResponders() {
         usernameTextField.resignFirstResponder()
@@ -138,14 +147,17 @@ class LoginViewController: UIViewController {
                 
             case .success(let isAuthenticated):
                 if isAuthenticated {
+                    // Authentication succeeded. Perform the exit segue to return to the presenting view controller.
                     self.performSegue(withIdentifier: self.exitSegue, sender: nil)
                 }
                 else {
+                    // Authentication failed. Show an error message.
                     let message = "Cannot sign in. Please check your username and password, then try again."
                     self.showAlert(forErrorMessage: message)
                 }
                 
             case .failure(let error):
+                // Error during authentication (e.g. network or content error).
                 self.showAlert(forError: error)
             }
         }
@@ -165,7 +177,8 @@ class LoginViewController: UIViewController {
     // MARK: State
     
     //
-    //
+    //  Update the UI to display the current state. Disables input fields and shows activity indicator while login is 
+    //  in progress.
     //
     private func updateState() {
         switch state {
@@ -178,7 +191,8 @@ class LoginViewController: UIViewController {
     }
     
     //
-    //
+    //  Configure the UI with the state. Disables/enables text and button interaction, and shows/hides activity 
+    //  indicator.
     //
     private func configureUI(inputEnabled: Bool, activityVisible: Bool) {
         usernameTextField.isEnabled = inputEnabled
@@ -197,12 +211,12 @@ class LoginViewController: UIViewController {
 }
 
 //
-//
+//  Text field delegate for login controller.
 //
 extension LoginViewController: UITextFieldDelegate {
     
     //
-    //
+    //  Dismiss keyboard when done button is tapped.
     //
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

@@ -5,6 +5,8 @@
 //  Created by Luke Van In on 2017/01/12.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Concrete implementation of the UserService, using the Udacity web service API.
+//
 
 import Foundation
 
@@ -14,7 +16,8 @@ struct UdacityUserService: UserService {
     let sessionURL = URL(string: "https://www.udacity.com/api/session")!
 
     //
-    //  Invalidate the current authenticated session.
+    //  Invalidate the current authenticated session. Delete the stored cookies, and invalidates the session with the
+    //  server API.
     //
     func logout(completion: @escaping UserService.LogoutCompletion) {
         var headers = [String: String]()
@@ -67,7 +70,7 @@ struct UdacityUserService: UserService {
     }
     
     //
-    //
+    //  Perform login by posting a request to the API. Expects a Session object on response.
     //
     private func login(parameters: [String: Any], completion: @escaping UserService.AuthenticationCompletion) {
         HTTPService.performRequest(
@@ -82,7 +85,7 @@ struct UdacityUserService: UserService {
     }
     
     //
-    //
+    //  Retrieve details for a user with given account ID. Returns a User object.
     //
     func fetchUser(accountId: String, completion: @escaping UserService.UserCompletion) {
         let url = usersURL.appendingPathComponent(accountId)
@@ -98,7 +101,7 @@ struct UdacityUserService: UserService {
     // MARK: Parseing
     
     //
-    //
+    //  Utility function for parseing response data. Removes the first 4 characters/bytes from the response.
     //
     private func trimData(_ data: Data) -> Data {
         // Remove first 5 bytes/characters.

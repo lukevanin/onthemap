@@ -5,6 +5,8 @@
 //  Created by Luke Van In on 2017/01/14.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Predefined behavior for testing student service functionality.
+//
 
 import Foundation
 
@@ -23,8 +25,8 @@ class MockStudentService: StudentService {
                 lastName: "Parkes"
                 ),
             location: StudentLocation(
-                mapString: "Huntsville, Alabama",
                 mediaURL: "https://www.linkedin.com/in/jarrodparkes",
+                mapString: "Huntsville, Alabama",
                 longitude: -86.5861037,
                 latitude: 34.7303688
                 )
@@ -38,34 +40,42 @@ class MockStudentService: StudentService {
                 lastName: "Uelmen"
                 ),
             location: StudentLocation(
-                mapString: "Tarpon Springs, FL",
                 mediaURL: "www.linkedin.com/in/jessicauelmen/en",
+                mapString: "Tarpon Springs, FL",
                 longitude: -82.756768,
                 latitude: 28.1461248
             )
-        )
+        ),
         
-//        StudentInformation(
-//            objectId: "hiz0vOTmrL",
-//            uniqueKey: "2362758535",
-//            firstName: "Jason",
-//            lastName: "Schatz",
-//            mapString: "18th and Valencia, San Francisco, CA",
-//            mediaURL: "http://en.wikipedia.org/wiki/Swift_%28programming_language%29",
-//            latitude: 37.7617,
-//            longitude: -122.4216
-//        ),
-//        
-//        StudentInformation(
-//            objectId: "8ZEuHF5uX8",
-//            uniqueKey: "2256298598",
-//            firstName: "Gabrielle",
-//            lastName: "Miller-Messner",
-//            mapString: "Southern Pines, NC",
-//            mediaURL: "http://www.linkedin.com/pub/gabrielle-miller-messner/11/557/60/en",
-//            latitude: 35.1740471,
-//            longitude: -79.3922539
-//        )
+        StudentInformation(
+            objectId: "hiz0vOTmrL",
+            uniqueKey: "2362758535",
+            user: User(
+                firstName: "Jason",
+                lastName: "Schatz"
+                ),
+            location: StudentLocation(
+                mediaURL: "http://en.wikipedia.org/wiki/Swift_%28programming_language%29",
+                mapString: "18th and Valencia, San Francisco, CA",
+                longitude: -122.4216,
+                latitude: 37.7617
+            )
+        ),
+        
+        StudentInformation(
+            objectId: "8ZEuHF5uX8",
+            uniqueKey: "2256298598",
+            user: User(
+                firstName: "Gabrielle",
+                lastName: "Miller-Messner"
+                ),
+            location: StudentLocation(
+                mediaURL: "http://www.linkedin.com/pub/gabrielle-miller-messner/11/557/60/en",
+                mapString: "Southern Pines, NC",
+                longitude: -79.3922539,
+                latitude: 35.1740471
+            )
+        )
 
     ]
     
@@ -100,6 +110,11 @@ class MockStudentService: StudentService {
         completion(.success())
     }
     
+    //
+    //  Create an object ID composed of 10 random characters. This may generate NSFW/non-PC words due to unfortunate 
+    //  coincedence. You have been warned! An easy way to avoid this situation is to remove vowel letters, and vowel 
+    //  shaped digits, from the input set.
+    //
     private func makeRandomObjectId() -> String {
         let characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".characters
         var output = ""

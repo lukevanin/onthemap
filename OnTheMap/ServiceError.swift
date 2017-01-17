@@ -19,9 +19,35 @@ enum ServiceError: Error {
     // Network connection error.
     case network
     
-    // Invalid or unsupported content.
-    case content
+    //
+    // Invalid or unsupported content returned by the server_
+    //
+    case response
     
-    // Invalid request.
+    //
+    // Invalid request sent by app (e.g. invalid data, incorrect URL).
+    //
     case request
+    
+    //
+    //
+    //
+    var localizedDescription: String {
+        switch self {
+        case .authentication:
+            return "Cannot log in. Please check your credentials and try again."
+            
+        case .server:
+            return "The server could not perform the requested action. Please try again in a few minutes."
+            
+        case .network:
+            return "There was a problem with the network connection. Please check your connection and try again."
+            
+        case .response:
+            return "The server returned an unexpected response. Please check that you are using the latest version of the app."
+            
+        case .request:
+            return "The app sent a request which was not recognized by the server. Please check that you are using the latest version of the app."
+        }
+    }
 }

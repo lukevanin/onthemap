@@ -5,6 +5,8 @@
 //  Created by Luke Van In on 2017/01/12.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Lists student location information in a table view. Tapping on a cell opens the media URL in a browser.
+//
 
 import UIKit
 
@@ -66,6 +68,8 @@ class ListViewController: UITableViewController, StudentsController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
+        // Update the table cell with the student information. Shows a detail disclosure indicator if the media URL is 
+        // valid.
         if let info = model?[indexPath.row] {
             cell.textLabel?.text = info.user.firstName + " " + info.user.lastName
             cell.detailTextLabel?.text = info.location.hasValidURL ? info.location.mapString : nil
@@ -76,7 +80,7 @@ class ListViewController: UITableViewController, StudentsController {
     }
     
     //
-    //
+    //  Called when the user taps on a student entry. Opens the media URL in a browser window.
     //
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let info = model?[indexPath.row] else {

@@ -11,6 +11,8 @@
 		FC1C35461E27DF4200191CA7 /* MockUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C35451E27DF4200191CA7 /* MockUserService.swift */; };
 		FC1CCE5F1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE5E1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift */; };
 		FC1CCE621E2DD694006D05AB /* CheckExistingStudentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE611E2DD694006D05AB /* CheckExistingStudentUseCase.swift */; };
+		FC1CCE641E2DE026006D05AB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE631E2DE026006D05AB /* AppState.swift */; };
+		FC1CCE661E2DFE80006D05AB /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE651E2DFE80006D05AB /* LogoutUseCase.swift */; };
 		FC5975A21E2924A4006C3733 /* UIAlertController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A11E2924A4006C3733 /* UIAlertController+Error.swift */; };
 		FC5975A41E29288C006C3733 /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A31E29288C006C3733 /* MockLocationService.swift */; };
 		FC5975A91E2928B9006C3733 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A81E2928B9006C3733 /* LocationService.swift */; };
@@ -62,6 +64,8 @@
 		FC1C35451E27DF4200191CA7 /* MockUserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockUserService.swift; sourceTree = "<group>"; };
 		FC1CCE5E1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateStudentInformationUseCase.swift; sourceTree = "<group>"; };
 		FC1CCE611E2DD694006D05AB /* CheckExistingStudentUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckExistingStudentUseCase.swift; sourceTree = "<group>"; };
+		FC1CCE631E2DE026006D05AB /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		FC1CCE651E2DFE80006D05AB /* LogoutUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
 		FC5975A11E2924A4006C3733 /* UIAlertController+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Error.swift"; sourceTree = "<group>"; };
 		FC5975A31E29288C006C3733 /* MockLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLocationService.swift; sourceTree = "<group>"; };
 		FC5975A81E2928B9006C3733 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 			children = (
 				FC1CCE5E1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift */,
 				FC1CCE611E2DD694006D05AB /* CheckExistingStudentUseCase.swift */,
+				FC1CCE651E2DFE80006D05AB /* LogoutUseCase.swift */,
 			);
 			name = "Use Case";
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 				FC5975B21E299ABB006C3733 /* User.swift */,
 				FC5975B61E299C3F006C3733 /* Session.swift */,
 				FC5975BB1E2A0097006C3733 /* Credentials.swift */,
+				FC1CCE631E2DE026006D05AB /* AppState.swift */,
 				FC5975B01E299A57006C3733 /* ServiceError.swift */,
 				FCC44DDE1E2C8363002E8D75 /* JSONEntity.swift */,
 				FCC44DDC1E2C0108002E8D75 /* JSONError.swift */,
@@ -390,7 +396,9 @@
 				FC1CCE5F1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift in Sources */,
 				FC5975A41E29288C006C3733 /* MockLocationService.swift in Sources */,
 				FC5975BE1E2A0223006C3733 /* MockStudentService.swift in Sources */,
+				FC1CCE661E2DFE80006D05AB /* LogoutUseCase.swift in Sources */,
 				FCA7E9E11E27459D009ED523 /* ListViewController.swift in Sources */,
+				FC1CCE641E2DE026006D05AB /* AppState.swift in Sources */,
 				FCA1B7EB1E28944300A10E85 /* StudentsController.swift in Sources */,
 				FC5975AB1E299250006C3733 /* StudentService.swift in Sources */,
 				FCA7E9E71E274A00009ED523 /* LoginViewController.swift in Sources */,

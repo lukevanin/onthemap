@@ -5,6 +5,10 @@
 //  Created by Luke Van In on 2017/01/13.
 //  Copyright © 2017 Luke Van In. All rights reserved.
 //
+//  Screen 1 of 2 for adding a location.
+//
+//  Allows the user to look up geo location coordinates from a text address.
+//
 
 import UIKit
 import MapKit
@@ -36,7 +40,7 @@ class LocationLookupViewController: UIViewController {
     // MARK: Actions
     
     //
-    //
+    //  "Find on map" tapped. Dismiss the keyboard and geocode the address.
     //
     @IBAction func onFindButtonAction(_ sender: Any) {
         locationTextField.resignFirstResponder()
@@ -45,7 +49,7 @@ class LocationLookupViewController: UIViewController {
     }
 
     //
-    //
+    //  Cancel button tapped. Dismiss the modal and return to the presenting view controller.
     //
     @IBAction func onCancelButtonAction(_ sender: Any) {
         performSegue(withIdentifier: dismissSegue, sender: sender)
@@ -61,38 +65,40 @@ class LocationLookupViewController: UIViewController {
     // MARK: State management
     
     //
-    //
+    //  Update the UI to display the current state. Disables UI input and shows activity indicator while geocoding is in
+    //  progress
     //
     private func updateState() {
         switch state {
         
         case .pending:
-            configureUI(inputEnabled: true)
+            configureUI(inputEnabled: true, activityVisible: false)
             
         case .busy:
-            configureUI(inputEnabled: false)
+            configureUI(inputEnabled: false, activityVisible: true)
         }
     }
     
     //
+    //  Configure UI. Disable/enable textfield and button input. Show/hide activity indicator.
     //
-    //
-    private func configureUI(inputEnabled: Bool) {
+    private func configureUI(inputEnabled: Bool, activityVisible: Bool) {
         locationTextField.isEnabled = inputEnabled
         findButton.isHidden = !inputEnabled
         
-        if inputEnabled {
-            activityIndicator.stopAnimating()
+        if activityVisible {
+            activityIndicator.startAnimating()
         }
         else {
-            activityIndicator.startAnimating()
+            activityIndicator.stopAnimating()
         }
     }
     
     // MARK: Location
     
     //
-    //
+    //  Retrieve coordinates for a given address. An error alert is shown if the address field is blank, or if geocoding
+    //  fails. Transitions to the next screen on successfully geocoding the address.
     //
     private func performLookup() {
 
@@ -134,7 +140,7 @@ class LocationLookupViewController: UIViewController {
     // MARK: View controller life cycle
     
     //
-    //
+    //  Configure view controllers before presentation.
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {
@@ -153,12 +159,12 @@ class LocationLookupViewController: UIViewController {
 }
 
 //
-//
+//  Text field delegate for location lookup view controller.
 //
 extension LocationLookupViewController: UITextFieldDelegate {
     
     //
-    //
+    //  Called when done/return keyboard button is tapped. Dismiss the keyboard.
     //
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
