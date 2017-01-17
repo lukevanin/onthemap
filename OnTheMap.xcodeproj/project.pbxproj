@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		FC1C35441E27DEDF00191CA7 /* UdacityUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C35431E27DEDF00191CA7 /* UdacityUserService.swift */; };
 		FC1C35461E27DF4200191CA7 /* MockUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C35451E27DF4200191CA7 /* MockUserService.swift */; };
+		FC1CCE5F1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE5E1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift */; };
+		FC1CCE621E2DD694006D05AB /* CheckExistingStudentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE611E2DD694006D05AB /* CheckExistingStudentUseCase.swift */; };
 		FC5975A21E2924A4006C3733 /* UIAlertController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A11E2924A4006C3733 /* UIAlertController+Error.swift */; };
 		FC5975A41E29288C006C3733 /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A31E29288C006C3733 /* MockLocationService.swift */; };
 		FC5975A91E2928B9006C3733 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A81E2928B9006C3733 /* LocationService.swift */; };
@@ -58,6 +60,8 @@
 /* Begin PBXFileReference section */
 		FC1C35431E27DEDF00191CA7 /* UdacityUserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityUserService.swift; sourceTree = "<group>"; };
 		FC1C35451E27DF4200191CA7 /* MockUserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockUserService.swift; sourceTree = "<group>"; };
+		FC1CCE5E1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateStudentInformationUseCase.swift; sourceTree = "<group>"; };
+		FC1CCE611E2DD694006D05AB /* CheckExistingStudentUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckExistingStudentUseCase.swift; sourceTree = "<group>"; };
 		FC5975A11E2924A4006C3733 /* UIAlertController+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Error.swift"; sourceTree = "<group>"; };
 		FC5975A31E29288C006C3733 /* MockLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLocationService.swift; sourceTree = "<group>"; };
 		FC5975A81E2928B9006C3733 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
@@ -122,6 +126,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC1CCE601E2DD1CC006D05AB /* Use Case */ = {
+			isa = PBXGroup;
+			children = (
+				FC1CCE5E1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift */,
+				FC1CCE611E2DD694006D05AB /* CheckExistingStudentUseCase.swift */,
+			);
+			name = "Use Case";
+			sourceTree = "<group>";
+		};
 		FC5975A51E292893006C3733 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,7 +196,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FCA7E9E21E2746A6009ED523 /* View Controller */ = {
+		FCA7E9E21E2746A6009ED523 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				FCC44DF01E2D40F5002E8D75 /* StudentsAppController.swift */,
@@ -197,7 +210,7 @@
 				FC5975A11E2924A4006C3733 /* UIAlertController+Error.swift */,
 				FC5975BF1E2A2747006C3733 /* UIViewController+Error.swift */,
 			);
-			name = "View Controller";
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		FCA7E9E31E2746B1009ED523 /* Storyboard */ = {
@@ -271,8 +284,9 @@
 				FCCD32C91E27399A00DFC250 /* Info.plist */,
 				FC5975B41E299BE3006C3733 /* Service */,
 				FC5975B81E29A812006C3733 /* Manager */,
+				FC1CCE601E2DD1CC006D05AB /* Use Case */,
 				FCA7E9E51E2746C5009ED523 /* Model */,
-				FCA7E9E21E2746A6009ED523 /* View Controller */,
+				FCA7E9E21E2746A6009ED523 /* Controller */,
 				FCC44DDB1E2BF642002E8D75 /* View */,
 				FCA7E9E31E2746B1009ED523 /* Storyboard */,
 				FCA7E9E41E2746B9009ED523 /* Resources */,
@@ -373,6 +387,7 @@
 				FCA1B7E31E288C1600A10E85 /* AuthenticationManager.swift in Sources */,
 				FC1C35461E27DF4200191CA7 /* MockUserService.swift in Sources */,
 				FC5975C61E2A7929006C3733 /* PaddedTextField.swift in Sources */,
+				FC1CCE5F1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift in Sources */,
 				FC5975A41E29288C006C3733 /* MockLocationService.swift in Sources */,
 				FC5975BE1E2A0223006C3733 /* MockStudentService.swift in Sources */,
 				FCA7E9E11E27459D009ED523 /* ListViewController.swift in Sources */,
@@ -391,6 +406,7 @@
 				FCC44DDA1E2BF500002E8D75 /* CircleMapView.swift in Sources */,
 				FC5975BA1E29FCCD006C3733 /* StudentLocation.swift in Sources */,
 				FC5975B31E299ABB006C3733 /* User.swift in Sources */,
+				FC1CCE621E2DD694006D05AB /* CheckExistingStudentUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,14 +16,6 @@ class LocationLookupViewController: UIViewController {
         case busy
     }
     
-//    private let locationService: LocationService = {
-//        let coordinate = CLLocationCoordinate2D(
-//            latitude: 40.7483,
-//            longitude: -73.984911
-//        )
-//        let placemark = MKPlacemark(coordinate: coordinate)
-//        return MockLocationService(placemarks: Result.success([placemark]), error: nil)
-//    }()
     private let locationService = NativeLocationService()
     
     private let dismissSegue = "dismiss"

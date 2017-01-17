@@ -89,8 +89,11 @@ class StudentsAppController: StudentsControllerDelegate, LoginControllerDelegate
             return
         }
         state.isCheckingLocation = true
+        
         // Check if any location information exists for the user.
-        checkIfUserHasLocation() { [weak self] result in
+        let interactor = CheckExistingStudentUseCase(
+            studentService: studentService,
+            authentication: authentication) { [weak self] (result) in
             DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
@@ -119,38 +122,11 @@ class StudentsAppController: StudentsControllerDelegate, LoginControllerDelegate
                 }
             }
         }
+        
+        interactor.execute()
     }
     
-    //
-    //
-    //
-    private func checkIfUserHasLocation(completion: @escaping (Result<Bool>) -> Void) {
-        // Fetch current auth session.
-        authentication.fetchSession { [weak self] (result) in
-            switch result {
-                
-            // Error fetching session.
-            case .failure(let error):
-                completion(Result.failure(error))
-                
-            // Fetched sesion. Fetch locations for user.
-            case .success(let session):
-                self?.studentService.fetchInformationForStudent(accountId: session.accountId) { (result) in
-                    switch result {
-                        
-                    // Error fetching entries for student.
-                    case .failure(let error):
-                        completion(Result.failure(error))
-                        
-                    // Fetched entries. Check if student has any entries.
-                    case .success(let entries):
-                        let hasLocation = (entries.count > 0)
-                        completion(Result.success(hasLocation))
-                    }
-                }
-            }
-        }
-    }
+
     
     //
     //

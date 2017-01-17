@@ -18,9 +18,7 @@ class StudentInfoViewController: UIViewController {
     
     private let dismissSegue = "dismiss"
     
-//    private let authenticationManager = AuthenticationManager(service: MockUserService(), credentials: Credentials.shared)
     private let authenticationManager = AuthenticationManager(service: UdacityUserService(), credentials: Credentials.shared)
-//    private let studentService = MockStudentService()
     private let studentService = UdacityStudentService()
     
     var address: String?
@@ -182,98 +180,31 @@ class StudentInfoViewController: UIViewController {
         }
         
         // Make location
-        let newLocation = StudentLocation(
+        let location = StudentLocation(
             mapString: address,
             mediaURL: mediaURL,
             longitude: coordinate.longitude,
             latitude: coordinate.latitude
         )
         
-        // Handle error
-        func handleError(_ error: Error) {
-            DispatchQueue.main.async { [weak self] in
-                self?.showAlert(forError: error) {
-                    completion(false)
-                }
-            }
-        }
-
-        // Step 3: Handle the response for adding or updating a location.
-        func handleUpdateResult(_ result: Result<Void>) {
-            
-            switch result {
-            case .success:
-                // Location saved
-                completion(true)
-                
-            case .failure(let error):
-                handleError(error)
-            }
-        }
-
-        // Step 2: Fetch user information for the account. If a location already exists for the user then update it,
-        // otherwise insert a new location.
-        func updateLocation(accountId: String, existingLocations: [StudentInformation]) {
-            self.authenticationManager.fetchUser(accountId: accountId) { (result) in
-                switch result {
-                case .success(let user):
-                    let request = StudentRequest(
-                        uniqueKey: accountId,
-                        user: user,
-                        location: newLocation
-                    )
-                    
-                    if let location = existingLocations.first {
-                        self.studentService.updateStudentInformation(
-                            objectId: location.objectId,
-                            student: request,
-                            completion: handleUpdateResult
-                        )
+        let interactor = UpdateStudentInformationUseCase(
+            location: location,
+            authentication: authenticationManager,
+            studentService: studentService) { [weak self] (success, error) in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self?.showAlert(forError: error) {
+                            completion(false)
+                        }
                     }
-                    else {
-                        self.studentService.addStudentInformation(
-                            student: request,
-                            completion: handleUpdateResult
-                        )
-                    }
-                    
-                case .failure(let error):
-                    handleError(error)
                 }
-            }
-        }
-
-        // Step 1: Fetch existing location information for the student account.
-        func fetchLocations(accountId: String) {
-            self.studentService.fetchInformationForStudent(accountId: accountId) { (result) in
-                switch result {
-                case .success(let locations):
-                    updateLocation(accountId: accountId, existingLocations: locations)
-                    
-                case .failure(let error):
-                    handleError(error)
+                else {
+                    completion(success)
                 }
-            }
         }
         
-        // Step 0: Fetch current authenticated session.
-        authenticationManager.fetchSession { result in
-            
-            switch result {
-                
-            // Fetched session.
-            case .success(let session):
-                // Fetch the current student
-                fetchLocations(accountId: session.accountId)
-                
-            // Error fetching session.
-            case .failure(let error):
-                handleError(error)
-            }
-        }
-
+        interactor.execute()
     }
-        
 }
 
 //
