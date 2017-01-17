@@ -5,8 +5,8 @@ On the Map iOS app for Udacity nanodegree.
 Add your location and URL to a world map. See locations and web sites of other students.
 
 <img src="Screenshots/iPhone/2a Map Portrait.png" width="320">
-<img src="Screenshots/iPhone/3b List Landscape.png" height="320">
 <img src="Screenshots/iPhone/5a Media Portrait.png" width="320">
+<img src="Screenshots/iPhone/3b List Landscape.png" height="320">
 
 ## Features
 
