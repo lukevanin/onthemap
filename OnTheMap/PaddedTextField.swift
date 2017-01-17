@@ -13,7 +13,7 @@ import UIKit
 
 class PaddedTextField: UITextField {
     
-    var padding = CGSize(width: 8.0, height: 4.0)
+    var padding = CGSize(width: 16.0, height: 4.0)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,5 +30,11 @@ class PaddedTextField: UITextField {
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: padding.width, dy: padding.height)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let diameter = min(bounds.width, bounds.height)
+        layer.cornerRadius = diameter * 0.5
     }
 }
