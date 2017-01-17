@@ -22,8 +22,10 @@ enum JSONError: Error {
     //  a string, but the app expects a number.
     //
     case field(String)
-    
-    var localizedDescription: String {
+}
+
+extension JSONError: LocalizedError {
+    var errorDescription: String? {
         switch self {
             
         case .format(let type):

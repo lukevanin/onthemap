@@ -28,11 +28,10 @@ enum ServiceError: Error {
     // Invalid request sent by app (e.g. invalid data, incorrect URL).
     //
     case request
-    
-    //
-    //
-    //
-    var localizedDescription: String {
+}
+
+extension ServiceError: LocalizedError {
+    var errorDescription: String? {
         switch self {
         case .authentication:
             return "Cannot log in. Please check your credentials and try again."

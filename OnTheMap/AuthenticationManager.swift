@@ -70,7 +70,8 @@ class AuthenticationManager {
                 return
             }
             self.handleSession(result)
-            completion(.success(self.isAuthenticated))
+            let output = result.map { _ in return self.isAuthenticated }
+            completion(output)
         }
     }
     
@@ -83,7 +84,8 @@ class AuthenticationManager {
                 return
             }
             self.handleSession(result)
-            completion(.success(self.isAuthenticated))
+            let output = result.map { _ in return self.isAuthenticated }
+            completion(output)
         }
     }
 

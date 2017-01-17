@@ -11,21 +11,23 @@
 import Foundation
 import CoreLocation
 
-struct NativeLocationService: LocationService {
+enum LocationError: Swift.Error {
     
-    enum Error: Swift.Error {
-        
-        // Another geo location request is already executing.
-        case busy
-        
-        //
-        var localizedDescription: String {
-            switch self {
-            case .busy:
-                return "Cannot perform geo location request while another request is in progress. Wait for the other request to finish then try again."
-            }
+    // Another geo location request is already executing.
+    case busy
+}
+
+//
+extension LocationError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .busy:
+            return "Cannot perform geo location request while another request is in progress. Wait for the other request to finish then try again."
         }
     }
+}
+
+struct NativeLocationService: LocationService {
     
     private let geocoder = CLGeocoder()
     
@@ -44,7 +46,7 @@ struct NativeLocationService: LocationService {
     //
     func lookupAddress(_ address: String, completion: @escaping LocationLookupCompletion) {
         guard !geocoder.isGeocoding else {
-            completion(Result.failure(Error.busy))
+            completion(Result.failure(LocationError.busy))
             return
         }
         geocoder.geocodeAddressString(address) { (placemarks, error) in

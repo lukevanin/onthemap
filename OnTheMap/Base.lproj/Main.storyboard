@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Npf-oH-ldp">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -29,7 +29,7 @@
             <objects>
                 <viewController id="lVC-tw-JzM" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="QfX-84-CAC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <connections>
                             <outlet property="delegate" destination="lVC-tw-JzM" id="xCb-EQ-Cjb"/>
@@ -80,20 +80,20 @@
                         <viewControllerLayoutGuide type="bottom" id="waD-Mc-mev"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dJy-bx-Odm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Iaw-V4-MCI">
-                                <rect key="frame" x="20" y="28" width="374" height="692"/>
+                                <rect key="frame" x="16" y="28" width="288" height="524"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tPi-yn-siD">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="196.33333333333334"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="131.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="pIJ-jb-AHA">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="173"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="288" height="131.5"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waL-Jo-JHf">
-                                                <rect key="frame" x="0.0" y="173" width="374" height="23.333333333333343"/>
+                                                <rect key="frame" x="0.0" y="131.5" width="288" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -114,13 +114,13 @@
                                         </variation>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DfO-lB-S0N">
-                                        <rect key="frame" x="0.0" y="212.33333333333331" width="374" height="479.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="147.5" width="288" height="376.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ai5-gC-jfb">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="183.99999999999997"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="288" height="184"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1Bg-af-6G6" customClass="PaddedTextField" customModule="OnTheMap" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="39.999999999999972"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="288" height="40"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -131,7 +131,7 @@
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BSB-Fe-0GH" customClass="PaddedTextField" customModule="OnTheMap" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="47.999999999999972" width="374" height="40"/>
+                                                        <rect key="frame" x="0.0" y="48" width="288" height="40"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -142,7 +142,7 @@
                                                         </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RL8-oT-mpr">
-                                                        <rect key="frame" x="0.0" y="95.999999999999972" width="374" height="40"/>
+                                                        <rect key="frame" x="0.0" y="96" width="288" height="40"/>
                                                         <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="etW-Ib-3iS"/>
@@ -154,7 +154,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eK-8p-87s">
-                                                        <rect key="frame" x="0.0" y="143.99999999999997" width="374" height="40"/>
+                                                        <rect key="frame" x="0.0" y="144" width="288" height="40"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                         <state key="normal" title="Don't have an account? Sign up"/>
                                                         <connections>
@@ -169,10 +169,10 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DGR-5v-owB" userLabel="Spacer View">
-                                                <rect key="frame" x="0.0" y="183.99999999999997" width="374" height="255.66666666666666"/>
+                                                <rect key="frame" x="0.0" y="184" width="288" height="152.5"/>
                                                 <subviews>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="mSI-Ww-jvm">
-                                                        <rect key="frame" x="168.66666666666666" y="108.66666666666669" width="37" height="37"/>
+                                                        <rect key="frame" x="125.5" y="57" width="37" height="37"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                                 <constraints>
@@ -181,7 +181,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6q-OI-uVQ">
-                                                <rect key="frame" x="0.0" y="439.66666666666663" width="374" height="40"/>
+                                                <rect key="frame" x="0.0" y="336.5" width="288" height="40"/>
                                                 <color key="backgroundColor" red="0.17365863919258118" green="0.24193555116653442" blue="0.58442771434783936" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Sign in with Facebook"/>
                                                 <connections>
@@ -243,8 +243,8 @@
                     <connections>
                         <segue destination="czr-BV-jAf" kind="relationship" relationship="viewControllers" id="HWX-La-2vM"/>
                         <segue destination="0Yy-vi-OaQ" kind="relationship" relationship="viewControllers" id="vV0-ga-uYJ"/>
-                        <segue destination="yop-ru-CW0" kind="presentation" identifier="location" id="qbK-Ub-tIw"/>
-                        <segue destination="OnS-ny-J5m" kind="presentation" identifier="login" id="dLx-Xw-U7d"/>
+                        <segue destination="yop-ru-CW0" kind="presentation" identifier="location" modalPresentationStyle="formSheet" id="qbK-Ub-tIw"/>
+                        <segue destination="OnS-ny-J5m" kind="presentation" identifier="login" modalPresentationStyle="formSheet" id="dLx-Xw-U7d"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YCe-a8-YzE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -256,15 +256,15 @@
             <objects>
                 <tableViewController id="3gi-fv-f8t" customClass="ListViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="n18-7c-1Wr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UserCell" textLabel="uOL-6c-e0s" detailTextLabel="tWB-l2-qy7" imageView="ZgV-sA-TCF" style="IBUITableViewCellStyleSubtitle" id="hKt-qP-jdj">
-                                <rect key="frame" x="0.0" y="28" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hKt-qP-jdj" id="6DT-XB-MmO">
-                                    <rect key="frame" x="0.0" y="0.0" width="381" height="59"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uOL-6c-e0s">
@@ -353,35 +353,35 @@
                         <viewControllerLayoutGuide type="bottom" id="RzB-XS-T83"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="h5S-ca-NxA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="UFq-7i-PmB">
-                                <rect key="frame" x="20" y="80" width="374" height="640"/>
+                                <rect key="frame" x="16" y="80" width="288" height="472"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UAI-jx-PiA">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="71"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="70.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Where are you" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pLX-i3-wyE">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="23.666666666666671"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="288" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="studying" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6o6-pf-aL5">
-                                                <rect key="frame" x="0.0" y="23.666666666666671" width="374" height="23.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="23.5" width="288" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3aQ-KI-AeO">
-                                                <rect key="frame" x="0.0" y="47.333333333333329" width="374" height="23.666666666666671"/>
+                                                <rect key="frame" x="0.0" y="47" width="288" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="248" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-Dr-UR2">
-                                                <rect key="frame" x="0.0" y="71" width="374" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="70.5" width="288" height="0.0"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" id="Xkp-Tz-vZp"/>
                                                 </constraints>
@@ -407,10 +407,10 @@
                                         </variation>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="3Wt-Zs-3AF">
-                                        <rect key="frame" x="0.0" y="87" width="374" height="553"/>
+                                        <rect key="frame" x="0.0" y="86.5" width="288" height="385.5"/>
                                         <subviews>
                                             <textField autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your location" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3MC-P1-8S5" customClass="PaddedTextField" customModule="OnTheMap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
@@ -421,14 +421,14 @@
                                                 </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQG-4F-A4U">
-                                                <rect key="frame" x="0.0" y="509" width="374" height="44"/>
+                                                <rect key="frame" x="0.0" y="341.5" width="288" height="44"/>
                                                 <subviews>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BdO-kh-pHx">
-                                                        <rect key="frame" x="169" y="4" width="37" height="37"/>
+                                                        <rect key="frame" x="126" y="4" width="37" height="37"/>
                                                         <color key="color" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </activityIndicatorView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mR-Rd-H1B">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                                         <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                         <state key="normal" title="Find on the map"/>
@@ -541,17 +541,17 @@
                         <viewControllerLayoutGuide type="bottom" id="uX7-yg-PwQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4fe-OL-nOo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BRP-NB-nSW">
-                                <rect key="frame" x="20" y="80" width="374" height="640"/>
+                                <rect key="frame" x="16" y="80" width="288" height="472"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Ah0-kC-XpF">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="640"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="472"/>
                                         <subviews>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AD3-A4-yF2" customClass="CircleMapView" customModule="OnTheMap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="320" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="236" width="0.0" height="0.0"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="4So-ro-DRw"/>
                                                     <constraint firstAttribute="width" secondItem="AD3-A4-yF2" secondAttribute="height" multiplier="1:1" id="XzB-O6-6Vo"/>
@@ -565,10 +565,10 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="XKe-RE-QgA">
-                                        <rect key="frame" x="16" y="0.0" width="358" height="640"/>
+                                        <rect key="frame" x="16" y="0.0" width="272" height="472"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your web site URL" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Z7Z-X3-TFD" customClass="PaddedTextField" customModule="OnTheMap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="358" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="272" height="44"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -582,10 +582,10 @@
                                                 </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="y8i-cP-rIh">
-                                                <rect key="frame" x="0.0" y="60" width="358" height="520"/>
+                                                <rect key="frame" x="0.0" y="60" width="272" height="352"/>
                                                 <subviews>
                                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="al3-zM-nmK" customClass="CircleMapView" customModule="OnTheMap" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="81" width="358" height="358"/>
+                                                        <rect key="frame" x="0.0" y="40" width="272" height="272"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="al3-zM-nmK" secondAttribute="height" multiplier="1:1" id="uZ3-uZ-o1h"/>
                                                         </constraints>
@@ -600,14 +600,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="x6w-Xa-34b" userLabel="Button View">
-                                                <rect key="frame" x="0.0" y="596" width="358" height="44"/>
+                                                <rect key="frame" x="0.0" y="428" width="272" height="44"/>
                                                 <subviews>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="2Wy-69-Fcb">
-                                                        <rect key="frame" x="161" y="3" width="37" height="37"/>
+                                                        <rect key="frame" x="118" y="3" width="37" height="37"/>
                                                         <color key="color" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </activityIndicatorView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCb-0J-tp6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="358" height="44"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="272" height="44"/>
                                                         <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                         <state key="normal" title="Submit"/>
