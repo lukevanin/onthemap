@@ -59,7 +59,3 @@ Custom views, usually providing minimal aesthetic changes.
 ## TODO
 
 - Authentication management when interacting with API: If authentication fails when performing an API request after login (ie posting student information), the app handles this by displaying an alert to the user. The user must then manually log out and then log in. The app should detect an invalid auth response and transition to the logout state.
-
-- Handle dismissed Facebook login: If the Facebook login screen is dismissed without explicit cancellation or confirmation, then the callback is never called, resulting in the login screen staying in the busy state forever. The app should check for the callback when the app becomes active, and if it has not been called, then switch back to the pending state.
-
-- Map & list view do not refresh after logging in on iPad. List refresh should happen as a result of login, and should not be based on view controller appearance (currently).

@@ -141,7 +141,7 @@
                                                             <outlet property="delegate" destination="OnS-ny-J5m" id="kEA-PH-LOt"/>
                                                         </connections>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RL8-oT-mpr">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RL8-oT-mpr" customClass="RoundedButton" customModule="OnTheMap" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="96" width="288" height="40"/>
                                                         <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -180,7 +180,7 @@
                                                     <constraint firstItem="mSI-Ww-jvm" firstAttribute="centerY" secondItem="DGR-5v-owB" secondAttribute="centerY" id="d1t-ze-ulJ"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6q-OI-uVQ">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6q-OI-uVQ" customClass="RoundedButton" customModule="OnTheMap" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="336.5" width="288" height="40"/>
                                                 <color key="backgroundColor" red="0.17365863919258118" green="0.24193555116653442" blue="0.58442771434783936" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Sign in with Facebook"/>
@@ -427,7 +427,7 @@
                                                         <rect key="frame" x="126" y="4" width="37" height="37"/>
                                                         <color key="color" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </activityIndicatorView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mR-Rd-H1B">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mR-Rd-H1B" customClass="RoundedButton" customModule="OnTheMap" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                                         <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
@@ -606,7 +606,7 @@
                                                         <rect key="frame" x="118" y="3" width="37" height="37"/>
                                                         <color key="color" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </activityIndicatorView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCb-0J-tp6">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCb-0J-tp6" customClass="RoundedButton" customModule="OnTheMap" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="272" height="44"/>
                                                         <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>

@@ -91,48 +91,6 @@ class LoginViewController: UIViewController {
     }
     
     //
-    //  Facebook login button tapped. Authenticate the user with Facebook, then authorize the token with Udacity API.
-    //
-    @IBAction func onFacebookLoginAction(_ sender: Any) {
-        
-        // Resign focus from any input fields to dismiss the keyboard.
-        resignResponders()
-        state = .busy
-
-        let login = FBSDKLoginManager()
-        let permissions = ["public_profile"]
-        login.logIn(withReadPermissions: permissions, from: self) { [weak self] (result, error) in
-            DispatchQueue.main.async {
-                guard let `self` = self else {
-                    return
-                }
-
-                // Show an error alert if an error occurred...
-                if let error = error {
-                    self.showAlert(forError: error)
-                    return
-                }
-                
-                // ... otherwise login with the facebook token.
-                if let result = result, !result.isCancelled, let token = result.token.tokenString {
-                    // Login to udacity with facebook token.
-                    self.delegate?.login(facebookToken: token, completion: self.handleLoginResponse)
-                }
-            }
-        }
-    }
-    
-    //
-    //  Resign focus from the input texfield and dismiss the keyboard.
-    //
-    private func resignResponders() {
-        usernameTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
-    }
-    
-    // MARK: Authentication
-
-    //
     //  Process authentication response. Notify delegate
     //
     private func handleLoginResponse(_ result: Result<Bool>) {
@@ -142,13 +100,13 @@ class LoginViewController: UIViewController {
             }
             
             self.state = .pending
-
+            
             switch result {
                 
             case .success(let isAuthenticated):
                 if isAuthenticated {
                     // Authentication succeeded. Perform the exit segue to return to the presenting view controller.
-                    self.performSegue(withIdentifier: self.exitSegue, sender: nil)
+                    self.dismiss()
                 }
                 else {
                     // Authentication failed. Show an error message.
@@ -161,6 +119,97 @@ class LoginViewController: UIViewController {
                 self.showAlert(forError: error)
             }
         }
+    }
+
+    
+    //
+    //  Facebook login button tapped. Authenticate the user with Facebook, then authorize the token with Udacity API.
+    //
+    @IBAction func onFacebookLoginAction(_ sender: Any) {
+        
+        // Resign focus from any input fields to dismiss the keyboard.
+        resignResponders()
+        state = .busy
+        
+        facebookLogin() { [weak self] result in
+            DispatchQueue.main.async {
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.state = .pending
+                
+                switch result {
+                    
+                case .success(let isAuthenticated):
+                    // Logged in successfully with facebook.
+                    if isAuthenticated {
+                        self.dismiss()
+                    }
+                    
+                case .failure(let error):
+                    // Facebook login failed. Show error
+                    self.showAlert(forError: error)
+                }
+            }
+        }
+    }
+    
+    //
+    //
+    //
+    private func facebookLogin(completion: @escaping (Result<Bool>) -> Void) {
+
+        let login = FBSDKLoginManager()
+        let permissions = ["public_profile"]
+        login.logIn(withReadPermissions: permissions, from: self) { [weak self] (result, error) in
+
+            // Show an error alert if an error occurred...
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            // ... otherwise login with the facebook token.
+            
+            guard let result = result else {
+                // Facebook login did not return an error or a result. Show error and go back to pending.
+                let error = ServiceError.response
+                completion(.failure(error))
+                return
+            }
+            
+            guard !result.isCancelled else {
+                // Operation cancelled by user. Just go back to the pending state.
+                completion(.success(false))
+                return
+            }
+            
+            guard let token = result.token.tokenString else {
+                // No token returned in result.
+                let error = ServiceError.authentication
+                completion(.failure(error))
+                return
+            }
+        
+            // Login to udacity with facebook token.
+            self?.delegate?.login(facebookToken: token, completion: completion)
+        }
+    }
+    
+    //
+    //  Resign focus from the input texfield and dismiss the keyboard.
+    //
+    private func resignResponders() {
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
+    //
+    //  Dismiss the login view controller and  return to the presenting view controller.
+    //
+    private func dismiss() {
+        performSegue(withIdentifier: self.exitSegue, sender: nil)
     }
     
     // MARK: View life cycle

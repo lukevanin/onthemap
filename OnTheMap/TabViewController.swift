@@ -29,6 +29,8 @@ class TabViewController: UITabBarController {
         return instance
     }()
     
+    private var didAppear = false
+    
 
     // MARK: View controller life cycle
 
@@ -41,7 +43,10 @@ class TabViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateAuthenticationState()
+        if !didAppear {
+            didAppear = true
+            updateAuthenticationState()
+        }
     }
     
     // MARK: Setup
@@ -93,6 +98,7 @@ class TabViewController: UITabBarController {
     //  view controller using interface builder.
     //
     @IBAction func unwindToPresenter(_ sender: UIStoryboardSegue) {
+        updateAuthenticationState()
     }
     
     //

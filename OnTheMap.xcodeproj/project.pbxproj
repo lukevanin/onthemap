@@ -13,6 +13,7 @@
 		FC1CCE621E2DD694006D05AB /* CheckExistingStudentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE611E2DD694006D05AB /* CheckExistingStudentUseCase.swift */; };
 		FC1CCE641E2DE026006D05AB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE631E2DE026006D05AB /* AppState.swift */; };
 		FC1CCE661E2DFE80006D05AB /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE651E2DFE80006D05AB /* LogoutUseCase.swift */; };
+		FC1CCE8B1E2E6BE1006D05AB /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE8A1E2E6BE1006D05AB /* RoundedButton.swift */; };
 		FC5975A21E2924A4006C3733 /* UIAlertController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A11E2924A4006C3733 /* UIAlertController+Error.swift */; };
 		FC5975A41E29288C006C3733 /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A31E29288C006C3733 /* MockLocationService.swift */; };
 		FC5975A91E2928B9006C3733 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A81E2928B9006C3733 /* LocationService.swift */; };
@@ -66,6 +67,7 @@
 		FC1CCE611E2DD694006D05AB /* CheckExistingStudentUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckExistingStudentUseCase.swift; sourceTree = "<group>"; };
 		FC1CCE631E2DE026006D05AB /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		FC1CCE651E2DFE80006D05AB /* LogoutUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
+		FC1CCE8A1E2E6BE1006D05AB /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		FC5975A11E2924A4006C3733 /* UIAlertController+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Error.swift"; sourceTree = "<group>"; };
 		FC5975A31E29288C006C3733 /* MockLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLocationService.swift; sourceTree = "<group>"; };
 		FC5975A81E2928B9006C3733 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				FC5975C51E2A7929006C3733 /* PaddedTextField.swift */,
 				FCC44DD91E2BF500002E8D75 /* CircleMapView.swift */,
 				FCC44DF41E2D616A002E8D75 /* AppNavItem.swift */,
+				FC1CCE8A1E2E6BE1006D05AB /* RoundedButton.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				FCC44DE31E2C9AA6002E8D75 /* NativeLocationService.swift in Sources */,
 				FC5975AD1E29954F006C3733 /* StudentRequest.swift in Sources */,
 				FCC44DDD1E2C0108002E8D75 /* JSONError.swift in Sources */,
+				FC1CCE8B1E2E6BE1006D05AB /* RoundedButton.swift in Sources */,
 				FCC44DDF1E2C8363002E8D75 /* JSONEntity.swift in Sources */,
 				FCA1B7E91E2891EC00A10E85 /* StudentInformation.swift in Sources */,
 				FCC44DE51E2C9D4A002E8D75 /* UdacityStudentService.swift in Sources */,

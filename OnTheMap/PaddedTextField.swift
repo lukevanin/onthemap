@@ -13,7 +13,12 @@ import UIKit
 
 class PaddedTextField: UITextField {
     
-    var padding = CGSize(width: 4.0, height: 4.0)
+    var padding = CGSize(width: 8.0, height: 4.0)
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.layer.cornerRadius = 4
+    }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return textRect(forBounds: bounds)
