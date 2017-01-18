@@ -15,12 +15,6 @@ import FBSDKLoginKit
 //
 //  Delegate for the login controller. Delegates login actions to an external object.
 //
-protocol LoginControllerDelegate: class {
-    typealias AuthenticationCompletion = (Result<Bool>) -> Void
-    func login(username: String, password: String, completion: @escaping AuthenticationCompletion)
-    func login(facebookToken: String, completion: @escaping AuthenticationCompletion)
-}
-
 class LoginViewController: UIViewController {
     
     enum State {
@@ -28,9 +22,7 @@ class LoginViewController: UIViewController {
         case busy
     }
     
-    private let exitSegue = "dismiss"
-    
-    weak var delegate: LoginControllerDelegate?
+    private let contentSegue = "content"
     
     private var state: State = .pending {
         didSet {
@@ -48,6 +40,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     // MARK: Actions
+    
+    //
+    //
+    //
+    @IBAction func unwindToLogin(_ segue: UIStoryboardSegue) {
+        
+    }
     
     //
     //  Sign up button tapped. Show web view to allow user to create an account.
@@ -87,40 +86,15 @@ class LoginViewController: UIViewController {
         
         // Attempt authentication with username and password.
         state = .busy
-        delegate?.login(username: username, password: password, completion: self.handleLoginResponse)
+        
+        let userService = UdacityUserService()
+        let interactor = LoginUseCase(
+            request: .credentials(username: username, password: password),
+            service: userService,
+            completion: handleLoginResult
+        )
+        interactor.execute()
     }
-    
-    //
-    //  Process authentication response. Notify delegate
-    //
-    private func handleLoginResponse(_ result: Result<Bool>) {
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            
-            self.state = .pending
-            
-            switch result {
-                
-            case .success(let isAuthenticated):
-                if isAuthenticated {
-                    // Authentication succeeded. Perform the exit segue to return to the presenting view controller.
-                    self.dismiss()
-                }
-                else {
-                    // Authentication failed. Show an error message.
-                    let message = "Cannot sign in. Please check your username and password, then try again."
-                    self.showAlert(forErrorMessage: message)
-                }
-                
-            case .failure(let error):
-                // Error during authentication (e.g. network or content error).
-                self.showAlert(forError: error)
-            }
-        }
-    }
-
     
     //
     //  Facebook login button tapped. Authenticate the user with Facebook, then authorize the token with Udacity API.
@@ -131,28 +105,7 @@ class LoginViewController: UIViewController {
         resignResponders()
         state = .busy
         
-        facebookLogin() { [weak self] result in
-            DispatchQueue.main.async {
-                guard let `self` = self else {
-                    return
-                }
-                
-                self.state = .pending
-                
-                switch result {
-                    
-                case .success(let isAuthenticated):
-                    // Logged in successfully with facebook.
-                    if isAuthenticated {
-                        self.dismiss()
-                    }
-                    
-                case .failure(let error):
-                    // Facebook login failed. Show error
-                    self.showAlert(forError: error)
-                }
-            }
-        }
+        facebookLogin(completion: handleLoginResult)
     }
     
     //
@@ -162,7 +115,7 @@ class LoginViewController: UIViewController {
 
         let login = FBSDKLoginManager()
         let permissions = ["public_profile"]
-        login.logIn(withReadPermissions: permissions, from: self) { [weak self] (result, error) in
+        login.logIn(withReadPermissions: permissions, from: self) { (result, error) in
 
             // Show an error alert if an error occurred...
             if let error = error {
@@ -193,7 +146,34 @@ class LoginViewController: UIViewController {
             }
         
             // Login to udacity with facebook token.
-            self?.delegate?.login(facebookToken: token, completion: completion)
+            let interactor = LoginUseCase(
+                request: .facebook(token: token),
+                service: UdacityUserService(),
+                completion: completion
+            )
+            interactor.execute()
+        }
+    }
+
+    //
+    //
+    //
+    private func handleLoginResult(_ result: Result<Bool>) {
+        DispatchQueue.main.async {
+            self.state = .pending
+            
+            switch result {
+                
+            case .success(let isAuthenticated):
+                // Logged in successfully with facebook.
+                if isAuthenticated {
+                    self.showContent()
+                }
+                
+            case .failure(let error):
+                // Facebook login failed. Show error
+                self.showAlert(forError: error)
+            }
         }
     }
     
@@ -206,10 +186,10 @@ class LoginViewController: UIViewController {
     }
     
     //
-    //  Dismiss the login view controller and  return to the presenting view controller.
+    //  Show the primary app content after successful login.
     //
-    private func dismiss() {
-        performSegue(withIdentifier: self.exitSegue, sender: nil)
+    private func showContent() {
+        performSegue(withIdentifier: self.contentSegue, sender: nil)
     }
     
     // MARK: View life cycle

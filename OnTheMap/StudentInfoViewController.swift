@@ -23,7 +23,6 @@ class StudentInfoViewController: UIViewController {
     
     private let dismissSegue = "dismiss"
     
-    private let authenticationManager = AuthenticationManager(service: UdacityUserService(), credentials: Credentials.shared)
     private let studentService = UdacityStudentService()
     
     var address: String?
@@ -207,9 +206,11 @@ class StudentInfoViewController: UIViewController {
         )
         
         // Call interactor.
+        let userService = UdacityUserService()
+        let studentService = UdacityStudentService()
         let interactor = UpdateStudentInformationUseCase(
             location: location,
-            authentication: authenticationManager,
+            userService: userService,
             studentService: studentService) { [weak self] (success, error) in
                 if let error = error {
                     DispatchQueue.main.async {

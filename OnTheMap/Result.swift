@@ -65,4 +65,17 @@ enum Result<T> {
             return
         }
     }
+    
+    //
+    //  Convenience method which maps the result to boolean. Returns true the result is success. Used in situations 
+    //  where the details of the success/failure are unnecessary.
+    //
+    func mapToSuccessBoolean() -> Bool {
+        switch self {
+        case .success:
+            return true
+        case .failure:
+            return false
+        }
+    }
 }

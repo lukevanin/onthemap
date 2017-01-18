@@ -11,38 +11,32 @@ import Foundation
 struct CheckExistingStudentUseCase {
     
     typealias Completion = (Result<Bool>) -> Void
+
+    private let credentials = Credentials.shared
     
     let studentService: StudentService
-    let authentication: AuthenticationManager
     let completion: Completion
     
-    //
-    //
-    //
     func execute() {
+        
         // Fetch current auth session.
-        authentication.fetchSession { result in
+        guard let session = credentials.session else {
+            completion(.failure(ServiceError.authentication))
+            return
+        }
+        
+        // Fetch records for logged in student.
+        studentService.fetchInformationForStudent(accountId: session.accountId) { (result) in
             switch result {
                 
-            // Error fetching session.
+            // Error fetching entries for student.
             case .failure(let error):
                 self.completion(Result.failure(error))
                 
-            // Fetched sesion. Fetch locations for user.
-            case .success(let session):
-                self.studentService.fetchInformationForStudent(accountId: session.accountId) { (result) in
-                    switch result {
-                        
-                    // Error fetching entries for student.
-                    case .failure(let error):
-                        self.completion(Result.failure(error))
-                        
-                    // Fetched entries. Check if student has any entries.
-                    case .success(let entries):
-                        let hasLocation = (entries.count > 0)
-                        self.completion(Result.success(hasLocation))
-                    }
-                }
+            // Fetched entries. Check if student has any entries.
+            case .success(let entries):
+                let hasLocation = (entries.count > 0)
+                self.completion(Result.success(hasLocation))
             }
         }
     }

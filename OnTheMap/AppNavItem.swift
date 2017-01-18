@@ -20,18 +20,17 @@ class AppNavItem: UINavigationItem {
     @IBOutlet var pinButtonItem: UIBarButtonItem!
     @IBOutlet var refreshButtonItem: UIBarButtonItem!
     
-    var state = AppState() {
+    var state: AppState? {
         didSet {
             updateState(animated: true)
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        updateState(animated: false)
-    }
-    
     private func updateState(animated: Bool) {
+        
+        guard let state = self.state else {
+            return
+        }
         
         // Disable the login button during any action. Avoids actions initiated before logout from completing after the 
         // login view becomes visible.

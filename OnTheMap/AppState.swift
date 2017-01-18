@@ -11,22 +11,43 @@
 
 import Foundation
 
-struct AppState {
+extension NSNotification.Name {
+    static let AppStateChanged = NSNotification.Name(rawValue: "AppStateChanged")
+}
+
+class AppState {
+    
+    //
+    //  Shared singleton instance. Used in the StudentsAppController, and AppNavItem. 
+    //
+    static var shared = AppState()
     
     //
     //  App is busy logging out.
     //
-    var isLoggingOut: Bool
+    var isLoggingOut: Bool {
+        didSet {
+            self.notify()
+        }
+    }
     
     //
     //  App is busy fetching list of students from web service API.
     //
-    var isFetchingStudents: Bool
-    
+    var isFetchingStudents: Bool {
+        didSet {
+            self.notify()
+        }
+    }
+
     //
     //  App is busy checking if the user has already uploaded location information.
     //
-    var isCheckingLocation: Bool
+    var isCheckingLocation: Bool {
+        didSet {
+            self.notify()
+        }
+    }
     
     //
     //  App is busy performing one or more activities.
@@ -43,5 +64,12 @@ struct AppState {
         self.isLoggingOut = false
         self.isFetchingStudents = false
         self.isCheckingLocation = false
+    }
+    
+    //
+    //  Post notification when app state changes.
+    //
+    private func notify() {
+        NotificationCenter.default.post(name: .AppStateChanged, object: self)
     }
 }

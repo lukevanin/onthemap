@@ -14,6 +14,9 @@
 		FC1CCE641E2DE026006D05AB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE631E2DE026006D05AB /* AppState.swift */; };
 		FC1CCE661E2DFE80006D05AB /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE651E2DFE80006D05AB /* LogoutUseCase.swift */; };
 		FC1CCE8B1E2E6BE1006D05AB /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1CCE8A1E2E6BE1006D05AB /* RoundedButton.swift */; };
+		FC26BF631E2F268A00ED861B /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC26BF621E2F268A00ED861B /* LoginUseCase.swift */; };
+		FC26BF691E2F30AE00ED861B /* StudentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC26BF681E2F30AE00ED861B /* StudentsModel.swift */; };
+		FC26BF6B1E2F48F800ED861B /* StudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC26BF6A1E2F48F800ED861B /* StudentsViewController.swift */; };
 		FC5975A21E2924A4006C3733 /* UIAlertController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A11E2924A4006C3733 /* UIAlertController+Error.swift */; };
 		FC5975A41E29288C006C3733 /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A31E29288C006C3733 /* MockLocationService.swift */; };
 		FC5975A91E2928B9006C3733 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5975A81E2928B9006C3733 /* LocationService.swift */; };
@@ -32,9 +35,7 @@
 		FC5975CD1E2A8230006C3733 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5975C91E2A8230006C3733 /* FBSDKCoreKit.framework */; };
 		FC5975CE1E2A8230006C3733 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5975CA1E2A8230006C3733 /* FBSDKLoginKit.framework */; };
 		FC5975CF1E2A8230006C3733 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5975CB1E2A8230006C3733 /* FBSDKShareKit.framework */; };
-		FCA1B7E31E288C1600A10E85 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1B7E21E288C1600A10E85 /* AuthenticationManager.swift */; };
 		FCA1B7E91E2891EC00A10E85 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1B7E81E2891EC00A10E85 /* StudentInformation.swift */; };
-		FCA1B7EB1E28944300A10E85 /* StudentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1B7EA1E28944300A10E85 /* StudentsController.swift */; };
 		FCA393A41E28A5BB000F17FB /* LocationLookupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA393A31E28A5BB000F17FB /* LocationLookupViewController.swift */; };
 		FCA393A61E28A6D6000F17FB /* StudentInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA393A51E28A6D6000F17FB /* StudentInfoViewController.swift */; };
 		FCA7E9D81E274270009ED523 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */; };
@@ -68,6 +69,9 @@
 		FC1CCE631E2DE026006D05AB /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		FC1CCE651E2DFE80006D05AB /* LogoutUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
 		FC1CCE8A1E2E6BE1006D05AB /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		FC26BF621E2F268A00ED861B /* LoginUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		FC26BF681E2F30AE00ED861B /* StudentsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsModel.swift; sourceTree = "<group>"; };
+		FC26BF6A1E2F48F800ED861B /* StudentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsViewController.swift; sourceTree = "<group>"; };
 		FC5975A11E2924A4006C3733 /* UIAlertController+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Error.swift"; sourceTree = "<group>"; };
 		FC5975A31E29288C006C3733 /* MockLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLocationService.swift; sourceTree = "<group>"; };
 		FC5975A81E2928B9006C3733 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
@@ -86,9 +90,7 @@
 		FC5975C91E2A8230006C3733 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		FC5975CA1E2A8230006C3733 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		FC5975CB1E2A8230006C3733 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		FCA1B7E21E288C1600A10E85 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		FCA1B7E81E2891EC00A10E85 /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
-		FCA1B7EA1E28944300A10E85 /* StudentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsController.swift; sourceTree = "<group>"; };
 		FCA393A31E28A5BB000F17FB /* LocationLookupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationLookupViewController.swift; sourceTree = "<group>"; };
 		FCA393A51E28A6D6000F17FB /* StudentInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfoViewController.swift; sourceTree = "<group>"; };
 		FCA7E9D51E274270009ED523 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				FC1CCE5E1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift */,
 				FC1CCE611E2DD694006D05AB /* CheckExistingStudentUseCase.swift */,
 				FC1CCE651E2DFE80006D05AB /* LogoutUseCase.swift */,
+				FC26BF621E2F268A00ED861B /* LoginUseCase.swift */,
 			);
 			name = "Use Case";
 			sourceTree = "<group>";
@@ -183,14 +186,6 @@
 			name = Concrete;
 			sourceTree = "<group>";
 		};
-		FC5975B81E29A812006C3733 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				FCA1B7E21E288C1600A10E85 /* AuthenticationManager.swift */,
-			);
-			name = Manager;
-			sourceTree = "<group>";
-		};
 		FCA7E9DB1E274498009ED523 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,12 +201,12 @@
 		FCA7E9E21E2746A6009ED523 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FCA7E9E61E274A00009ED523 /* LoginViewController.swift */,
 				FCC44DF01E2D40F5002E8D75 /* StudentsAppController.swift */,
-				FCA1B7EA1E28944300A10E85 /* StudentsController.swift */,
 				FCCD32BF1E27399A00DFC250 /* TabViewController.swift */,
+				FC26BF6A1E2F48F800ED861B /* StudentsViewController.swift */,
 				FCA7E9DE1E274585009ED523 /* MapViewController.swift */,
 				FCA7E9E01E27459D009ED523 /* ListViewController.swift */,
-				FCA7E9E61E274A00009ED523 /* LoginViewController.swift */,
 				FCA393A31E28A5BB000F17FB /* LocationLookupViewController.swift */,
 				FCA393A51E28A6D6000F17FB /* StudentInfoViewController.swift */,
 				FC5975A11E2924A4006C3733 /* UIAlertController+Error.swift */,
@@ -243,6 +238,7 @@
 		FCA7E9E51E2746C5009ED523 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FC26BF681E2F30AE00ED861B /* StudentsModel.swift */,
 				FCA1B7E81E2891EC00A10E85 /* StudentInformation.swift */,
 				FC5975AC1E29954F006C3733 /* StudentRequest.swift */,
 				FC5975B91E29FCCD006C3733 /* StudentLocation.swift */,
@@ -292,7 +288,6 @@
 				FCCD32BD1E27399A00DFC250 /* AppDelegate.swift */,
 				FCCD32C91E27399A00DFC250 /* Info.plist */,
 				FC5975B41E299BE3006C3733 /* Service */,
-				FC5975B81E29A812006C3733 /* Manager */,
 				FC1CCE601E2DD1CC006D05AB /* Use Case */,
 				FCA7E9E51E2746C5009ED523 /* Model */,
 				FCA7E9E21E2746A6009ED523 /* Controller */,
@@ -391,10 +386,10 @@
 				FC5975AD1E29954F006C3733 /* StudentRequest.swift in Sources */,
 				FCC44DDD1E2C0108002E8D75 /* JSONError.swift in Sources */,
 				FC1CCE8B1E2E6BE1006D05AB /* RoundedButton.swift in Sources */,
+				FC26BF6B1E2F48F800ED861B /* StudentsViewController.swift in Sources */,
 				FCC44DDF1E2C8363002E8D75 /* JSONEntity.swift in Sources */,
 				FCA1B7E91E2891EC00A10E85 /* StudentInformation.swift in Sources */,
 				FCC44DE51E2C9D4A002E8D75 /* UdacityStudentService.swift in Sources */,
-				FCA1B7E31E288C1600A10E85 /* AuthenticationManager.swift in Sources */,
 				FC1C35461E27DF4200191CA7 /* MockUserService.swift in Sources */,
 				FC5975C61E2A7929006C3733 /* PaddedTextField.swift in Sources */,
 				FC1CCE5F1E2DD19E006D05AB /* UpdateStudentInformationUseCase.swift in Sources */,
@@ -403,11 +398,12 @@
 				FC1CCE661E2DFE80006D05AB /* LogoutUseCase.swift in Sources */,
 				FCA7E9E11E27459D009ED523 /* ListViewController.swift in Sources */,
 				FC1CCE641E2DE026006D05AB /* AppState.swift in Sources */,
-				FCA1B7EB1E28944300A10E85 /* StudentsController.swift in Sources */,
 				FC5975AB1E299250006C3733 /* StudentService.swift in Sources */,
+				FC26BF631E2F268A00ED861B /* LoginUseCase.swift in Sources */,
 				FCA7E9E71E274A00009ED523 /* LoginViewController.swift in Sources */,
 				FC1C35441E27DEDF00191CA7 /* UdacityUserService.swift in Sources */,
 				FCCD32BE1E27399A00DFC250 /* AppDelegate.swift in Sources */,
+				FC26BF691E2F30AE00ED861B /* StudentsModel.swift in Sources */,
 				FCA393A61E28A6D6000F17FB /* StudentInfoViewController.swift in Sources */,
 				FC5975BC1E2A0097006C3733 /* Credentials.swift in Sources */,
 				FC5975B71E299C3F006C3733 /* Session.swift in Sources */,

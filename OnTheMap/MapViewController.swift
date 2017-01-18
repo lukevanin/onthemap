@@ -13,70 +13,28 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, StudentsController {
+class MapViewController: StudentsViewController {
     
+    //
+    //  Custom MKPointAnnotation class used to associate student information with pin locations on the map.
+    //
     class StudentAnnotation: MKPointAnnotation {
         var student: StudentInformation?
     }
-    
-    var state = AppState() {
-        didSet {
-            if self.isViewLoaded {
-                self.updateState()
-            }
-        }
-    }
-    
-    var model: [StudentInformation]? {
-        didSet {
-            if self.isViewLoaded {
-                self.updateMap()
-            }
-        }
-    }
-    var delegate: StudentsControllerDelegate?
     
     // MARK: Outlets
 
     @IBOutlet weak var mapView: MKMapView!
     
-    // MARK: Actions
-    
-    @IBAction func onLogoutAction(_ sender: Any) {
-        delegate?.logout()
-    }
-    
-    @IBAction func onPinAction(_ sender: Any) {
-        delegate?.addLocation()
-    }
-    
-    @IBAction func onRefreshAction(_ sender: Any) {
-        delegate?.loadStudents()
-    }
-
-    // MARK: View controller life cycle
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateState()
-        updateMap()
-    }
-    
-    private func updateState() {
-        if let appNavItem = navigationItem as? AppNavItem {
-            appNavItem.state = state
-        }
-    }
-    
     // MARK: Pins
     
     //
-    //  Update the annotations on the map. An annotation is created for each student location in the model. The 
-    //  annotation contains data for the coordinates of where the pin should appear, as well as the name and URL to 
+    //  Update the annotations on the map. An annotation is created for each student location in the model. The
+    //  annotation contains data for the coordinates of where the pin should appear, as well as the name and URL to
     //  show when the pin is tapped. The annotation is used to instantiate a view for the pin (see MKMapViewDelegate
     //  below).
     //
-    private func updateMap() {
+    override func updateContent() {
         mapView.removeAnnotations(mapView.annotations)
         if let annotations = makeAnnotations() {
             mapView.addAnnotations(annotations)
@@ -87,7 +45,7 @@ class MapViewController: UIViewController, StudentsController {
     //  Creates any array annotations from the model containing student information entries.
     //
     private func makeAnnotations() -> [MKAnnotation]? {
-        return model?.map(makeAnnotationForStudent)
+        return model.students.map(makeAnnotationForStudent)
     }
     
     //

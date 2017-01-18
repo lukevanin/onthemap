@@ -25,41 +25,38 @@ protocol StudentsAppDelegate: NSObjectProtocol, ErrorAlertPresenter {
     func showLoginScreen()
     func showLocationEditScreen()
     func present(_ controller: UIViewController, animated: Bool, completion: (() -> Void)?)
-    func updateStudents(_ students: [StudentInformation]?)
-    func updateState(_ state: AppState)
 }
 
-class StudentsAppController: StudentsControllerDelegate, LoginControllerDelegate {
-    
-    //
-    //  Authentication state. True if the user is authenticated with a valid session, or false otherwise.
-    //
-    var isAuthenticated: Bool {
-        return authentication.isAuthenticated
-    }
+//
+//  Delegate actions for view controllers which display students. Used by map and list view controllers which need
+//  to perform the same actions. Placing this functionality in the delegate removes the need to duplicate the behavior
+//  in each view controller.
+//
+protocol StudentsControllerDelegate: class {
+    func logout()
+    func addLocation()
+    func showInformationForStudent(_ student: StudentInformation)
+    func loadStudents()
+}
+
+class StudentsAppController: StudentsControllerDelegate {
     
     //
     //  State of the application. Describes actions which the app performs. Setting this value updates the status bar 
     //  network activity indicator when one or more actions is underway. The state is also propogated to the delegate, 
     //  where it is used to update the nav bar button items on the map and list screens.
     //
-    var state = AppState() {
-        didSet {
-            UIApplication.shared.isNetworkActivityIndicatorVisible = state.isActive
-            delegate?.updateState(state)
-        }
-    }
+    let state = AppState.shared
     
     //
     //  Currently loaded student data. Setting this value propogates the data to the delegate, which updates the map
     //  and list screens.
     //
-    var students: [StudentInformation]? {
-        didSet {
-            self.delegate?.updateStudents(students)
-        }
-    }
+    let model = StudentsModel.shared
 
+    //
+    //  Delegate. Implemented by the primary content view controller.
+    //
     weak var delegate: StudentsAppDelegate?
     
     //
@@ -67,16 +64,41 @@ class StudentsAppController: StudentsControllerDelegate, LoginControllerDelegate
     //
     private let numberOfStudents = 100
     
-    //
-    //  Authentication manager which controls the user authentication. Pass in MockUserService to emulate API behaviors.
-    //
-    private let authentication = AuthenticationManager(service: UdacityUserService(), credentials: Credentials.shared)
+    // MARK: Life cycle
+    
+    init() {
+        addNotificationObservers()
+    }
+    
+    deinit {
+        removeNotificationObservers()
+    }
+    
+    // MARK: Notifications
     
     //
-    //  Facade for interacting with the student related data in the web service API. Replace with MockStudentService to
-    //  emulate API functionality.
+    //  Observe changes to the model.
     //
-    private let studentService = UdacityStudentService()
+    private func addNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onAppStateChanged), name: .AppStateChanged, object: state)
+    }
+    
+    //
+    //  Stop observing changes to the model.
+    //
+    private func removeNotificationObservers() {
+        NotificationCenter.default.removeObserver(self, name: .AppStateChanged, object: model)
+        
+    }
+    
+    //
+    //  Update the navigation bar when the app state changes.
+    //
+    @objc func onAppStateChanged(_ notification: Notification) {
+        DispatchQueue.main.async { [weak self] in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = self?.state.isActive ?? false
+        }
+    }
     
     // MARK: Features
     
@@ -92,7 +114,8 @@ class StudentsAppController: StudentsControllerDelegate, LoginControllerDelegate
         }
         state.isLoggingOut = true
         
-        let interactor = LogoutUseCase(authentication: authentication) { [weak self] in
+        let userService = UdacityUserService()
+        let interactor = LogoutUseCase(service: userService) { [weak self] _ in
             DispatchQueue.main.async {
                 self?.state.isLoggingOut = false
                 self?.delegate?.showLoginScreen()
@@ -119,9 +142,8 @@ class StudentsAppController: StudentsControllerDelegate, LoginControllerDelegate
         state.isCheckingLocation = true
         
         // Check if any location information exists for the user.
-        let interactor = CheckExistingStudentUseCase(
-            studentService: studentService,
-            authentication: authentication) { [weak self] (result) in
+        let studentService = UdacityStudentService()
+        let interactor = CheckExistingStudentUseCase(studentService: studentService) { [weak self] (result) in
             DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
@@ -215,17 +237,18 @@ class StudentsAppController: StudentsControllerDelegate, LoginControllerDelegate
         }
         state.isFetchingStudents = true
         
+        let studentService = UdacityStudentService()
         studentService.fetchLatestStudentInformation(count: numberOfStudents) { [weak self] result in
-            guard let `self` = self else {
-                return
-            }
             DispatchQueue.main.async {
+                guard let `self` = self else {
+                    return
+                }
                 self.state.isFetchingStudents = false
                 switch result {
                     
                 // Loaded students.
                 case .success(let students):
-                    self.students = students
+                    self.model.students = students
                     
                 // Error loading students.
                 case .failure(let error):
@@ -233,21 +256,5 @@ class StudentsAppController: StudentsControllerDelegate, LoginControllerDelegate
                 }
             }
         }
-    }
-    
-    // MARK: Authentication
-    
-    //
-    //  Authenticate the user with a Facebook token. The token is obtained by authenticating using the Facebook web API.
-    //
-    func login(facebookToken: String, completion: @escaping LoginControllerDelegate.AuthenticationCompletion) {
-        authentication.login(facebookToken: facebookToken, completion: completion)
-    }
-    
-    //
-    //  Authenticate the user with username and password credentials.
-    //
-    func login(username: String, password: String, completion: @escaping LoginControllerDelegate.AuthenticationCompletion) {
-        authentication.login(username: username, password: password, completion: completion)
     }
 }

@@ -10,71 +10,38 @@
 
 import UIKit
 
-class ListViewController: UITableViewController, StudentsController {
-
-    var state = AppState() {
-        didSet {
-            if self.isViewLoaded {
-                self.updateState()
-            }
-        }
-    }
-
-    var model: [StudentInformation]? {
-        didSet {
-            if self.isViewLoaded {
-                self.tableView.reloadData()
-            }
-        }
-    }
+class ListViewController: StudentsViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var delegate: StudentsControllerDelegate?
+    @IBOutlet weak var tableView: UITableView!
     
     private let cellIdentifier = "UserCell"
     
-    // MARK: Actions
-    
-    @IBAction func onLogoutAction(_ sender: Any) {
-        delegate?.logout()
-    }
-    
-    @IBAction func onPinAction(_ sender: Any) {
-        delegate?.addLocation()
-    }
-    
-    @IBAction func onRefreshAction(_ sender: Any) {
-        delegate?.loadStudents()
-    }
-
     // MARK: View controller life cycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateState()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.flashScrollIndicators()
     }
     
-    private func updateState() {
-        if let appNavItem = navigationItem as? AppNavItem {
-            appNavItem.state = state
-        }
-    }
-
     // MARK: Table view
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model?.count ?? 0
+    override func updateContent() {
+        tableView.reloadData()
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.students.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
         // Update the table cell with the student information. Shows a detail disclosure indicator if the media URL is 
         // valid.
-        if let info = model?[indexPath.row] {
-            cell.textLabel?.text = info.user.firstName + " " + info.user.lastName
-            cell.detailTextLabel?.text = info.location.hasValidURL ? info.location.mapString : nil
-            cell.accessoryType = info.location.hasValidURL ? .disclosureIndicator : .none
-        }
+        let info = model.students[indexPath.row]
+        cell.textLabel?.text = info.user.firstName + " " + info.user.lastName
+        cell.detailTextLabel?.text = info.location.hasValidURL ? info.location.mapString : nil
+        cell.accessoryType = info.location.hasValidURL ? .disclosureIndicator : .none
         
         return cell
     }
@@ -82,10 +49,8 @@ class ListViewController: UITableViewController, StudentsController {
     //
     //  Called when the user taps on a student entry. Opens the media URL in a browser window.
     //
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let info = model?[indexPath.row] else {
-            return
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let info = model.students[indexPath.row]
         delegate?.showInformationForStudent(info)
     }
 }

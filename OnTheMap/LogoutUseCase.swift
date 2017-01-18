@@ -13,18 +13,24 @@ import FBSDKLoginKit
 
 struct LogoutUseCase {
     
-    typealias Completion = () -> Void
+    typealias Completion = (Bool) -> Void
     
-    let authentication: AuthenticationManager
+    private let credentials = Credentials.shared
+    
+    let service: UserService
     let completion: Completion
     
     func execute() {
+        
+        // Clear local session.
+        credentials.session = nil
+        
         // Log out from facebook.
         FBSDKLoginManager().logOut()
         
         // Log out from udacity.
-        authentication.logout() { _ in
-            self.completion()
+        service.logout() { result in
+            self.completion(result.mapToSuccessBoolean())
         }
     }
 }

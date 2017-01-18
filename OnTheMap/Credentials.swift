@@ -19,6 +19,13 @@ class Credentials {
     static let shared = Credentials()
     
     //
+    //  True if a valid session exists.
+    //
+    var isAuthenticated: Bool {
+        return session != nil
+    }
+    
+    //
     //  Data for the current authenticated session. This is set on login, and nullified on logout.
     //
     var session: Session?

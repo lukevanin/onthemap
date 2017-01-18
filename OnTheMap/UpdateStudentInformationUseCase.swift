@@ -18,9 +18,11 @@ import Foundation
 struct UpdateStudentInformationUseCase {
     
     typealias Completion = (Bool, Error?) -> Void
-    
+
+    private let credentials = Credentials.shared
+
     let location: StudentLocation
-    let authentication: AuthenticationManager
+    let userService: UserService
     let studentService: StudentService
     let completion: Completion
     
@@ -28,22 +30,13 @@ struct UpdateStudentInformationUseCase {
     //  Step 0: Fetch current authenticated session.
     //
     func execute() {
-        
-        authentication.fetchSession { result in
-            
-            switch result {
-                
-            // Fetched session.
-            case .success(let session):
-                // Fetch the current student
-                self.fetchLocations(accountId: session.accountId)
-                
-            // Error fetching session.
-            case .failure(let error):
-                self.handleError(error)
-            }
+
+        guard let session = credentials.session else {
+            handleError(ServiceError.authentication)
+            return
         }
         
+        self.fetchLocations(accountId: session.accountId)
     }
     
     //
@@ -66,9 +59,12 @@ struct UpdateStudentInformationUseCase {
     // otherwise insert a new location.
     //
     private func updateLocation(accountId: String, existingLocations: [StudentInformation]) {
-        authentication.fetchUser(accountId: accountId) {  result in
+        userService.fetchUser(accountId: accountId) { (result) in
             switch result {
+            
             case .success(let user):
+                // Successfully fetched user for account ID. 
+                // Update or insert the location for the student.
                 let request = StudentRequest(
                     uniqueKey: accountId,
                     user: user,
